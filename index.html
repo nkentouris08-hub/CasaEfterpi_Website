@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Casa Efterpi — A Neoclassical Estate in Samos, Greece</title>
+<meta name="description" content="Casa Efterpi is a grand neoclassical estate on Samos, Greece, intimately run by the family who has cared for it for generations." />
+<link rel="icon" type="image/png" href="assets/crest.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          bg: '#FAF7F2',
+          cream: '#F5F0E8',
+          stone: '#E8E0D0',
+          terracotta: { DEFAULT: '#C17F5A', light: '#E8C4A8' },
+          gold: '#B8936A',
+          brown: '#3D2B1A',
+          sienna: '#6B4C35',
+          green: '#2E5A44',
+        },
+        fontFamily: {
+          heading: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+          body: ['Jost', 'Arial', 'sans-serif'],
+        },
+      },
+    },
+  }
+</script>
+<style>
+  :root{
+    --color-bg:#FAF7F2; --color-cream:#F5F0E8; --color-stone:#E8E0D0;
+    --color-terracotta:#C17F5A; --color-terracotta-l:#E8C4A8; --color-gold:#B8936A;
+    --color-dark-brown:#3D2B1A; --color-mid-brown:#6B4C35; --color-green:#2E5A44;
+    --font-heading:'Cormorant Garamond', Georgia, serif; --font-body:'Jost', Arial, sans-serif;
+    --sp-xs:8px; --sp-sm:16px; --sp-md:32px; --sp-lg:64px; --sp-xl:120px; --sp-2xl:200px;
+    --r-sm:2px; --r-md:4px; --container:1280px; --container-narrow:760px;
+  }
+  html{scroll-behavior:smooth; scroll-padding-top:88px;}
+  body{font-family:var(--font-body); background:var(--color-bg); color:var(--color-mid-brown);}
+  h1,h2,h3,.font-heading{font-family:var(--font-heading);}
+
+  .eyebrow{font-family:var(--font-body); font-size:13px; font-weight:500; letter-spacing:.22em; text-transform:uppercase; color:var(--color-terracotta);}
+
+  .nav-link{font-family:var(--font-body); font-size:13px; font-weight:400; text-transform:uppercase; letter-spacing:3px; text-decoration:none; padding-bottom:4px; border-bottom:2px solid transparent; transition:border-color .2s ease, color .2s ease;}
+  header.is-transparent .nav-link{color:var(--color-bg);}
+  header.is-solid .nav-link{color:var(--color-dark-brown);}
+  .nav-link:hover{border-bottom-color:var(--color-gold);}
+
+  .btn-primary{display:inline-block; background:var(--color-terracotta); color:var(--color-bg); font-family:var(--font-body); font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:3px; padding:14px 40px; border:none; border-radius:0; cursor:pointer; transition:background-color .25s ease;}
+  .btn-primary:hover, .btn-primary:focus-visible{background:var(--color-dark-brown);}
+
+  .btn-secondary{display:inline-block; background:transparent; color:var(--color-dark-brown); font-family:var(--font-body); font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:3px; padding:13px 40px; border:1px solid var(--color-gold); border-radius:0; cursor:pointer; transition:background-color .25s ease;}
+  .btn-secondary:hover, .btn-secondary:focus-visible{background:var(--color-bg);}
+
+  header.is-transparent .btn-secondary{border-color:var(--color-bg); color:var(--color-bg);}
+
+  header.is-transparent #menu-toggle{color:var(--color-bg);}
+  header.is-solid #menu-toggle{color:var(--color-dark-brown);}
+  header.is-transparent .site-wordmark{color:var(--color-bg);}
+  header.is-solid .site-wordmark{color:var(--color-dark-brown);}
+
+  a, button, input, textarea{outline-offset:3px;}
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible{outline:1.5px solid var(--color-gold);}
+
+  .reveal{transition:opacity .9s cubic-bezier(.22,1,.36,1), transform .9s cubic-bezier(.22,1,.36,1);}
+  html.js-reveal-ready .reveal{opacity:0; transform:translateY(28px);}
+  html.js-reveal-ready .reveal.is-visible{opacity:1; transform:translateY(0);}
+
+  .shadow-soft{box-shadow:0 30px 60px -25px rgba(61,43,26,.25), 0 10px 20px -10px rgba(193,127,90,.18);}
+
+  .grain{position:fixed; inset:0; pointer-events:none; z-index:60; opacity:.035; mix-blend-mode:multiply;}
+
+  .field{width:100%; background:transparent; border:none; border-bottom:1px solid var(--color-stone); padding:10px 2px; font-family:var(--font-body); font-size:15px; color:var(--color-dark-brown); border-radius:0; transition:border-color .25s ease;}
+  .field:focus{outline:none; border-bottom-color:var(--color-gold);}
+  .field::placeholder{color:#8a7a68;}
+  .field-label{font-size:12px; letter-spacing:.15em; text-transform:uppercase; color:var(--color-mid-brown); font-weight:500;}
+
+  .field-dark{width:100%; background:transparent; border:none; border-bottom:1px solid rgba(245,240,232,.3); padding:10px 2px; font-family:var(--font-body); font-size:14px; color:var(--color-bg); border-radius:0; transition:border-color .25s ease;}
+  .field-dark:focus{outline:none; border-bottom-color:var(--color-gold);}
+  .field-dark::placeholder{color:rgba(245,240,232,.5);}
+
+  @keyframes bounce-soft{0%,100%{transform:translateY(0);} 50%{transform:translateY(8px);}}
+  .scroll-cue{animation:bounce-soft 2.2s ease-in-out infinite;}
+
+  .ph-tile{position:relative; overflow:hidden;}
+  .ph-tile img{display:block; width:100%; height:100%; object-fit:cover;}
+  .ph-tile .ph-icon{position:absolute; inset:0; display:flex; align-items:center; justify-content:center; opacity:.55;}
+
+  /* Minimal nav-card tiles (image + plain caption below, no overlay) */
+  .nav-tile-caption{font-family:var(--font-heading); font-size:18px; font-weight:500; color:var(--color-dark-brown); transition:color .25s ease;}
+  .nav-tile:hover .nav-tile-caption{color:var(--color-terracotta);}
+
+  /* Understated text-link CTA used on hero / invitation, styled like an inline link, not a button */
+  .link-cta{display:inline-flex; align-items:center; gap:8px; font-family:var(--font-body); font-size:13px; font-weight:500; letter-spacing:.15em; text-transform:uppercase; border-bottom:1px solid currentColor; padding-bottom:4px; transition:opacity .25s ease, gap .25s ease;}
+  .link-cta:hover{opacity:.7; gap:12px;}
+
+  header.is-transparent .is-header-backdrop{background:linear-gradient(to bottom, rgba(42,31,21,.55), transparent);}
+  header.is-solid .is-header-backdrop{background:var(--color-bg);}
+  header.is-solid{box-shadow:0 8px 24px -16px rgba(61,43,26,.35);}
+</style>
+</head>
+<body class="antialiased">
+<div class="grain" style="background-image:url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22><filter id=%22n%22><feTurbulence type=%22fractalNoise%22 baseFrequency=%220.85%22 numOctaves=%222%22 stitchTiles=%22stitch%22/></filter><rect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23n)%22/></svg>');"></div>
+
+<!-- NAV -->
+<header id="site-header" class="is-transparent fixed top-0 inset-x-0 z-50 transition-colors duration-300">
+  <div class="absolute inset-0 -z-10 is-header-backdrop"></div>
+  <div class="max-w-[1280px] mx-auto flex items-center justify-between px-6 md:px-10 py-3">
+    <a href="#hero" class="flex items-center gap-3">
+      <img src="assets/crest.png" alt="Casa Efterpi crest" class="h-12 w-12 object-contain" />
+      <span class="site-wordmark font-heading text-xl tracking-[0.1em] hidden sm:inline">CASA EFTERPI</span>
+    </a>
+    <nav class="hidden lg:flex items-center gap-10">
+      <a class="nav-link" href="#hero">Home</a>
+      <a class="nav-link" href="#rooms">Rooms</a>
+      <a class="nav-link" href="#gallery">Gallery</a>
+      <a class="nav-link" href="#about">About</a>
+      <a class="nav-link" href="#contact">Contact</a>
+    </nav>
+    <div class="hidden lg:block">
+      <a href="#contact" class="btn-secondary !py-2.5 !px-7 !text-[12px]">Book Now</a>
+    </div>
+    <button id="menu-toggle" aria-label="Open menu" aria-expanded="false" class="lg:hidden p-2">
+      <svg id="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="w-7 h-7"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      <svg id="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="w-7 h-7 hidden"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <div id="mobile-menu" class="hidden lg:hidden bg-bg border-t border-stone">
+    <div class="flex flex-col px-6 py-6 gap-5">
+      <a class="nav-link !text-brown" href="#hero">Home</a>
+      <a class="nav-link !text-brown" href="#rooms">Rooms</a>
+      <a class="nav-link !text-brown" href="#gallery">Gallery</a>
+      <a class="nav-link !text-brown" href="#about">About</a>
+      <a class="nav-link !text-brown" href="#contact">Contact</a>
+      <a href="#contact" class="btn-primary text-center mt-2">Book Now</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section id="hero" class="relative h-screen min-h-[640px] max-h-[940px] w-full overflow-hidden">
+  <div class="absolute inset-0">
+    <img src="https://placehold.co/2400x1029/c9b89a/c9b89a?text=+" alt="Full elevation of the Casa Efterpi facade, from pediment to garden" class="w-full h-full object-cover" style="object-position:top center;" />
+  </div>
+
+  <div class="reveal absolute left-0 bottom-0 max-w-[90%] md:max-w-md">
+    <div class="px-8 md:px-12 py-9 md:py-11" style="background:rgba(250,247,242,.85);">
+      <h1 class="font-heading text-brown text-[40px] md:text-[58px] font-light leading-[1.05]">Casa Efterpi</h1>
+      <p class="mt-3 font-body text-terracotta text-[13px] font-normal tracking-[.25em] uppercase">Samos, Greece</p>
+    </div>
+  </div>
+
+  <a href="#invitation" aria-label="Scroll to content" class="scroll-cue absolute bottom-7 right-7 md:right-10 w-11 h-11 flex items-center justify-center text-brown hover:text-terracotta transition-colors" style="background:rgba(250,247,242,.85);">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M12 4v16M5 13l7 7 7-7"/></svg>
+  </a>
+</section>
+
+<!-- INVITATION -->
+<section id="invitation" class="px-6 py-[var(--sp-xl)]">
+  <div class="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
+
+    <div class="reveal ph-tile aspect-[2/3] bg-stone order-1">
+      <img src="https://placehold.co/700x1050/e8c4a8/e8c4a8?text=+" alt="" />
+      <div class="ph-icon text-brown/60">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-12 h-12"><path d="M3 21V9l9-6 9 6v12M9 21V13h6v8"/></svg>
+      </div>
+    </div>
+
+    <div class="reveal order-2">
+      <p class="eyebrow">Our Invitation</p>
+      <h2 class="font-heading text-brown text-[34px] md:text-[42px] font-normal mt-3">Settle In.</h2>
+      <p class="mt-6 text-[16px] leading-[1.8] text-sienna">
+        There is no rush at Casa Efterpi. Mornings begin on the stone steps with coffee and the scent
+        of the garden; evenings end on the veranda, watching the light leave the Aegean.
+      </p>
+      <p class="mt-5 text-[16px] leading-[1.8] text-sienna">
+        However long you stay, the house asks only one thing of you — that you slow down enough to meet it.
+      </p>
+      <div class="flex flex-wrap items-center gap-8 mt-8 text-terracotta">
+        <a href="#rooms" class="link-cta">Discover the Rooms</a>
+        <a href="#contact" class="link-cta">Begin Your Stay</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- NAV TILES (Rooms / Gallery / About) -->
+<section id="pillars" class="px-6 pb-[var(--sp-xl)]">
+  <div class="max-w-[1280px] mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6">
+
+      <a href="#rooms" class="reveal nav-tile group block">
+        <div class="ph-tile aspect-[2/3] bg-stone">
+          <img src="https://placehold.co/800x1200/e8e0d0/e8e0d0?text=+" alt="" class="transition-transform duration-700 group-hover:scale-105" />
+        </div>
+        <p class="nav-tile-caption mt-4">Rooms</p>
+      </a>
+
+      <a href="#gallery" class="reveal nav-tile group block">
+        <div class="ph-tile aspect-[2/3] bg-terracotta-light">
+          <img src="https://placehold.co/800x1200/e8c4a8/e8c4a8?text=+" alt="" class="transition-transform duration-700 group-hover:scale-105" />
+        </div>
+        <p class="nav-tile-caption mt-4">Gallery</p>
+      </a>
+
+      <a href="#about" class="reveal nav-tile group block">
+        <div class="ph-tile aspect-[2/3] bg-stone">
+          <img src="assets/hero.jpg" alt="The neoclassical facade of Casa Efterpi" class="transition-transform duration-700 group-hover:scale-105" />
+        </div>
+        <p class="nav-tile-caption mt-4">About</p>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- WELCOME -->
+<section class="px-6 py-[var(--sp-xl)] bg-cream">
+  <div class="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
+
+    <div class="reveal order-2 md:order-1">
+      <p class="eyebrow">Welcome to Casa Efterpi</p>
+      <h2 class="font-heading text-brown text-[34px] md:text-[42px] font-normal mt-3">Your Home on Samos</h2>
+      <p class="mt-6 text-[16px] leading-[1.8] text-sienna max-w-md">
+        On the island of Samos, where the Aegean meets a nineteenth-century mansion, Casa Efterpi
+        offers quiet elegance to travellers who have stopped chasing more — and started noticing everything.
+      </p>
+      <p class="mt-5 text-[16px] leading-[1.8] text-sienna max-w-md">
+        Set above the harbour town, the house has watched ships come and go since the 1870s. Our
+        concept is simple: a home run by the family who has always lived in it, open just enough to share it.
+      </p>
+    </div>
+
+    <div class="reveal order-1 md:order-2 flex justify-center">
+      <svg viewBox="0 0 220 320" class="w-full max-w-[240px]" fill="none">
+        <path d="M112 8 C 94 55, 100 110, 112 165 C 122 215, 108 270, 96 308" stroke="var(--color-gold)" stroke-width="1.4" stroke-linecap="round"/>
+        <path d="M110 38 C 86 30, 62 38, 50 54 C 68 54, 92 48, 110 38 Z" stroke="var(--color-terracotta)" stroke-width="1.2" stroke-linejoin="round"/>
+        <path d="M114 70 C 140 60, 164 66, 178 82 C 158 84, 134 80, 114 70 Z" stroke="var(--color-terracotta)" stroke-width="1.2" stroke-linejoin="round"/>
+        <path d="M108 104 C 84 98, 60 104, 48 120 C 66 120, 90 114, 108 104 Z" stroke="var(--color-terracotta)" stroke-width="1.2" stroke-linejoin="round"/>
+        <path d="M116 138 C 142 130, 164 136, 176 152 C 156 154, 134 148, 116 138 Z" stroke="var(--color-terracotta)" stroke-width="1.2" stroke-linejoin="round"/>
+        <path d="M106 174 C 82 170, 60 176, 50 192 C 68 191, 90 184, 106 174 Z" stroke="var(--color-terracotta)" stroke-width="1.2" stroke-linejoin="round"/>
+        <path d="M112 208 C 136 200, 156 206, 168 220 C 150 222, 130 217, 112 208 Z" stroke="var(--color-terracotta)" stroke-width="1.2" stroke-linejoin="round"/>
+        <circle cx="60" cy="98" r="4.5" fill="var(--color-gold)"/>
+        <circle cx="168" cy="138" r="4.5" fill="var(--color-gold)"/>
+        <circle cx="54" cy="170" r="4.5" fill="var(--color-gold)"/>
+      </svg>
+    </div>
+
+  </div>
+</section>
+
+<!-- PHOTO STRIP 1 -->
+<section class="px-0">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-[2px] bg-bg">
+    <div class="ph-tile aspect-[4/5] bg-stone">
+      <img src="https://placehold.co/700x875/e8e0d0/e8e0d0?text=+" alt="Staircase detail at Casa Efterpi" />
+    </div>
+    <div class="ph-tile aspect-[4/5] bg-terracotta-light">
+      <img src="https://placehold.co/700x875/e8c4a8/e8c4a8?text=+" alt="Interior lounge detail" />
+    </div>
+    <div class="ph-tile aspect-[4/5] bg-stone">
+      <img src="https://placehold.co/700x875/e8e0d0/e8e0d0?text=+" alt="Table set for breakfast" />
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section class="px-6 py-[var(--sp-xl)]">
+  <div class="max-w-[1280px] mx-auto reveal">
+    <svg viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 text-sienna/70"><path d="M9 7C5.7 7 3 9.7 3 13s2.7 6 6 6c.6 0 1-.4 1-1s-.4-1-1-1c-2.2 0-4-1.8-4-4 0-.4 0-.7.1-1H6c1.7 0 3-1.3 3-3V8c0-.6-.4-1-1-1H9zm10 0c-3.3 0-6 2.7-6 6s2.7 6 6 6c.6 0 1-.4 1-1s-.4-1-1-1c-2.2 0-4-1.8-4-4 0-.4 0-.7.1-1H16c1.7 0 3-1.3 3-3V8c0-.6-.4-1-1-1h-1z"/></svg>
+    <p class="font-heading italic text-brown text-[28px] md:text-[36px] leading-[1.4] mt-6 max-w-[820px]">
+      Casa Efterpi was never meant to become a hotel in the usual sense. It is our family's home,
+      kept exactly as it was built, and shared — quietly — with those who know how to appreciate
+      a house that has done nothing but stand still and grow more beautiful.
+    </p>
+    <p class="eyebrow mt-7">— The Family Behind Casa Efterpi</p>
+  </div>
+</section>
+
+<!-- PHOTO STRIP 2 -->
+<section class="px-0">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-[2px] bg-bg">
+    <div class="ph-tile aspect-[4/5] bg-terracotta-light">
+      <img src="https://placehold.co/700x875/e8c4a8/e8c4a8?text=+" alt="Terrace dining at sunset" />
+    </div>
+    <div class="ph-tile aspect-[4/5] bg-stone">
+      <img src="https://placehold.co/700x875/e8e0d0/e8e0d0?text=+" alt="A local Samian dish" />
+    </div>
+    <div class="ph-tile aspect-[4/5] bg-terracotta-light">
+      <img src="https://placehold.co/700x875/e8c4a8/e8c4a8?text=+" alt="The garden courtyard" />
+    </div>
+  </div>
+</section>
+
+<!-- THREE PILLARS (text features) -->
+<section class="px-6 py-[var(--sp-xl)] bg-cream">
+  <div class="max-w-[1280px] mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12">
+
+      <div class="reveal">
+        <h3 class="font-heading text-brown text-[24px] font-medium">The Architecture</h3>
+        <p class="mt-3 font-heading italic text-terracotta text-[18px] leading-snug">A neoclassical mansion built to outlast centuries.</p>
+        <p class="mt-4 text-[15px] leading-[1.8] text-sienna">
+          The facade greets you first — full elevation, columns, pediment, and green shutters,
+          glowing warm in the morning light.
+        </p>
+        <a href="#about" class="link-cta mt-6 text-terracotta">Explore the Architecture</a>
+      </div>
+
+      <div class="reveal">
+        <h3 class="font-heading text-brown text-[24px] font-medium">The Sea &amp; Garden</h3>
+        <p class="mt-3 font-heading italic text-terracotta text-[18px] leading-snug">The Aegean begins where the garden ends.</p>
+        <p class="mt-4 text-[15px] leading-[1.8] text-sienna">
+          Bougainvillea in the foreground, blue water beyond — breakfast on the stone steps,
+          a book in the shade of an old olive tree.
+        </p>
+        <a href="#gallery" class="link-cta mt-6 text-terracotta">Explore the Grounds</a>
+      </div>
+
+      <div class="reveal">
+        <h3 class="font-heading text-brown text-[24px] font-medium">The Family Story</h3>
+        <p class="mt-3 font-heading italic text-terracotta text-[18px] leading-snug">Generations of care, in every detail.</p>
+        <p class="mt-4 text-[15px] leading-[1.8] text-sienna">
+          The people who built this house are the same people who welcome you into it,
+          generation after generation.
+        </p>
+        <a href="#about" class="link-cta mt-6 text-terracotta">Explore Our Story</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ROOMS -->
+<section id="rooms" class="px-6 py-[var(--sp-xl)]">
+  <div class="max-w-[1280px] mx-auto">
+    <div class="max-w-[760px] reveal">
+      <p class="eyebrow">Accommodations</p>
+      <h2 class="font-heading text-brown text-[36px] md:text-[44px] font-light mt-3">Rooms &amp; Suites</h2>
+      <p class="mt-5 text-[16px] leading-[1.8] text-sienna">
+        Each room is named for the feature of the house it overlooks — the garden, the gulf, the old olive grove.
+        Furnishings are original where possible, restored where necessary, and never replaced for the sake of fashion.
+      </p>
+    </div>
+
+    <div class="mt-14 divide-y divide-gold/20">
+
+      <!-- Room 1 -->
+      <div class="reveal flex flex-col md:flex-row gap-8 md:gap-12 py-10 first:pt-0">
+        <div class="ph-tile w-full md:w-[45%] aspect-[3/2] bg-stone shrink-0">
+          <img src="https://placehold.co/900x600/e8e0d0/e8e0d0?text=+" alt="" />
+        </div>
+        <div class="flex flex-col justify-center">
+          <h3 class="font-heading text-brown text-[26px] font-normal">The Garden Room</h3>
+          <p class="mt-3 text-[15px] leading-[1.8] text-sienna max-w-md">
+            Ground-floor quiet, opening directly onto the bougainvillea terrace.
+          </p>
+          <div class="flex items-center gap-6 mt-5 text-sienna">
+            <span class="flex items-center gap-2 text-[13px] tracking-wide text-mid-brown" style="color:var(--color-mid-brown)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-sienna"><path d="M3 18v-7a2 2 0 012-2h14a2 2 0 012 2v7M3 18h18M3 14h18M7 11V8a1 1 0 011-1h2a1 1 0 011 1v3"/></svg>
+              Queen bed
+            </span>
+            <span class="flex items-center gap-2 text-[13px] tracking-wide" style="color:var(--color-mid-brown)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-sienna"><path d="M21 3c-4 0-9 1-12 4-3 3-4 7-4 11 4 0 8-1 11-4 3-3 5-7 5-11z"/></svg>
+              Garden view
+            </span>
+            <span class="flex items-center gap-2 text-[13px] tracking-wide" style="color:var(--color-mid-brown)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-sienna"><path d="M5 12.5a10 10 0 0114 0M8 15.5a6 6 0 018 0M12 19h.01"/></svg>
+              Wifi
+            </span>
+          </div>
+          <a href="#contact" class="btn-secondary mt-7 self-start">Enquire</a>
+        </div>
+      </div>
+
+      <!-- Room 2 -->
+      <div class="reveal flex flex-col md:flex-row gap-8 md:gap-12 py-10">
+        <div class="ph-tile w-full md:w-[45%] aspect-[3/2] bg-terracotta-light shrink-0">
+          <img src="https://placehold.co/900x600/e8c4a8/e8c4a8?text=+" alt="" />
+        </div>
+        <div class="flex flex-col justify-center">
+          <h3 class="font-heading text-brown text-[26px] font-normal">The Gulf Suite</h3>
+          <p class="mt-3 text-[15px] leading-[1.8] text-sienna max-w-md">
+            Top-floor views across the rooftops to the Aegean beyond.
+          </p>
+          <div class="flex items-center gap-6 mt-5">
+            <span class="flex items-center gap-2 text-[13px] tracking-wide" style="color:var(--color-mid-brown)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-sienna"><path d="M3 18v-7a2 2 0 012-2h14a2 2 0 012 2v7M3 18h18M3 14h18M7 11V8a1 1 0 011-1h2a1 1 0 011 1v3"/></svg>
+              King bed
+            </span>
+            <span class="flex items-center gap-2 text-[13px] tracking-wide" style="color:var(--color-mid-brown)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-sienna"><path d="M2 9c1.5 1.5 3 1.5 4.5 0s3-1.5 4.5 0 3 1.5 4.5 0 3-1.5 4.5 0M2 14c1.5 1.5 3 1.5 4.5 0s3-1.5 4.5 0 3 1.5 4.5 0 3-1.5 4.5 0"/></svg>
+              Sea view
+            </span>
+            <span class="flex items-center gap-2 text-[13px] tracking-wide" style="color:var(--color-mid-brown)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-sienna"><path d="M4 12h16v3a4 4 0 01-4 4H8a4 4 0 01-4-4v-3zM4 12V7a2 2 0 012-2h1M7 5v2"/></svg>
+              Soaking tub
+            </span>
+          </div>
+          <a href="#contact" class="btn-secondary mt-7 self-start">Enquire</a>
+        </div>
+      </div>
+
+      <!-- Room 3 -->
+      <div class="reveal flex flex-col md:flex-row gap-8 md:gap-12 py-10 last:pb-0">
+        <div class="ph-tile w-full md:w-[45%] aspect-[3/2] bg-stone shrink-0">
+          <img src="https://placehold.co/900x600/e8e0d0/e8e0d0?text=+" alt="" />
+        </div>
+        <div class="flex flex-col justify-center">
+          <h3 class="font-heading text-brown text-[26px] font-normal">The Olive Room</h3>
+          <p class="mt-3 text-[15px] leading-[1.8] text-sienna max-w-md">
+            A smaller, sunlit room beneath the old roofline, facing the olive grove.
+          </p>
+          <div class="flex items-center gap-6 mt-5">
+            <span class="flex items-center gap-2 text-[13px] tracking-wide" style="color:var(--color-mid-brown)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-sienna"><path d="M3 18v-7a2 2 0 012-2h14a2 2 0 012 2v7M3 18h18M3 14h18M7 11V8a1 1 0 011-1h2a1 1 0 011 1v3"/></svg>
+              Double bed
+            </span>
+            <span class="flex items-center gap-2 text-[13px] tracking-wide" style="color:var(--color-mid-brown)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-sienna"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M4.2 4.2l2 2M17.8 17.8l2 2M2 12h3M19 12h3M4.2 19.8l2-2M17.8 6.2l2-2"/></svg>
+              Private balcony
+            </span>
+            <span class="flex items-center gap-2 text-[13px] tracking-wide" style="color:var(--color-mid-brown)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-sienna"><path d="M5 12.5a10 10 0 0114 0M8 15.5a6 6 0 018 0M12 19h.01"/></svg>
+              Wifi
+            </span>
+          </div>
+          <a href="#contact" class="btn-secondary mt-7 self-start">Enquire</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery" class="px-6 py-[var(--sp-xl)] bg-cream">
+  <div class="max-w-[1280px] mx-auto">
+    <div class="max-w-[760px] reveal">
+      <p class="eyebrow">Gallery</p>
+      <h2 class="font-heading text-brown text-[36px] md:text-[44px] font-light mt-3">A Glimpse Inside</h2>
+      <p class="mt-5 text-[16px] leading-[1.8] text-sienna">
+        Architecture, gardens, and the sea beyond — as the house presents them, without filters or staging.
+      </p>
+    </div>
+
+    <div class="mt-12 grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
+
+      <div class="reveal ph-tile aspect-[4/3] bg-stone group">
+        <img src="https://placehold.co/800x600/e8e0d0/e8e0d0?text=+" alt="" class="transition-transform duration-700 group-hover:scale-105" />
+        <div class="absolute inset-0 bg-gradient-to-t from-brown/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        <span class="absolute bottom-3 left-3 text-bg text-[12px] tracking-wide opacity-0 group-hover:opacity-100 transition-opacity duration-300">Facade, Morning Light</span>
+      </div>
+      <div class="reveal ph-tile aspect-[4/3] bg-terracotta-light group">
+        <img src="https://placehold.co/800x600/e8c4a8/e8c4a8?text=+" alt="" class="transition-transform duration-700 group-hover:scale-105" />
+        <div class="absolute inset-0 bg-gradient-to-t from-brown/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        <span class="absolute bottom-3 left-3 text-bg text-[12px] tracking-wide opacity-0 group-hover:opacity-100 transition-opacity duration-300">Garden Terrace</span>
+      </div>
+      <div class="reveal ph-tile aspect-[4/3] bg-stone group">
+        <img src="https://placehold.co/800x600/e8e0d0/e8e0d0?text=+" alt="" class="transition-transform duration-700 group-hover:scale-105" />
+        <div class="absolute inset-0 bg-gradient-to-t from-brown/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        <span class="absolute bottom-3 left-3 text-bg text-[12px] tracking-wide opacity-0 group-hover:opacity-100 transition-opacity duration-300">Sea View, Veranda</span>
+      </div>
+      <div class="reveal ph-tile aspect-[4/3] bg-terracotta-light group">
+        <img src="https://placehold.co/800x600/e8c4a8/e8c4a8?text=+" alt="" class="transition-transform duration-700 group-hover:scale-105" />
+        <div class="absolute inset-0 bg-gradient-to-t from-brown/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        <span class="absolute bottom-3 left-3 text-bg text-[12px] tracking-wide opacity-0 group-hover:opacity-100 transition-opacity duration-300">Entrance Hall</span>
+      </div>
+      <div class="reveal ph-tile aspect-[4/3] bg-stone group">
+        <img src="https://placehold.co/800x600/e8e0d0/e8e0d0?text=+" alt="" class="transition-transform duration-700 group-hover:scale-105" />
+        <div class="absolute inset-0 bg-gradient-to-t from-brown/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        <span class="absolute bottom-3 left-3 text-bg text-[12px] tracking-wide opacity-0 group-hover:opacity-100 transition-opacity duration-300">Breakfast on the Steps</span>
+      </div>
+      <div class="reveal ph-tile aspect-[4/3] bg-terracotta-light group">
+        <img src="https://placehold.co/800x600/e8c4a8/e8c4a8?text=+" alt="" class="transition-transform duration-700 group-hover:scale-105" />
+        <div class="absolute inset-0 bg-gradient-to-t from-brown/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        <span class="absolute bottom-3 left-3 text-bg text-[12px] tracking-wide opacity-0 group-hover:opacity-100 transition-opacity duration-300">Evening, West Wing</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT / FAMILY STORY -->
+<section id="about" class="px-6 py-[var(--sp-xl)]">
+  <div class="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
+
+    <div class="reveal ph-tile aspect-[2/3] bg-stone border border-gold/30 max-w-[460px]">
+      <img src="https://placehold.co/700x1050/e8e0d0/e8e0d0?text=+" alt="" />
+      <div class="ph-icon text-brown/60">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-12 h-12"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3 2.5-5 6-5s6 2 6 5"/><circle cx="17" cy="9" r="2.5"/><path d="M15.5 14c2.7.3 4.5 2 4.5 5.5"/></svg>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <p class="eyebrow">Our Story</p>
+      <h2 class="font-heading text-brown text-[36px] md:text-[44px] font-light mt-3">Generations of Care</h2>
+      <p class="mt-6 text-[16px] leading-[1.8] text-sienna">
+        Casa Efterpi has belonged to our family since the house was first built — and we have never thought
+        of ourselves as anything other than its caretakers. Every cornice, shutter, and stone step has been
+        maintained, not modernised, by the people who grew up beneath this roof.
+      </p>
+      <p class="mt-5 text-[16px] leading-[1.8] text-sienna">
+        We open our home to a small number of guests at a time, because that is the only way we know how to
+        do this well. There is no front desk, no uniform, no script — only a family who happens to also
+        welcome travellers, the way Samos has always welcomed them.
+      </p>
+      <p class="mt-7 font-heading italic text-brown text-[19px]">— The family behind Casa Efterpi</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials" class="px-6 py-[var(--sp-xl)] overflow-hidden">
+  <div class="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 lg:gap-24 items-center">
+
+    <!-- Left: heading + navigation dots -->
+    <div class="reveal">
+      <p class="eyebrow">Guest Stories</p>
+      <h2 class="font-heading text-brown text-[34px] md:text-[42px] font-normal mt-3">What Guests Remember</h2>
+      <p class="mt-6 text-[16px] leading-[1.8] text-sienna max-w-md">
+        We don't ask guests to leave reviews — but some write to us anyway. Here is how a few of them
+        described their time at Casa Efterpi.
+      </p>
+      <div id="testimonial-dots" class="flex items-center gap-3 mt-9">
+        <button type="button" class="rounded-full transition-all duration-300 h-2.5 w-10 bg-terracotta" data-index="0" aria-label="View testimonial 1"></button>
+        <button type="button" class="rounded-full transition-all duration-300 h-2.5 w-2.5 bg-stone hover:bg-gold/60" data-index="1" aria-label="View testimonial 2"></button>
+        <button type="button" class="rounded-full transition-all duration-300 h-2.5 w-2.5 bg-stone hover:bg-gold/60" data-index="2" aria-label="View testimonial 3"></button>
+        <button type="button" class="rounded-full transition-all duration-300 h-2.5 w-2.5 bg-stone hover:bg-gold/60" data-index="3" aria-label="View testimonial 4"></button>
+      </div>
+    </div>
+
+    <!-- Right: stacked testimonial cards -->
+    <div class="reveal relative min-h-[380px] md:min-h-[360px]">
+      <div id="testimonial-track" class="relative h-full">
+
+        <article class="testimonial-card absolute inset-0 transition-all duration-500 ease-in-out" data-index="0" style="opacity:1; transform:translateX(0) scale(1); z-index:10;" aria-hidden="false">
+          <div class="bg-bg border border-gold/20 shadow-soft p-8 md:p-10 h-full flex flex-col">
+            <div class="flex gap-1.5 mb-6 text-gold">
+              <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 7.09-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 7.09-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 7.09-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 7.09-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 7.09-1.01L12 2z"/></svg>
+            </div>
+            <div class="relative flex-1">
+              <svg viewBox="0 0 24 24" fill="currentColor" class="absolute -top-1 -left-1 w-7 h-7 text-terracotta/15"><path d="M9 7C5.7 7 3 9.7 3 13s2.7 6 6 6c.6 0 1-.4 1-1s-.4-1-1-1c-2.2 0-4-1.8-4-4 0-.4 0-.7.1-1H6c1.7 0 3-1.3 3-3V8c0-.6-.4-1-1-1H9zm10 0c-3.3 0-6 2.7-6 6s2.7 6 6 6c.6 0 1-.4 1-1s-.4-1-1-1c-2.2 0-4-1.8-4-4 0-.4 0-.7.1-1H16c1.7 0 3-1.3 3-3V8c0-.6-.4-1-1-1h-1z"/></svg>
+              <p class="relative z-10 font-heading italic text-brown text-[19px] md:text-[20px] leading-[1.6]">"From the moment we arrived, there was no front desk, no formality — just the family, the garden, and a stillness we didn't know we needed. Three nights turned into a week."</p>
+            </div>
+            <div class="h-px bg-stone my-6"></div>
+            <div class="flex items-center gap-4">
+              <div class="h-12 w-12 rounded-full bg-terracotta-light flex items-center justify-center font-heading text-brown text-lg shrink-0">E</div>
+              <div>
+                <h3 class="text-[14px] font-semibold text-brown tracking-wide">Eleanor M.</h3>
+                <p class="text-[13px]" style="color:var(--color-mid-brown)">London, United Kingdom</p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="testimonial-card absolute inset-0 transition-all duration-500 ease-in-out" data-index="1" style="opacity:0; transform:translateX(40px) scale(0.96); z-index:0; pointer-events:none;" aria-hidden="true">
+          <div class="bg-bg border border-gold/20 shadow-soft p-8 md:p-10 h-full flex flex-col">
+            <div class="flex gap-1.5 mb-6 text-gold">
+              <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 7.09-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 7.09-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 7.09-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 7.09-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 7.09-1.01L12 2z"/></svg>
+            </div>
+            <div class="relative flex-1">
+              <svg viewBox="0 0 24 24" fill="currentColor" class="absolute -top-1 -left-1 w-7 h-7 text-terracotta/15"><path d="M9 7C5.7 7 3 9.7 3 13s2.7 6 6 6c.6 0 1-.4 1-1s-.4-1-1-1c-2.2 0-4-1.8-4-4 0-.4 0-.7.1-1H6c1.7 0 3-1.3 3-3V8c0-.6-.4-1-1-1H9zm10 0c-3.3 0-6 2.7-6 6s2.7 6 6 6c.6 0 1-.4 1-1s-.4-1-1-1c-2.2 0-4-1.8-4-4 0-.4 0-.7.1-1H16c1.7 0 3-1.3 3-3V8c0-.6-.4-1-1-1h-1z"/></svg>
+              <p class="relative z-10 font-heading italic text-brown text-[19px] md:text-[20px] leading-[1.6]">"Sofia and her parents made us feel like old friends, not paying guests. The breakfasts on the stone steps were the best part of our whole trip to Greece."</p>
+            </div>
+            <div class="h-px bg-stone my-6"></div>
+            <div class="flex items-center gap-4">
+              <div class="h-12 w-12 rounded-full bg-stone flex items-center justify-center font-heading text-brown text-lg shrink-0">M</div>
+              <div>
+                <h3 class="text-[14px] font-semibold text-brown tracking-wide">Markus &amp; Ina W.</h3>
+                <p class="text-[13px]" style="color:var(--color-mid-brown)">Vienna, Austria</p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="testimonial-card absolute inset-0 transition-all duration-500 ease-in-out" data-index="2" style="opacity:0; transform:translateX(40px) scale(0.96); z-index:0; pointer-events:none;" aria-hidden="true">
+          <div class="bg-bg border border-gold/20 shadow-soft p-8 md:p-10 h-full flex flex-col">
+            <div class="flex gap-1.5 mb-6 text-gold">
+              <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 7.09-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 7.09-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 7.09-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 7.09-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 7.09-1.01L12 2z"/></svg>
+            </div>
+            <div class="relative flex-1">
+              <svg viewBox="0 0 24 24" fill="currentColor" class="absolute -top-1 -left-1 w-7 h-7 text-terracotta/15"><path d="M9 7C5.7 7 3 9.7 3 13s2.7 6 6 6c.6 0 1-.4 1-1s-.4-1-1-1c-2.2 0-4-1.8-4-4 0-.4 0-.7.1-1H6c1.7 0 3-1.3 3-3V8c0-.6-.4-1-1-1H9zm10 0c-3.3 0-6 2.7-6 6s2.7 6 6 6c.6 0 1-.4 1-1s-.4-1-1-1c-2.2 0-4-1.8-4-4 0-.4 0-.7.1-1H16c1.7 0 3-1.3 3-3V8c0-.6-.4-1-1-1h-1z"/></svg>
+              <p class="relative z-10 font-heading italic text-brown text-[19px] md:text-[20px] leading-[1.6]">"As an architect, I came for the neoclassical facade and stayed for the way light moves through the house all day. Every cornice has been cared for, not modernised — it's rare to see."</p>
+            </div>
+            <div class="h-px bg-stone my-6"></div>
+            <div class="flex items-center gap-4">
+              <div class="h-12 w-12 rounded-full bg-terracotta-light flex items-center justify-center font-heading text-brown text-lg shrink-0">S</div>
+              <div>
+                <h3 class="text-[14px] font-semibold text-brown tracking-wide">Sophia T.</h3>
+                <p class="text-[13px]" style="color:var(--color-mid-brown)">Athens, Greece</p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="testimonial-card absolute inset-0 transition-all duration-500 ease-in-out" data-index="3" style="opacity:0; transform:translateX(40px) scale(0.96); z-index:0; pointer-events:none;" aria-hidden="true">
+          <div class="bg-bg border border-gold/20 shadow-soft p-8 md:p-10 h-full flex flex-col">
+            <div class="flex gap-1.5 mb-6 text-gold">
+              <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 7.09-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 7.09-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 7.09-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 7.09-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 7.09-1.01L12 2z"/></svg>
+            </div>
+            <div class="relative flex-1">
+              <svg viewBox="0 0 24 24" fill="currentColor" class="absolute -top-1 -left-1 w-7 h-7 text-terracotta/15"><path d="M9 7C5.7 7 3 9.7 3 13s2.7 6 6 6c.6 0 1-.4 1-1s-.4-1-1-1c-2.2 0-4-1.8-4-4 0-.4 0-.7.1-1H6c1.7 0 3-1.3 3-3V8c0-.6-.4-1-1-1H9zm10 0c-3.3 0-6 2.7-6 6s2.7 6 6 6c.6 0 1-.4 1-1s-.4-1-1-1c-2.2 0-4-1.8-4-4 0-.4 0-.7.1-1H16c1.7 0 3-1.3 3-3V8c0-.6-.4-1-1-1h-1z"/></svg>
+              <p class="relative z-10 font-heading italic text-brown text-[19px] md:text-[20px] leading-[1.6]">"We watched the sun set over the Aegean from the veranda every single evening. Casa Efterpi isn't a hotel, it's somebody's home — and they let us borrow it for a week."</p>
+            </div>
+            <div class="h-px bg-stone my-6"></div>
+            <div class="flex items-center gap-4">
+              <div class="h-12 w-12 rounded-full bg-stone flex items-center justify-center font-heading text-brown text-lg shrink-0">J</div>
+              <div>
+                <h3 class="text-[14px] font-semibold text-brown tracking-wide">James R.</h3>
+                <p class="text-[13px]" style="color:var(--color-mid-brown)">New York, USA</p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- Decorative elements -->
+      <div class="hidden md:block absolute -bottom-6 -left-6 h-24 w-24 bg-terracotta/5 -z-10"></div>
+      <div class="hidden md:block absolute -top-6 -right-6 h-24 w-24 bg-terracotta/5 -z-10"></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="px-6 py-[var(--sp-xl)] bg-cream">
+  <div class="max-w-[1280px] mx-auto">
+    <div class="max-w-[760px] reveal">
+      <p class="eyebrow">Visit</p>
+      <h2 class="font-heading text-brown text-[36px] md:text-[44px] font-light mt-3">Begin Your Stay</h2>
+      <p class="mt-5 text-[16px] leading-[1.8] text-sienna">
+        Write to us directly, or use the form below. We answer every message ourselves.
+      </p>
+    </div>
+
+    <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">
+
+      <div class="reveal">
+        <ul class="space-y-5">
+          <li class="flex items-start gap-4">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mt-0.5 text-sienna shrink-0"><path d="M12 21s7-6.5 7-12a7 7 0 10-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
+            <span class="text-[15px] text-mid-brown" style="color:var(--color-mid-brown)">Samos, Greece</span>
+          </li>
+          <li class="flex items-start gap-4">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mt-0.5 text-sienna shrink-0"><rect x="3" y="5" width="18" height="14"/><path d="M3 6l9 7 9-7"/></svg>
+            <span class="text-[15px] text-mid-brown" style="color:var(--color-mid-brown)">info@casaefterpi.com</span>
+          </li>
+          <li class="flex items-start gap-4">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mt-0.5 text-sienna shrink-0"><path d="M5 4h3l2 5-2 1.5a11 11 0 005.5 5.5L15 14l5 2v3a2 2 0 01-2 2C9.5 21 3 14.5 3 6a2 2 0 012-2z"/></svg>
+            <span class="text-[15px] text-mid-brown" style="color:var(--color-mid-brown)">+30 22730 00 000</span>
+          </li>
+        </ul>
+
+        <div class="ph-tile aspect-[4/3] bg-stone mt-8 border border-gold/30">
+          <img src="https://placehold.co/800x600/e8e0d0/e8e0d0?text=+" alt="" />
+          <div class="ph-icon text-brown/60">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-10 h-10"><path d="M12 21s7-6.5 7-12a7 7 0 10-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <form id="contact-form" class="reveal space-y-6">
+        <div>
+          <label class="field-label" for="name">Name</label>
+          <input class="field" type="text" id="name" name="name" placeholder="Your full name" required />
+        </div>
+        <div>
+          <label class="field-label" for="email">Email</label>
+          <input class="field" type="email" id="email" name="email" placeholder="you@example.com" required />
+        </div>
+        <div class="grid grid-cols-2 gap-6">
+          <div>
+            <label class="field-label" for="arrival">Arrival</label>
+            <input class="field" type="date" id="arrival" name="arrival" />
+          </div>
+          <div>
+            <label class="field-label" for="departure">Departure</label>
+            <input class="field" type="date" id="departure" name="departure" />
+          </div>
+        </div>
+        <div>
+          <label class="field-label" for="message">Message</label>
+          <textarea class="field" id="message" name="message" rows="4" placeholder="Tell us about your stay"></textarea>
+        </div>
+        <button type="submit" class="btn-primary w-full sm:w-auto">Send Enquiry</button>
+      </form>
+      <p id="form-success" class="hidden text-[15px] mt-2 reveal is-visible" style="color:var(--color-green)">Thank you — your message has been received. We will reply personally, soon.</p>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="site-footer" class="bg-brown text-bg px-6 pt-[var(--sp-lg)] pb-8">
+  <div class="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-10">
+
+    <div>
+      <div class="flex items-center gap-3">
+        <img src="assets/crest.png" alt="Casa Efterpi crest" class="h-12 w-12 object-contain" />
+        <span class="font-heading text-lg tracking-[0.1em]">CASA EFTERPI</span>
+      </div>
+      <p class="mt-4 text-[13px] tracking-[.2em] uppercase text-bg/60">Samos · Greece</p>
+    </div>
+
+    <div>
+      <p class="text-[12px] tracking-[.2em] uppercase text-bg/50 mb-4">Find Us</p>
+      <ul class="space-y-3 text-[14px] text-bg/85">
+        <li>Samos, Greece</li>
+        <li>info@casaefterpi.com</li>
+        <li>+30 22730 00 000</li>
+      </ul>
+    </div>
+
+    <div>
+      <p class="text-[12px] tracking-[.2em] uppercase text-bg/50 mb-4">Discover</p>
+      <ul class="space-y-3 text-[14px]">
+        <li><a href="#hero" class="hover:text-terracotta-light transition-colors">Home</a></li>
+        <li><a href="#rooms" class="hover:text-terracotta-light transition-colors">Rooms</a></li>
+        <li><a href="#gallery" class="hover:text-terracotta-light transition-colors">Gallery</a></li>
+        <li><a href="#about" class="hover:text-terracotta-light transition-colors">About</a></li>
+        <li><a href="#contact" class="hover:text-terracotta-light transition-colors">Contact</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <p class="text-[12px] tracking-[.2em] uppercase text-bg/50 mb-4">Stay in Touch</p>
+      <form id="newsletter-form">
+        <label class="sr-only" for="newsletter-email">Email Address</label>
+        <input class="field-dark" type="email" id="newsletter-email" name="email" placeholder="your@email.com" required />
+        <button type="submit" class="btn-secondary !border-bg/40 !text-bg w-full mt-5 hover:!bg-bg/10">Subscribe</button>
+      </form>
+      <p id="newsletter-success" class="hidden text-[13px] mt-3 text-terracotta-light">Thank you — you're on the list.</p>
+    </div>
+
+  </div>
+
+  <div class="max-w-[1280px] mx-auto border-t border-bg/15 mt-12 pt-6 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+    <div class="flex items-center gap-6">
+      <a href="#" aria-label="Instagram" class="text-bg/70 hover:text-bg transition-colors">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-5 h-5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+      </a>
+      <a href="#about" class="text-[13px] text-bg/70 hover:text-bg transition-colors">About Us</a>
+      <a href="#" class="text-[13px] text-bg/70 hover:text-bg transition-colors">Privacy Policy</a>
+      <a href="#" class="text-[13px] text-bg/70 hover:text-bg transition-colors">Cancellation Policy</a>
+    </div>
+    <p class="text-[13px] text-bg/50">© 2026 Casa Efterpi. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+  // Header transparent -> solid on scroll
+  var header = document.getElementById('site-header');
+  function updateHeader(){
+    if (window.scrollY > 40) {
+      header.classList.remove('is-transparent');
+      header.classList.add('is-solid');
+    } else {
+      header.classList.remove('is-solid');
+      header.classList.add('is-transparent');
+    }
+  }
+  updateHeader();
+  window.addEventListener('scroll', updateHeader, { passive: true });
+
+  // Mobile menu toggle
+  var menuToggle = document.getElementById('menu-toggle');
+  var mobileMenu = document.getElementById('mobile-menu');
+  var iconOpen = document.getElementById('icon-open');
+  var iconClose = document.getElementById('icon-close');
+  menuToggle.addEventListener('click', function(){
+    var isHidden = mobileMenu.classList.contains('hidden');
+    mobileMenu.classList.toggle('hidden');
+    iconOpen.classList.toggle('hidden');
+    iconClose.classList.toggle('hidden');
+    menuToggle.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
+  });
+  mobileMenu.querySelectorAll('a').forEach(function(link){
+    link.addEventListener('click', function(){
+      mobileMenu.classList.add('hidden');
+      iconOpen.classList.remove('hidden');
+      iconClose.classList.add('hidden');
+      menuToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // Scroll-reveal animation (progressive enhancement: content is visible by
+  // default; the js-reveal-ready class only arms the hidden/fade-in state
+  // once we know the observer is ready to bring elements back).
+  var revealEls = document.querySelectorAll('.reveal');
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+  revealEls.forEach(function(el){
+    var rect = el.getBoundingClientRect();
+    var alreadyInView = rect.top < window.innerHeight && rect.bottom > 0;
+    if (alreadyInView) {
+      el.classList.add('is-visible');
+    } else {
+      observer.observe(el);
+    }
+  });
+  document.documentElement.classList.add('js-reveal-ready');
+
+  // Testimonials carousel
+  var testimonialCards = document.querySelectorAll('.testimonial-card');
+  var testimonialDots = document.querySelectorAll('#testimonial-dots button');
+  var testimonialIndex = 0;
+  var testimonialTimer;
+
+  function showTestimonial(index){
+    testimonialCards.forEach(function(card, i){
+      if (i === index) {
+        card.style.opacity = '1';
+        card.style.transform = 'translateX(0) scale(1)';
+        card.style.zIndex = '10';
+        card.style.pointerEvents = 'auto';
+        card.setAttribute('aria-hidden', 'false');
+      } else {
+        card.style.opacity = '0';
+        card.style.transform = 'translateX(40px) scale(0.96)';
+        card.style.zIndex = '0';
+        card.style.pointerEvents = 'none';
+        card.setAttribute('aria-hidden', 'true');
+      }
+    });
+    testimonialDots.forEach(function(dot, i){
+      dot.className = i === index
+        ? 'rounded-full transition-all duration-300 h-2.5 w-10 bg-terracotta'
+        : 'rounded-full transition-all duration-300 h-2.5 w-2.5 bg-stone hover:bg-gold/60';
+    });
+    testimonialIndex = index;
+  }
+
+  function startTestimonialAutoRotate(){
+    clearInterval(testimonialTimer);
+    if (testimonialCards.length <= 1) return;
+    testimonialTimer = setInterval(function(){
+      showTestimonial((testimonialIndex + 1) % testimonialCards.length);
+    }, 6000);
+  }
+
+  if (testimonialCards.length) {
+    testimonialDots.forEach(function(dot){
+      dot.addEventListener('click', function(){
+        showTestimonial(parseInt(dot.getAttribute('data-index'), 10));
+        startTestimonialAutoRotate();
+      });
+    });
+    startTestimonialAutoRotate();
+  }
+
+  // Contact form (front-end only)
+  var contactForm = document.getElementById('contact-form');
+  var formSuccess = document.getElementById('form-success');
+  contactForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    contactForm.classList.add('hidden');
+    formSuccess.classList.remove('hidden');
+  });
+
+  // Newsletter form (front-end only)
+  var newsletterForm = document.getElementById('newsletter-form');
+  var newsletterSuccess = document.getElementById('newsletter-success');
+  newsletterForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    newsletterForm.classList.add('hidden');
+    newsletterSuccess.classList.remove('hidden');
+  });
+</script>
+
+</body>
+</html>
