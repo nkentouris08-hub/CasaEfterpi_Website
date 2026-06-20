@@ -8,7 +8,7 @@
 <link rel="icon" type="image/png" href="assets/crest.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&family=Parisienne&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
   tailwind.config = {
@@ -38,6 +38,7 @@
     --color-terracotta:#C17F5A; --color-terracotta-l:#E8C4A8; --color-gold:#B8936A;
     --color-dark-brown:#3D2B1A; --color-mid-brown:#6B4C35; --color-green:#2E5A44;
     --font-heading:'Cormorant Garamond', Georgia, serif; --font-body:'Jost', Arial, sans-serif;
+    --font-script:'Parisienne', cursive;
     --sp-xs:8px; --sp-sm:16px; --sp-md:32px; --sp-lg:64px; --sp-xl:120px; --sp-2xl:200px;
     --r-sm:2px; --r-md:4px; --container:1280px; --container-narrow:760px;
   }
@@ -64,6 +65,11 @@
   header.is-solid #menu-toggle{color:var(--color-dark-brown);}
   header.is-transparent .site-wordmark{color:var(--color-bg);}
   header.is-solid .site-wordmark{color:var(--color-dark-brown);}
+
+  .brand-script{font-family:var(--font-script); font-weight:400; letter-spacing:.015em;}
+
+  .brand-mark{filter:drop-shadow(0 0 6px rgba(184,147,106,.6)) drop-shadow(0 0 16px rgba(193,127,90,.4)); transition:filter .35s ease, transform .35s ease;}
+  .brand-mark:hover{filter:drop-shadow(0 0 9px rgba(184,147,106,.85)) drop-shadow(0 0 24px rgba(193,127,90,.6)); transform:scale(1.05);}
 
   a, button, input, textarea{outline-offset:3px;}
   a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible{outline:1.5px solid var(--color-gold);}
@@ -113,8 +119,8 @@
   <div class="absolute inset-0 -z-10 is-header-backdrop"></div>
   <div class="max-w-[1280px] mx-auto flex items-center justify-between px-6 md:px-10 py-3">
     <a href="#hero" class="flex items-center gap-3">
-      <img src="assets/crest.png" alt="Casa Efterpi crest" class="h-12 w-12 object-contain" />
-      <span class="site-wordmark font-heading text-xl tracking-[0.1em] hidden sm:inline">CASA EFTERPI</span>
+      <img src="assets/crest.png" alt="Casa Efterpi crest" class="brand-mark h-14 w-14 object-contain" />
+      <span class="site-wordmark brand-script text-2xl hidden sm:inline">Casa Efterpi</span>
     </a>
     <nav class="hidden lg:flex items-center gap-10">
       <a class="nav-link" href="#hero">Home</a>
@@ -151,7 +157,7 @@
 
   <div class="reveal absolute left-0 bottom-0 max-w-[90%] md:max-w-md">
     <div class="px-8 md:px-12 py-9 md:py-11" style="background:rgba(250,247,242,.85);">
-      <h1 class="font-heading text-brown text-[40px] md:text-[58px] font-light leading-[1.05]">Casa Efterpi</h1>
+      <h1 class="brand-script text-brown text-[44px] md:text-[64px] leading-[1.15]">Casa Efterpi</h1>
       <p class="mt-3 font-body text-terracotta text-[13px] font-normal tracking-[.25em] uppercase">Samos, Greece</p>
     </div>
   </div>
@@ -722,8 +728,8 @@
 
     <div>
       <div class="flex items-center gap-3">
-        <img src="assets/crest.png" alt="Casa Efterpi crest" class="h-12 w-12 object-contain" />
-        <span class="font-heading text-lg tracking-[0.1em]">CASA EFTERPI</span>
+        <img src="assets/crest.png" alt="Casa Efterpi crest" class="brand-mark h-14 w-14 object-contain" />
+        <span class="brand-script text-2xl">Casa Efterpi</span>
       </div>
       <p class="mt-4 text-[13px] tracking-[.2em] uppercase text-bg/60">Samos · Greece</p>
     </div>
