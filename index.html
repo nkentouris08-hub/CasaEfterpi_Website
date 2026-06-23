@@ -109,6 +109,17 @@
   header.is-transparent .is-header-backdrop{background:linear-gradient(to bottom, rgba(42,31,21,.55), transparent);}
   header.is-solid .is-header-backdrop{background:var(--color-bg);}
   header.is-solid{box-shadow:0 8px 24px -16px rgba(61,43,26,.35);}
+
+  /* Legal disclosure (footer) */
+  .legal-info-toggle{display:inline-block; background:none; border:none; cursor:pointer; padding:4px 2px; font-family:var(--font-body); font-size:11px; font-weight:500; letter-spacing:.18em; text-transform:uppercase; color:var(--color-bg); opacity:.4; text-decoration:underline; text-decoration-color:currentColor; text-underline-offset:4px; transition:opacity .25s ease;}
+  .legal-info-toggle:hover, .legal-info-toggle:focus-visible{opacity:.75;}
+
+  .legal-info-panel{max-height:0; overflow:hidden; width:100%; transition:max-height .5s cubic-bezier(.22,1,.36,1);}
+  .legal-info-inner{max-width:560px; margin:18px auto 0; padding:24px 28px; border:1px solid rgba(250,247,242,.12); border-radius:var(--r-md); background:rgba(250,247,242,.03);}
+  .legal-info-list{display:flex; flex-direction:column; gap:10px; text-align:left;}
+  .legal-info-row{display:flex; flex-wrap:wrap; gap:2px 10px; font-size:13px; line-height:1.5;}
+  .legal-info-row dt{flex:0 0 168px; margin:0; color:var(--color-terracotta-l); font-weight:500; letter-spacing:.02em;}
+  .legal-info-row dd{flex:1 1 220px; margin:0; color:rgba(250,247,242,.85);}
 </style>
 </head>
 <body class="antialiased">
@@ -777,6 +788,25 @@
     </div>
     <p class="text-[13px] text-bg/50">© 2026 Casa Efterpi. All rights reserved.</p>
   </div>
+
+  <div class="max-w-[1280px] mx-auto mt-8 flex flex-col items-center text-center">
+    <button type="button" id="legal-info-toggle" class="legal-info-toggle" aria-expanded="false" aria-controls="legal-info-panel">Legal Info</button>
+    <div id="legal-info-panel" class="legal-info-panel">
+      <div class="legal-info-inner">
+        <dl class="legal-info-list">
+          <div class="legal-info-row"><dt>Επωνυμία</dt><dd>Τουριστικές κατοικίες οικογένειας Κεντούρη Μονοπρόσωπη ΙΚΕ</dd></div>
+          <div class="legal-info-row"><dt>Διακριτικός Τίτλος</dt><dd>Casa Efterpi</dd></div>
+          <div class="legal-info-row"><dt>Αριθμός ΓΕΜΗ</dt><dd>193851851000 (έναρξη 18/05/2026)</dd></div>
+          <div class="legal-info-row"><dt>ΑΦΜ</dt><dd>803287721 — ΔΟΥ Σάμου</dd></div>
+          <div class="legal-info-row"><dt>ΚΑΔ</dt><dd>55200103</dd></div>
+          <div class="legal-info-row"><dt>Έδρα</dt><dd>Ανώνυμος 9, 83200 Καρλόβασι, Σάμος</dd></div>
+          <div class="legal-info-row"><dt>Μοναδικός Εταίρος</dt><dd>Γεώργιος Α. Κεντούρης</dd></div>
+          <div class="legal-info-row"><dt>Διαχειριστές</dt><dd>Γεώργιος Α. Κεντούρης &amp; Άννα Ν. Μουρατίδου</dd></div>
+          <div class="legal-info-row"><dt>Εταιρικό Κεφάλαιο</dt><dd>140.000 €</dd></div>
+        </dl>
+      </div>
+    </div>
+  </div>
 </footer>
 
 <script>
@@ -903,6 +933,27 @@
     newsletterForm.classList.add('hidden');
     newsletterSuccess.classList.remove('hidden');
   });
+
+  // Legal info disclosure (footer)
+  var legalToggle = document.getElementById('legal-info-toggle');
+  var legalPanel = document.getElementById('legal-info-panel');
+  if (legalToggle && legalPanel) {
+    legalToggle.addEventListener('click', function(){
+      var isOpen = legalToggle.getAttribute('aria-expanded') === 'true';
+      if (isOpen) {
+        legalPanel.style.maxHeight = '0px';
+        legalToggle.setAttribute('aria-expanded', 'false');
+      } else {
+        legalPanel.style.maxHeight = legalPanel.scrollHeight + 'px';
+        legalToggle.setAttribute('aria-expanded', 'true');
+      }
+    });
+    window.addEventListener('resize', function(){
+      if (legalToggle.getAttribute('aria-expanded') === 'true') {
+        legalPanel.style.maxHeight = legalPanel.scrollHeight + 'px';
+      }
+    });
+  }
 </script>
 
 </body>
