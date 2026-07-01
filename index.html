@@ -120,6 +120,33 @@
   .legal-info-row{display:flex; flex-wrap:wrap; gap:2px 10px; font-size:13px; line-height:1.5;}
   .legal-info-row dt{flex:0 0 168px; margin:0; color:var(--color-terracotta-l); font-weight:500; letter-spacing:.02em;}
   .legal-info-row dd{flex:1 1 220px; margin:0; color:rgba(250,247,242,.85);}
+
+  /* ─── Language Switcher ─── */
+  .lang-switcher{position:relative;}
+
+  .lang-trigger{display:flex;align-items:center;gap:6px;border:1px solid transparent;padding:5px 14px;border-radius:50px;cursor:pointer;font-family:var(--font-body);font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;transition:border-color .25s ease,color .25s ease,background-color .25s ease;line-height:1;white-space:nowrap;}
+  header.is-transparent .lang-trigger{color:var(--color-bg);border-color:rgba(250,247,242,.6);background:rgba(250,247,242,.15);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);}
+  header.is-transparent .lang-trigger:hover{border-color:rgba(250,247,242,.9);background:rgba(250,247,242,.26);}
+  header.is-solid .lang-trigger{color:var(--color-dark-brown);border-color:var(--color-gold);background:var(--color-cream);}
+  header.is-solid .lang-trigger:hover{background:var(--color-stone);border-color:var(--color-gold);}
+
+  .lang-chevron{width:13px;height:13px;flex-shrink:0;transition:transform .2s ease;}
+  .lang-trigger[aria-expanded="true"] .lang-chevron{transform:rotate(180deg);}
+
+  .lang-dropdown{position:absolute;top:calc(100% + 8px);right:0;list-style:none;padding:5px 0;margin:0;min-width:152px;background:var(--color-bg);border:1px solid var(--color-stone);border-radius:var(--r-md);box-shadow:0 12px 32px -8px rgba(61,43,26,.22);z-index:200;display:block;opacity:0;transform:translateY(-6px);pointer-events:none;transition:opacity .2s ease,transform .2s ease;}
+  .lang-dropdown.is-open{opacity:1;transform:translateY(0);pointer-events:auto;}
+
+  .lang-option{display:flex;align-items:center;gap:10px;width:100%;padding:9px 16px;background:transparent;border:none;cursor:pointer;font-family:var(--font-body);font-size:13px;color:var(--color-mid-brown);text-align:left;white-space:nowrap;transition:background-color .15s ease;}
+  .lang-option:hover{background:var(--color-cream);color:var(--color-dark-brown);}
+  .lang-option[aria-selected="true"]{font-weight:600;color:var(--color-dark-brown);}
+
+  .lang-check{width:14px;height:14px;margin-left:auto;flex-shrink:0;color:var(--color-terracotta);visibility:hidden;}
+  .lang-option[aria-selected="true"] .lang-check{visibility:visible;}
+
+  /* Mobile language buttons */
+  .mobile-lang-btn{display:inline-flex;align-items:center;gap:5px;background:transparent;border:1px solid rgba(61,43,26,.25);padding:5px 13px;border-radius:50px;cursor:pointer;font-family:var(--font-body);font-size:12px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--color-mid-brown);transition:border-color .2s ease,color .2s ease;}
+  .mobile-lang-btn.is-active{border-color:var(--color-terracotta);color:var(--color-terracotta);font-weight:600;}
+  .mobile-lang-btn:hover:not(.is-active){border-color:var(--color-gold);}
 </style>
 </head>
 <body class="antialiased">
@@ -134,14 +161,36 @@
       <span class="site-wordmark brand-script text-2xl hidden sm:inline">Casa Efterpi</span>
     </a>
     <nav class="hidden lg:flex items-center gap-10">
-      <a class="nav-link" href="#hero">Home</a>
-      <a class="nav-link" href="#rooms">Rooms</a>
-      <a class="nav-link" href="#gallery">Gallery</a>
-      <a class="nav-link" href="#about">About</a>
-      <a class="nav-link" href="#contact">Contact</a>
+      <a class="nav-link" href="#hero" data-i18n="nav.home">Home</a>
+      <a class="nav-link" href="#rooms" data-i18n="nav.rooms">Rooms</a>
+      <a class="nav-link" href="#gallery" data-i18n="nav.gallery">Gallery</a>
+      <a class="nav-link" href="#about" data-i18n="nav.about">About</a>
+      <a class="nav-link" href="#contact" data-i18n="nav.contact">Contact</a>
     </nav>
-    <div class="hidden lg:block">
-      <a href="#contact" class="btn-secondary !py-2.5 !px-7 !text-[12px]">Book Now</a>
+    <!-- Desktop: lang switcher + Book Now -->
+    <div class="hidden lg:flex items-center gap-4">
+      <div id="lang-switcher" class="lang-switcher">
+        <button id="lang-trigger" class="lang-trigger" aria-haspopup="listbox" aria-expanded="false" aria-label="Select language">
+          <span id="lang-flag">🇬🇧</span>
+          <span id="lang-label">English</span>
+          <svg class="lang-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <ul id="lang-dropdown" class="lang-dropdown" role="listbox" aria-label="Language selection">
+          <li role="presentation">
+            <button class="lang-option" role="option" data-lang="en" aria-selected="true">
+              🇬🇧 English
+              <svg class="lang-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>
+            </button>
+          </li>
+          <li role="presentation">
+            <button class="lang-option" role="option" data-lang="el" aria-selected="false">
+              🇬🇷 Ελληνικά
+              <svg class="lang-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>
+            </button>
+          </li>
+        </ul>
+      </div>
+      <a href="#contact" class="btn-secondary !py-2.5 !px-7 !text-[12px]" data-i18n="nav.book_now">Book Now</a>
     </div>
     <button id="menu-toggle" aria-label="Open menu" aria-expanded="false" class="lg:hidden p-2">
       <svg id="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="w-7 h-7"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
@@ -150,12 +199,17 @@
   </div>
   <div id="mobile-menu" class="hidden lg:hidden bg-bg border-t border-stone">
     <div class="flex flex-col px-6 py-6 gap-5">
-      <a class="nav-link !text-brown" href="#hero">Home</a>
-      <a class="nav-link !text-brown" href="#rooms">Rooms</a>
-      <a class="nav-link !text-brown" href="#gallery">Gallery</a>
-      <a class="nav-link !text-brown" href="#about">About</a>
-      <a class="nav-link !text-brown" href="#contact">Contact</a>
-      <a href="#contact" class="btn-primary text-center mt-2">Book Now</a>
+      <a class="nav-link !text-brown" href="#hero" data-i18n="nav.home">Home</a>
+      <a class="nav-link !text-brown" href="#rooms" data-i18n="nav.rooms">Rooms</a>
+      <a class="nav-link !text-brown" href="#gallery" data-i18n="nav.gallery">Gallery</a>
+      <a class="nav-link !text-brown" href="#about" data-i18n="nav.about">About</a>
+      <a class="nav-link !text-brown" href="#contact" data-i18n="nav.contact">Contact</a>
+      <!-- Mobile language switcher -->
+      <div class="flex gap-3 pt-1 border-t border-stone/60">
+        <button class="mobile-lang-btn is-active" data-lang="en" aria-selected="true">🇬🇧 English</button>
+        <button class="mobile-lang-btn" data-lang="el" aria-selected="false">🇬🇷 Ελληνικά</button>
+      </div>
+      <a href="#contact" class="btn-primary text-center" data-i18n="nav.book_now">Book Now</a>
     </div>
   </div>
 </header>
@@ -163,17 +217,17 @@
 <!-- HERO -->
 <section id="hero" class="relative h-screen min-h-[640px] max-h-[940px] w-full overflow-hidden">
   <div class="absolute inset-0">
-    <img src="https://placehold.co/2400x1029/c9b89a/c9b89a?text=+" alt="Full elevation of the Casa Efterpi facade, from pediment to garden" class="w-full h-full object-cover" style="object-position:top center;" />
+    <img src="https://placehold.co/2400x1029/c9b89a/c9b89a?text=+" alt="Full elevation of the Casa Efterpi facade, from pediment to garden" data-i18n-attr="alt:hero.img_alt" class="w-full h-full object-cover" style="object-position:top center;" />
   </div>
 
   <div class="reveal absolute left-0 bottom-0 max-w-[90%] md:max-w-md">
     <div class="px-8 md:px-12 py-9 md:py-11" style="background:rgba(250,247,242,.85);">
       <h1 class="brand-script text-brown text-[44px] md:text-[64px] leading-[1.15]">Casa Efterpi</h1>
-      <p class="mt-3 font-body text-terracotta text-[13px] font-normal tracking-[.25em] uppercase">Samos, Greece</p>
+      <p class="mt-3 font-body text-terracotta text-[13px] font-normal tracking-[.25em] uppercase" data-i18n="hero.location">Samos, Greece</p>
     </div>
   </div>
 
-  <a href="#invitation" aria-label="Scroll to content" class="scroll-cue absolute bottom-7 right-7 md:right-10 w-11 h-11 flex items-center justify-center text-brown hover:text-terracotta transition-colors" style="background:rgba(250,247,242,.85);">
+  <a href="#invitation" aria-label="Scroll to content" data-i18n-attr="aria-label:hero.scroll_label" class="scroll-cue absolute bottom-7 right-7 md:right-10 w-11 h-11 flex items-center justify-center text-brown hover:text-terracotta transition-colors" style="background:rgba(250,247,242,.85);">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M12 4v16M5 13l7 7 7-7"/></svg>
   </a>
 </section>
@@ -190,18 +244,18 @@
     </div>
 
     <div class="reveal order-2">
-      <p class="eyebrow">Our Invitation</p>
-      <h2 class="font-heading text-brown text-[34px] md:text-[42px] font-normal mt-3">Settle In.</h2>
-      <p class="mt-6 text-[16px] leading-[1.8] text-sienna">
+      <p class="eyebrow" data-i18n="invitation.eyebrow">Our Invitation</p>
+      <h2 class="font-heading text-brown text-[34px] md:text-[42px] font-normal mt-3" data-i18n="invitation.heading">Settle In.</h2>
+      <p class="mt-6 text-[16px] leading-[1.8] text-sienna" data-i18n="invitation.body1">
         There is no rush at Casa Efterpi. Mornings begin on the stone steps with coffee and the scent
         of the garden; evenings end on the veranda, watching the light leave the Aegean.
       </p>
-      <p class="mt-5 text-[16px] leading-[1.8] text-sienna">
+      <p class="mt-5 text-[16px] leading-[1.8] text-sienna" data-i18n="invitation.body2">
         However long you stay, the house asks only one thing of you — that you slow down enough to meet it.
       </p>
       <div class="flex flex-wrap items-center gap-8 mt-8 text-terracotta">
-        <a href="#rooms" class="link-cta">Discover the Rooms</a>
-        <a href="#contact" class="link-cta">Begin Your Stay</a>
+        <a href="#rooms" class="link-cta" data-i18n="invitation.cta1">Discover the Rooms</a>
+        <a href="#contact" class="link-cta" data-i18n="invitation.cta2">Begin Your Stay</a>
       </div>
     </div>
 
@@ -217,21 +271,21 @@
         <div class="ph-tile aspect-[2/3] bg-stone">
           <img src="https://placehold.co/800x1200/e8e0d0/e8e0d0?text=+" alt="" class="transition-transform duration-700 group-hover:scale-105" />
         </div>
-        <p class="nav-tile-caption mt-4">Rooms</p>
+        <p class="nav-tile-caption mt-4" data-i18n="tiles.rooms">Rooms</p>
       </a>
 
       <a href="#gallery" class="reveal nav-tile group block">
         <div class="ph-tile aspect-[2/3] bg-terracotta-light">
           <img src="https://placehold.co/800x1200/e8c4a8/e8c4a8?text=+" alt="" class="transition-transform duration-700 group-hover:scale-105" />
         </div>
-        <p class="nav-tile-caption mt-4">Gallery</p>
+        <p class="nav-tile-caption mt-4" data-i18n="tiles.gallery">Gallery</p>
       </a>
 
       <a href="#about" class="reveal nav-tile group block">
         <div class="ph-tile aspect-[2/3] bg-stone">
-          <img src="assets/hero.jpg" alt="The neoclassical facade of Casa Efterpi" class="transition-transform duration-700 group-hover:scale-105" />
+          <img src="assets/hero.jpg" alt="The neoclassical facade of Casa Efterpi" data-i18n-attr="alt:tiles.about_img_alt" class="transition-transform duration-700 group-hover:scale-105" />
         </div>
-        <p class="nav-tile-caption mt-4">About</p>
+        <p class="nav-tile-caption mt-4" data-i18n="tiles.about">About</p>
       </a>
 
     </div>
@@ -243,13 +297,13 @@
   <div class="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
 
     <div class="reveal order-2 md:order-1">
-      <p class="eyebrow">Welcome to Casa Efterpi</p>
-      <h2 class="font-heading text-brown text-[34px] md:text-[42px] font-normal mt-3">Your Home on Samos</h2>
-      <p class="mt-6 text-[16px] leading-[1.8] text-sienna max-w-md">
+      <p class="eyebrow" data-i18n="welcome.eyebrow">Welcome to Casa Efterpi</p>
+      <h2 class="font-heading text-brown text-[34px] md:text-[42px] font-normal mt-3" data-i18n="welcome.heading">Your Home on Samos</h2>
+      <p class="mt-6 text-[16px] leading-[1.8] text-sienna max-w-md" data-i18n="welcome.body1">
         On the island of Samos, where the Aegean meets a nineteenth-century mansion, Casa Efterpi
         offers quiet elegance to travellers who have stopped chasing more — and started noticing everything.
       </p>
-      <p class="mt-5 text-[16px] leading-[1.8] text-sienna max-w-md">
+      <p class="mt-5 text-[16px] leading-[1.8] text-sienna max-w-md" data-i18n="welcome.body2">
         Set above the harbour town, the house has watched ships come and go since the 1870s. Our
         concept is simple: a home run by the family who has always lived in it, open just enough to share it.
       </p>
@@ -277,13 +331,13 @@
 <section class="px-0">
   <div class="grid grid-cols-1 md:grid-cols-3 gap-[2px] bg-bg">
     <div class="ph-tile aspect-[4/5] bg-stone">
-      <img src="https://placehold.co/700x875/e8e0d0/e8e0d0?text=+" alt="Staircase detail at Casa Efterpi" />
+      <img src="https://placehold.co/700x875/e8e0d0/e8e0d0?text=+" alt="Staircase detail at Casa Efterpi" data-i18n-attr="alt:photo1.alt1" />
     </div>
     <div class="ph-tile aspect-[4/5] bg-terracotta-light">
-      <img src="https://placehold.co/700x875/e8c4a8/e8c4a8?text=+" alt="Interior lounge detail" />
+      <img src="https://placehold.co/700x875/e8c4a8/e8c4a8?text=+" alt="Interior lounge detail" data-i18n-attr="alt:photo1.alt2" />
     </div>
     <div class="ph-tile aspect-[4/5] bg-stone">
-      <img src="https://placehold.co/700x875/e8e0d0/e8e0d0?text=+" alt="Table set for breakfast" />
+      <img src="https://placehold.co/700x875/e8e0d0/e8e0d0?text=+" alt="Table set for breakfast" data-i18n-attr="alt:photo1.alt3" />
     </div>
   </div>
 </section>
@@ -292,12 +346,12 @@
 <section class="px-6 py-[var(--sp-xl)]">
   <div class="max-w-[1280px] mx-auto reveal">
     <svg viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 text-sienna/70"><path d="M9 7C5.7 7 3 9.7 3 13s2.7 6 6 6c.6 0 1-.4 1-1s-.4-1-1-1c-2.2 0-4-1.8-4-4 0-.4 0-.7.1-1H6c1.7 0 3-1.3 3-3V8c0-.6-.4-1-1-1H9zm10 0c-3.3 0-6 2.7-6 6s2.7 6 6 6c.6 0 1-.4 1-1s-.4-1-1-1c-2.2 0-4-1.8-4-4 0-.4 0-.7.1-1H16c1.7 0 3-1.3 3-3V8c0-.6-.4-1-1-1h-1z"/></svg>
-    <p class="font-heading italic text-brown text-[28px] md:text-[36px] leading-[1.4] mt-6 max-w-[820px]">
+    <p class="font-heading italic text-brown text-[28px] md:text-[36px] leading-[1.4] mt-6 max-w-[820px]" data-i18n="quote.text">
       Casa Efterpi was never meant to become a hotel in the usual sense. It is our family's home,
       kept exactly as it was built, and shared — quietly — with those who know how to appreciate
       a house that has done nothing but stand still and grow more beautiful.
     </p>
-    <p class="eyebrow mt-7">— The Family Behind Casa Efterpi</p>
+    <p class="eyebrow mt-7" data-i18n="quote.attribution">— The Family Behind Casa Efterpi</p>
   </div>
 </section>
 
@@ -305,13 +359,13 @@
 <section class="px-0">
   <div class="grid grid-cols-1 md:grid-cols-3 gap-[2px] bg-bg">
     <div class="ph-tile aspect-[4/5] bg-terracotta-light">
-      <img src="https://placehold.co/700x875/e8c4a8/e8c4a8?text=+" alt="Terrace dining at sunset" />
+      <img src="https://placehold.co/700x875/e8c4a8/e8c4a8?text=+" alt="Terrace dining at sunset" data-i18n-attr="alt:photo2.alt1" />
     </div>
     <div class="ph-tile aspect-[4/5] bg-stone">
-      <img src="https://placehold.co/700x875/e8e0d0/e8e0d0?text=+" alt="A local Samian dish" />
+      <img src="https://placehold.co/700x875/e8e0d0/e8e0d0?text=+" alt="A local Samian dish" data-i18n-attr="alt:photo2.alt2" />
     </div>
     <div class="ph-tile aspect-[4/5] bg-terracotta-light">
-      <img src="https://placehold.co/700x875/e8c4a8/e8c4a8?text=+" alt="The garden courtyard" />
+      <img src="https://placehold.co/700x875/e8c4a8/e8c4a8?text=+" alt="The garden courtyard" data-i18n-attr="alt:photo2.alt3" />
     </div>
   </div>
 </section>
@@ -322,33 +376,33 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12">
 
       <div class="reveal">
-        <h3 class="font-heading text-brown text-[24px] font-medium">The Architecture</h3>
-        <p class="mt-3 font-heading italic text-terracotta text-[18px] leading-snug">A neoclassical mansion built to outlast centuries.</p>
-        <p class="mt-4 text-[15px] leading-[1.8] text-sienna">
+        <h3 class="font-heading text-brown text-[24px] font-medium" data-i18n="pillars.arch.heading">The Architecture</h3>
+        <p class="mt-3 font-heading italic text-terracotta text-[18px] leading-snug" data-i18n="pillars.arch.sub">A neoclassical mansion built to outlast centuries.</p>
+        <p class="mt-4 text-[15px] leading-[1.8] text-sienna" data-i18n="pillars.arch.body">
           The facade greets you first — full elevation, columns, pediment, and green shutters,
           glowing warm in the morning light.
         </p>
-        <a href="#about" class="link-cta mt-6 text-terracotta">Explore the Architecture</a>
+        <a href="#about" class="link-cta mt-6 text-terracotta" data-i18n="pillars.arch.link">Explore the Architecture</a>
       </div>
 
       <div class="reveal">
-        <h3 class="font-heading text-brown text-[24px] font-medium">The Sea &amp; Garden</h3>
-        <p class="mt-3 font-heading italic text-terracotta text-[18px] leading-snug">The Aegean begins where the garden ends.</p>
-        <p class="mt-4 text-[15px] leading-[1.8] text-sienna">
+        <h3 class="font-heading text-brown text-[24px] font-medium" data-i18n="pillars.sea.heading">The Sea &amp; Garden</h3>
+        <p class="mt-3 font-heading italic text-terracotta text-[18px] leading-snug" data-i18n="pillars.sea.sub">The Aegean begins where the garden ends.</p>
+        <p class="mt-4 text-[15px] leading-[1.8] text-sienna" data-i18n="pillars.sea.body">
           Bougainvillea in the foreground, blue water beyond — breakfast on the stone steps,
           a book in the shade of an old olive tree.
         </p>
-        <a href="#gallery" class="link-cta mt-6 text-terracotta">Explore the Grounds</a>
+        <a href="#gallery" class="link-cta mt-6 text-terracotta" data-i18n="pillars.sea.link">Explore the Grounds</a>
       </div>
 
       <div class="reveal">
-        <h3 class="font-heading text-brown text-[24px] font-medium">The Family Story</h3>
-        <p class="mt-3 font-heading italic text-terracotta text-[18px] leading-snug">Generations of care, in every detail.</p>
-        <p class="mt-4 text-[15px] leading-[1.8] text-sienna">
+        <h3 class="font-heading text-brown text-[24px] font-medium" data-i18n="pillars.family.heading">The Family Story</h3>
+        <p class="mt-3 font-heading italic text-terracotta text-[18px] leading-snug" data-i18n="pillars.family.sub">Generations of care, in every detail.</p>
+        <p class="mt-4 text-[15px] leading-[1.8] text-sienna" data-i18n="pillars.family.body">
           The people who built this house are the same people who welcome you into it,
           generation after generation.
         </p>
-        <a href="#about" class="link-cta mt-6 text-terracotta">Explore Our Story</a>
+        <a href="#about" class="link-cta mt-6 text-terracotta" data-i18n="pillars.family.link">Explore Our Story</a>
       </div>
 
     </div>
@@ -359,9 +413,9 @@
 <section id="rooms" class="px-6 py-[var(--sp-xl)]">
   <div class="max-w-[1280px] mx-auto">
     <div class="max-w-[760px] reveal">
-      <p class="eyebrow">Accommodations</p>
-      <h2 class="font-heading text-brown text-[36px] md:text-[44px] font-light mt-3">Rooms &amp; Suites</h2>
-      <p class="mt-5 text-[16px] leading-[1.8] text-sienna">
+      <p class="eyebrow" data-i18n="rooms.eyebrow">Accommodations</p>
+      <h2 class="font-heading text-brown text-[36px] md:text-[44px] font-light mt-3" data-i18n="rooms.heading">Rooms &amp; Suites</h2>
+      <p class="mt-5 text-[16px] leading-[1.8] text-sienna" data-i18n="rooms.intro">
         Each room is named for the feature of the house it overlooks — the garden, the gulf, the old olive grove.
         Furnishings are original where possible, restored where necessary, and never replaced for the sake of fashion.
       </p>
@@ -375,25 +429,25 @@
           <img src="https://placehold.co/900x600/e8e0d0/e8e0d0?text=+" alt="" />
         </div>
         <div class="flex flex-col justify-center">
-          <h3 class="font-heading text-brown text-[26px] font-normal">The Garden Room</h3>
-          <p class="mt-3 text-[15px] leading-[1.8] text-sienna max-w-md">
+          <h3 class="font-heading text-brown text-[26px] font-normal" data-i18n="rooms.garden.name">The Garden Room</h3>
+          <p class="mt-3 text-[15px] leading-[1.8] text-sienna max-w-md" data-i18n="rooms.garden.desc">
             Ground-floor quiet, opening directly onto the bougainvillea terrace.
           </p>
           <div class="flex items-center gap-6 mt-5 text-sienna">
             <span class="flex items-center gap-2 text-[13px] tracking-wide text-mid-brown" style="color:var(--color-mid-brown)">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-sienna"><path d="M3 18v-7a2 2 0 012-2h14a2 2 0 012 2v7M3 18h18M3 14h18M7 11V8a1 1 0 011-1h2a1 1 0 011 1v3"/></svg>
-              Queen bed
+              <span data-i18n="rooms.garden.feat1">Queen bed</span>
             </span>
             <span class="flex items-center gap-2 text-[13px] tracking-wide" style="color:var(--color-mid-brown)">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-sienna"><path d="M21 3c-4 0-9 1-12 4-3 3-4 7-4 11 4 0 8-1 11-4 3-3 5-7 5-11z"/></svg>
-              Garden view
+              <span data-i18n="rooms.garden.feat2">Garden view</span>
             </span>
             <span class="flex items-center gap-2 text-[13px] tracking-wide" style="color:var(--color-mid-brown)">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-sienna"><path d="M5 12.5a10 10 0 0114 0M8 15.5a6 6 0 018 0M12 19h.01"/></svg>
-              Wifi
+              <span data-i18n="rooms.garden.feat3">Wifi</span>
             </span>
           </div>
-          <a href="#contact" class="btn-secondary mt-7 self-start">Enquire</a>
+          <a href="#contact" class="btn-secondary mt-7 self-start" data-i18n="rooms.enquire">Enquire</a>
         </div>
       </div>
 
@@ -403,25 +457,25 @@
           <img src="https://placehold.co/900x600/e8c4a8/e8c4a8?text=+" alt="" />
         </div>
         <div class="flex flex-col justify-center">
-          <h3 class="font-heading text-brown text-[26px] font-normal">The Gulf Suite</h3>
-          <p class="mt-3 text-[15px] leading-[1.8] text-sienna max-w-md">
+          <h3 class="font-heading text-brown text-[26px] font-normal" data-i18n="rooms.gulf.name">The Gulf Suite</h3>
+          <p class="mt-3 text-[15px] leading-[1.8] text-sienna max-w-md" data-i18n="rooms.gulf.desc">
             Top-floor views across the rooftops to the Aegean beyond.
           </p>
           <div class="flex items-center gap-6 mt-5">
             <span class="flex items-center gap-2 text-[13px] tracking-wide" style="color:var(--color-mid-brown)">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-sienna"><path d="M3 18v-7a2 2 0 012-2h14a2 2 0 012 2v7M3 18h18M3 14h18M7 11V8a1 1 0 011-1h2a1 1 0 011 1v3"/></svg>
-              King bed
+              <span data-i18n="rooms.gulf.feat1">King bed</span>
             </span>
             <span class="flex items-center gap-2 text-[13px] tracking-wide" style="color:var(--color-mid-brown)">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-sienna"><path d="M2 9c1.5 1.5 3 1.5 4.5 0s3-1.5 4.5 0 3 1.5 4.5 0 3-1.5 4.5 0M2 14c1.5 1.5 3 1.5 4.5 0s3-1.5 4.5 0 3 1.5 4.5 0 3-1.5 4.5 0"/></svg>
-              Sea view
+              <span data-i18n="rooms.gulf.feat2">Sea view</span>
             </span>
             <span class="flex items-center gap-2 text-[13px] tracking-wide" style="color:var(--color-mid-brown)">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-sienna"><path d="M4 12h16v3a4 4 0 01-4 4H8a4 4 0 01-4-4v-3zM4 12V7a2 2 0 012-2h1M7 5v2"/></svg>
-              Soaking tub
+              <span data-i18n="rooms.gulf.feat3">Soaking tub</span>
             </span>
           </div>
-          <a href="#contact" class="btn-secondary mt-7 self-start">Enquire</a>
+          <a href="#contact" class="btn-secondary mt-7 self-start" data-i18n="rooms.enquire">Enquire</a>
         </div>
       </div>
 
@@ -431,25 +485,25 @@
           <img src="https://placehold.co/900x600/e8e0d0/e8e0d0?text=+" alt="" />
         </div>
         <div class="flex flex-col justify-center">
-          <h3 class="font-heading text-brown text-[26px] font-normal">The Olive Room</h3>
-          <p class="mt-3 text-[15px] leading-[1.8] text-sienna max-w-md">
+          <h3 class="font-heading text-brown text-[26px] font-normal" data-i18n="rooms.olive.name">The Olive Room</h3>
+          <p class="mt-3 text-[15px] leading-[1.8] text-sienna max-w-md" data-i18n="rooms.olive.desc">
             A smaller, sunlit room beneath the old roofline, facing the olive grove.
           </p>
           <div class="flex items-center gap-6 mt-5">
             <span class="flex items-center gap-2 text-[13px] tracking-wide" style="color:var(--color-mid-brown)">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-sienna"><path d="M3 18v-7a2 2 0 012-2h14a2 2 0 012 2v7M3 18h18M3 14h18M7 11V8a1 1 0 011-1h2a1 1 0 011 1v3"/></svg>
-              Double bed
+              <span data-i18n="rooms.olive.feat1">Double bed</span>
             </span>
             <span class="flex items-center gap-2 text-[13px] tracking-wide" style="color:var(--color-mid-brown)">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-sienna"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M4.2 4.2l2 2M17.8 17.8l2 2M2 12h3M19 12h3M4.2 19.8l2-2M17.8 6.2l2-2"/></svg>
-              Private balcony
+              <span data-i18n="rooms.olive.feat2">Private balcony</span>
             </span>
             <span class="flex items-center gap-2 text-[13px] tracking-wide" style="color:var(--color-mid-brown)">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-sienna"><path d="M5 12.5a10 10 0 0114 0M8 15.5a6 6 0 018 0M12 19h.01"/></svg>
-              Wifi
+              <span data-i18n="rooms.olive.feat3">Wifi</span>
             </span>
           </div>
-          <a href="#contact" class="btn-secondary mt-7 self-start">Enquire</a>
+          <a href="#contact" class="btn-secondary mt-7 self-start" data-i18n="rooms.enquire">Enquire</a>
         </div>
       </div>
 
@@ -461,9 +515,9 @@
 <section id="gallery" class="px-6 py-[var(--sp-xl)] bg-cream">
   <div class="max-w-[1280px] mx-auto">
     <div class="max-w-[760px] reveal">
-      <p class="eyebrow">Gallery</p>
-      <h2 class="font-heading text-brown text-[36px] md:text-[44px] font-light mt-3">A Glimpse Inside</h2>
-      <p class="mt-5 text-[16px] leading-[1.8] text-sienna">
+      <p class="eyebrow" data-i18n="gallery.eyebrow">Gallery</p>
+      <h2 class="font-heading text-brown text-[36px] md:text-[44px] font-light mt-3" data-i18n="gallery.heading">A Glimpse Inside</h2>
+      <p class="mt-5 text-[16px] leading-[1.8] text-sienna" data-i18n="gallery.intro">
         Architecture, gardens, and the sea beyond — as the house presents them, without filters or staging.
       </p>
     </div>
@@ -473,32 +527,32 @@
       <div class="reveal ph-tile aspect-[4/3] bg-stone group">
         <img src="https://placehold.co/800x600/e8e0d0/e8e0d0?text=+" alt="" class="transition-transform duration-700 group-hover:scale-105" />
         <div class="absolute inset-0 bg-gradient-to-t from-brown/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-        <span class="absolute bottom-3 left-3 text-bg text-[12px] tracking-wide opacity-0 group-hover:opacity-100 transition-opacity duration-300">Facade, Morning Light</span>
+        <span class="absolute bottom-3 left-3 text-bg text-[12px] tracking-wide opacity-0 group-hover:opacity-100 transition-opacity duration-300" data-i18n="gallery.cap1">Facade, Morning Light</span>
       </div>
       <div class="reveal ph-tile aspect-[4/3] bg-terracotta-light group">
         <img src="https://placehold.co/800x600/e8c4a8/e8c4a8?text=+" alt="" class="transition-transform duration-700 group-hover:scale-105" />
         <div class="absolute inset-0 bg-gradient-to-t from-brown/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-        <span class="absolute bottom-3 left-3 text-bg text-[12px] tracking-wide opacity-0 group-hover:opacity-100 transition-opacity duration-300">Garden Terrace</span>
+        <span class="absolute bottom-3 left-3 text-bg text-[12px] tracking-wide opacity-0 group-hover:opacity-100 transition-opacity duration-300" data-i18n="gallery.cap2">Garden Terrace</span>
       </div>
       <div class="reveal ph-tile aspect-[4/3] bg-stone group">
         <img src="https://placehold.co/800x600/e8e0d0/e8e0d0?text=+" alt="" class="transition-transform duration-700 group-hover:scale-105" />
         <div class="absolute inset-0 bg-gradient-to-t from-brown/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-        <span class="absolute bottom-3 left-3 text-bg text-[12px] tracking-wide opacity-0 group-hover:opacity-100 transition-opacity duration-300">Sea View, Veranda</span>
+        <span class="absolute bottom-3 left-3 text-bg text-[12px] tracking-wide opacity-0 group-hover:opacity-100 transition-opacity duration-300" data-i18n="gallery.cap3">Sea View, Veranda</span>
       </div>
       <div class="reveal ph-tile aspect-[4/3] bg-terracotta-light group">
         <img src="https://placehold.co/800x600/e8c4a8/e8c4a8?text=+" alt="" class="transition-transform duration-700 group-hover:scale-105" />
         <div class="absolute inset-0 bg-gradient-to-t from-brown/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-        <span class="absolute bottom-3 left-3 text-bg text-[12px] tracking-wide opacity-0 group-hover:opacity-100 transition-opacity duration-300">Entrance Hall</span>
+        <span class="absolute bottom-3 left-3 text-bg text-[12px] tracking-wide opacity-0 group-hover:opacity-100 transition-opacity duration-300" data-i18n="gallery.cap4">Entrance Hall</span>
       </div>
       <div class="reveal ph-tile aspect-[4/3] bg-stone group">
         <img src="https://placehold.co/800x600/e8e0d0/e8e0d0?text=+" alt="" class="transition-transform duration-700 group-hover:scale-105" />
         <div class="absolute inset-0 bg-gradient-to-t from-brown/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-        <span class="absolute bottom-3 left-3 text-bg text-[12px] tracking-wide opacity-0 group-hover:opacity-100 transition-opacity duration-300">Breakfast on the Steps</span>
+        <span class="absolute bottom-3 left-3 text-bg text-[12px] tracking-wide opacity-0 group-hover:opacity-100 transition-opacity duration-300" data-i18n="gallery.cap5">Breakfast on the Steps</span>
       </div>
       <div class="reveal ph-tile aspect-[4/3] bg-terracotta-light group">
         <img src="https://placehold.co/800x600/e8c4a8/e8c4a8?text=+" alt="" class="transition-transform duration-700 group-hover:scale-105" />
         <div class="absolute inset-0 bg-gradient-to-t from-brown/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-        <span class="absolute bottom-3 left-3 text-bg text-[12px] tracking-wide opacity-0 group-hover:opacity-100 transition-opacity duration-300">Evening, West Wing</span>
+        <span class="absolute bottom-3 left-3 text-bg text-[12px] tracking-wide opacity-0 group-hover:opacity-100 transition-opacity duration-300" data-i18n="gallery.cap6">Evening, West Wing</span>
       </div>
 
     </div>
@@ -517,19 +571,19 @@
     </div>
 
     <div class="reveal">
-      <p class="eyebrow">Our Story</p>
-      <h2 class="font-heading text-brown text-[36px] md:text-[44px] font-light mt-3">Generations of Care</h2>
-      <p class="mt-6 text-[16px] leading-[1.8] text-sienna">
+      <p class="eyebrow" data-i18n="about.eyebrow">Our Story</p>
+      <h2 class="font-heading text-brown text-[36px] md:text-[44px] font-light mt-3" data-i18n="about.heading">Generations of Care</h2>
+      <p class="mt-6 text-[16px] leading-[1.8] text-sienna" data-i18n="about.body1">
         Casa Efterpi has belonged to our family since the house was first built — and we have never thought
         of ourselves as anything other than its caretakers. Every cornice, shutter, and stone step has been
         maintained, not modernised, by the people who grew up beneath this roof.
       </p>
-      <p class="mt-5 text-[16px] leading-[1.8] text-sienna">
+      <p class="mt-5 text-[16px] leading-[1.8] text-sienna" data-i18n="about.body2">
         We open our home to a small number of guests at a time, because that is the only way we know how to
         do this well. There is no front desk, no uniform, no script — only a family who happens to also
         welcome travellers, the way Samos has always welcomed them.
       </p>
-      <p class="mt-7 font-heading italic text-brown text-[19px]">— The family behind Casa Efterpi</p>
+      <p class="mt-7 font-heading italic text-brown text-[19px]" data-i18n="about.attribution">— The family behind Casa Efterpi</p>
     </div>
 
   </div>
@@ -541,9 +595,9 @@
 
     <!-- Left: heading -->
     <div class="reveal">
-      <p class="eyebrow">Guest Stories</p>
-      <h2 class="font-heading text-brown text-[34px] md:text-[42px] font-normal mt-3">What Guests Remember</h2>
-      <p class="mt-6 text-[16px] leading-[1.8] text-sienna max-w-md">
+      <p class="eyebrow" data-i18n="testimonials.eyebrow">Guest Stories</p>
+      <h2 class="font-heading text-brown text-[34px] md:text-[42px] font-normal mt-3" data-i18n="testimonials.heading">What Guests Remember</h2>
+      <p class="mt-6 text-[16px] leading-[1.8] text-sienna max-w-md" data-i18n="testimonials.body">
         We don't ask guests to leave reviews — but some write to us anyway. The house is currently being
         restored, and their stories will return here once we reopen our doors.
       </p>
@@ -556,7 +610,7 @@
         <article class="testimonial-card absolute inset-0 transition-all duration-500 ease-in-out overflow-hidden" data-index="0" style="opacity:1; transform:translateX(0) scale(1); z-index:10;" aria-hidden="false">
           <div class="bg-bg border border-gold/20 shadow-soft p-8 md:p-10 h-full flex flex-col items-center justify-center text-center overflow-hidden">
             <svg viewBox="0 0 24 24" fill="currentColor" class="w-7 h-7 text-terracotta/15 mb-5 shrink-0"><path d="M9 7C5.7 7 3 9.7 3 13s2.7 6 6 6c.6 0 1-.4 1-1s-.4-1-1-1c-2.2 0-4-1.8-4-4 0-.4 0-.7.1-1H6c1.7 0 3-1.3 3-3V8c0-.6-.4-1-1-1H9zm10 0c-3.3 0-6 2.7-6 6s2.7 6 6 6c.6 0 1-.4 1-1s-.4-1-1-1c-2.2 0-4-1.8-4-4 0-.4 0-.7.1-1H16c1.7 0 3-1.3 3-3V8c0-.6-.4-1-1-1h-1z"/></svg>
-            <p class="font-heading italic text-brown text-[18px] md:text-[20px] leading-[1.6] max-w-[300px]">Guest stories are on their way. We're restoring Casa Efterpi with care, and look forward to sharing them again soon.</p>
+            <p class="font-heading italic text-brown text-[18px] md:text-[20px] leading-[1.6] max-w-[300px]" data-i18n="testimonials.placeholder">Guest stories are on their way. We're restoring Casa Efterpi with care, and look forward to sharing them again soon.</p>
           </div>
         </article>
 
@@ -574,9 +628,9 @@
 <section id="contact" class="px-6 py-[var(--sp-xl)] bg-cream">
   <div class="max-w-[1280px] mx-auto">
     <div class="max-w-[760px] reveal">
-      <p class="eyebrow">Visit</p>
-      <h2 class="font-heading text-brown text-[36px] md:text-[44px] font-light mt-3">Begin Your Stay</h2>
-      <p class="mt-5 text-[16px] leading-[1.8] text-sienna">
+      <p class="eyebrow" data-i18n="contact.eyebrow">Visit</p>
+      <h2 class="font-heading text-brown text-[36px] md:text-[44px] font-light mt-3" data-i18n="contact.heading">Begin Your Stay</h2>
+      <p class="mt-5 text-[16px] leading-[1.8] text-sienna" data-i18n="contact.intro">
         Write to us directly, or use the form below. We answer every message ourselves.
       </p>
     </div>
@@ -587,7 +641,7 @@
         <ul class="space-y-5">
           <li class="flex items-start gap-4">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mt-0.5 text-sienna shrink-0"><path d="M12 21s7-6.5 7-12a7 7 0 10-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
-            <span class="text-[15px] text-mid-brown" style="color:var(--color-mid-brown)">Anonimos 9<br>Karlovasi, Samos 83200</span>
+            <span class="text-[15px] text-mid-brown" style="color:var(--color-mid-brown)"><span data-i18n="contact.address1">Anonimos 9</span><br><span data-i18n="contact.address2">Karlovasi, Samos 83200</span></span>
           </li>
           <li class="flex items-start gap-4">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mt-0.5 text-sienna shrink-0"><rect x="3" y="5" width="18" height="14"/><path d="M3 6l9 7 9-7"/></svg>
@@ -609,30 +663,30 @@
 
       <form id="contact-form" class="reveal space-y-6">
         <div>
-          <label class="field-label" for="name">Name</label>
-          <input class="field" type="text" id="name" name="name" placeholder="Your full name" required />
+          <label class="field-label" for="name" data-i18n="contact.label_name">Name</label>
+          <input class="field" type="text" id="name" name="name" placeholder="Your full name" data-i18n-attr="placeholder:contact.ph_name" required />
         </div>
         <div>
-          <label class="field-label" for="email">Email</label>
+          <label class="field-label" for="email" data-i18n="contact.label_email">Email</label>
           <input class="field" type="email" id="email" name="email" placeholder="you@example.com" required />
         </div>
         <div class="grid grid-cols-2 gap-6">
           <div>
-            <label class="field-label" for="arrival">Arrival</label>
+            <label class="field-label" for="arrival" data-i18n="contact.label_arrival">Arrival</label>
             <input class="field" type="date" id="arrival" name="arrival" />
           </div>
           <div>
-            <label class="field-label" for="departure">Departure</label>
+            <label class="field-label" for="departure" data-i18n="contact.label_departure">Departure</label>
             <input class="field" type="date" id="departure" name="departure" />
           </div>
         </div>
         <div>
-          <label class="field-label" for="message">Message</label>
-          <textarea class="field" id="message" name="message" rows="4" placeholder="Tell us about your stay"></textarea>
+          <label class="field-label" for="message" data-i18n="contact.label_message">Message</label>
+          <textarea class="field" id="message" name="message" rows="4" placeholder="Tell us about your stay" data-i18n-attr="placeholder:contact.ph_message"></textarea>
         </div>
-        <button type="submit" class="btn-primary w-full sm:w-auto">Send Enquiry</button>
+        <button type="submit" class="btn-primary w-full sm:w-auto" data-i18n="contact.submit">Send Enquiry</button>
       </form>
-      <p id="form-success" class="hidden text-[15px] mt-2 reveal is-visible" style="color:var(--color-green)">Thank you — your message has been received. We will reply personally, soon.</p>
+      <p id="form-success" class="hidden text-[15px] mt-2 reveal is-visible" style="color:var(--color-green)" data-i18n="contact.success">Thank you — your message has been received. We will reply personally, soon.</p>
 
     </div>
   </div>
@@ -647,37 +701,37 @@
         <img src="assets/crest.png" alt="Casa Efterpi crest" class="brand-mark h-14 w-14 object-contain" />
         <span class="brand-script text-2xl">Casa Efterpi</span>
       </div>
-      <p class="mt-4 text-[13px] tracking-[.2em] uppercase text-bg/60">Samos · Greece</p>
+      <p class="mt-4 text-[13px] tracking-[.2em] uppercase text-bg/60" data-i18n="footer.location">Samos · Greece</p>
     </div>
 
     <div>
-      <p class="text-[12px] tracking-[.2em] uppercase text-bg/50 mb-4">Find Us</p>
+      <p class="text-[12px] tracking-[.2em] uppercase text-bg/50 mb-4" data-i18n="footer.find_us">Find Us</p>
       <ul class="space-y-3 text-[14px] text-bg/85">
-        <li>Anonimos 9, Karlovasi, Samos 83200</li>
+        <li data-i18n="footer.address">Anonimos 9, Karlovasi, Samos 83200</li>
         <li>info@casa-efterpi.gr</li>
         <li>+30 698 777 2651</li>
       </ul>
     </div>
 
     <div>
-      <p class="text-[12px] tracking-[.2em] uppercase text-bg/50 mb-4">Discover</p>
+      <p class="text-[12px] tracking-[.2em] uppercase text-bg/50 mb-4" data-i18n="footer.discover">Discover</p>
       <ul class="space-y-3 text-[14px]">
-        <li><a href="#hero" class="hover:text-terracotta-light transition-colors">Home</a></li>
-        <li><a href="#rooms" class="hover:text-terracotta-light transition-colors">Rooms</a></li>
-        <li><a href="#gallery" class="hover:text-terracotta-light transition-colors">Gallery</a></li>
-        <li><a href="#about" class="hover:text-terracotta-light transition-colors">About</a></li>
-        <li><a href="#contact" class="hover:text-terracotta-light transition-colors">Contact</a></li>
+        <li><a href="#hero" class="hover:text-terracotta-light transition-colors" data-i18n="footer.home">Home</a></li>
+        <li><a href="#rooms" class="hover:text-terracotta-light transition-colors" data-i18n="footer.rooms">Rooms</a></li>
+        <li><a href="#gallery" class="hover:text-terracotta-light transition-colors" data-i18n="footer.gallery">Gallery</a></li>
+        <li><a href="#about" class="hover:text-terracotta-light transition-colors" data-i18n="footer.about">About</a></li>
+        <li><a href="#contact" class="hover:text-terracotta-light transition-colors" data-i18n="footer.contact">Contact</a></li>
       </ul>
     </div>
 
     <div>
-      <p class="text-[12px] tracking-[.2em] uppercase text-bg/50 mb-4">Stay in Touch</p>
+      <p class="text-[12px] tracking-[.2em] uppercase text-bg/50 mb-4" data-i18n="footer.stay_touch">Stay in Touch</p>
       <form id="newsletter-form">
-        <label class="sr-only" for="newsletter-email">Email Address</label>
+        <label class="sr-only" for="newsletter-email" data-i18n="footer.newsletter_label">Email Address</label>
         <input class="field-dark" type="email" id="newsletter-email" name="email" placeholder="your@email.com" required />
-        <button type="submit" class="btn-secondary !border-bg/40 !text-bg w-full mt-5 hover:!bg-bg/10">Subscribe</button>
+        <button type="submit" class="btn-secondary !border-bg/40 !text-bg w-full mt-5 hover:!bg-bg/10" data-i18n="footer.subscribe">Subscribe</button>
       </form>
-      <p id="newsletter-success" class="hidden text-[13px] mt-3 text-terracotta-light">Thank you — you're on the list.</p>
+      <p id="newsletter-success" class="hidden text-[13px] mt-3 text-terracotta-light" data-i18n="footer.newsletter_success">Thank you — you're on the list.</p>
     </div>
 
   </div>
@@ -687,15 +741,15 @@
       <a href="#" aria-label="Instagram" class="text-bg/70 hover:text-bg transition-colors">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-5 h-5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
       </a>
-      <a href="#about" class="text-[13px] text-bg/70 hover:text-bg transition-colors">About Us</a>
-      <a href="#" class="text-[13px] text-bg/70 hover:text-bg transition-colors">Privacy Policy</a>
-      <a href="#" class="text-[13px] text-bg/70 hover:text-bg transition-colors">Cancellation Policy</a>
+      <a href="#about" class="text-[13px] text-bg/70 hover:text-bg transition-colors" data-i18n="footer.about_us">About Us</a>
+      <a href="#" class="text-[13px] text-bg/70 hover:text-bg transition-colors" data-i18n="footer.privacy">Privacy Policy</a>
+      <a href="#" class="text-[13px] text-bg/70 hover:text-bg transition-colors" data-i18n="footer.cancellation">Cancellation Policy</a>
     </div>
-    <p class="text-[13px] text-bg/50">© 2026 Casa Efterpi. All rights reserved.</p>
+    <p class="text-[13px] text-bg/50" data-i18n="footer.copyright">© 2026 Casa Efterpi. All rights reserved.</p>
   </div>
 
   <div class="max-w-[1280px] mx-auto mt-8 flex flex-col items-center text-center">
-    <button type="button" id="legal-info-toggle" class="legal-info-toggle" aria-expanded="false" aria-controls="legal-info-panel">Legal Info</button>
+    <button type="button" id="legal-info-toggle" class="legal-info-toggle" aria-expanded="false" aria-controls="legal-info-panel" data-i18n="footer.legal">Legal Info</button>
     <div id="legal-info-panel" class="legal-info-panel">
       <div class="legal-info-inner">
         <dl class="legal-info-list">
@@ -861,5 +915,6 @@
   }
 </script>
 
+<script src="js/i18n.js"></script>
 </body>
 </html>
