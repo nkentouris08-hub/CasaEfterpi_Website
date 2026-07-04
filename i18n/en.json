@@ -14,7 +14,7 @@
   "invitation.heading": "Settle In.",
   "invitation.body1": "There is no rush at Casa Efterpi. Mornings begin on the stone steps with coffee and the scent of the garden; evenings end on the veranda, watching the light leave the Aegean.",
   "invitation.body2": "However long you stay, the house asks only one thing of you — that you slow down enough to meet it.",
-  "invitation.cta1": "Discover the Rooms",
+  "invitation.cta1": "View the Rooms",
   "invitation.cta2": "Begin Your Stay",
 
   "tiles.rooms": "Rooms",
@@ -25,7 +25,7 @@
   "welcome.eyebrow": "Welcome to Casa Efterpi",
   "welcome.heading": "Your Home on Samos",
   "welcome.body1": "On the island of Samos, where the Aegean meets a nineteenth-century mansion, Casa Efterpi offers quiet elegance to travellers who have stopped chasing more — and started noticing everything.",
-  "welcome.body2": "Set above the harbour town, the house has watched ships come and go since the 1870s. Our concept is simple: a home run by the family who has always lived in it, open just enough to share it.",
+  "welcome.body2": "Set above the harbour town, the house has watched ships come and go since the 1870s. The idea is simple: a home run by the family who has always lived in it, open just enough to share it.",
 
   "photo1.alt1": "Staircase detail at Casa Efterpi",
   "photo1.alt2": "Interior lounge detail",
@@ -96,7 +96,7 @@
   "testimonials.eyebrow": "Guest Stories",
   "testimonials.heading": "What Guests Remember",
   "testimonials.body": "We don't ask guests to leave reviews — but some write to us anyway. The house is currently being restored, and their stories will return here once we reopen our doors.",
-  "testimonials.placeholder": "Guest stories are on their way. We're restoring Casa Efterpi with care, and look forward to sharing them again soon.",
+  "testimonials.placeholder": "The house is being restored with the care it deserves. Their stories will return when we reopen.",
 
   "contact.eyebrow": "Visit",
   "contact.heading": "Begin Your Stay",
@@ -109,7 +109,7 @@
   "contact.label_departure": "Departure",
   "contact.label_message": "Message",
   "contact.ph_name": "Your full name",
-  "contact.ph_message": "Tell us about your stay",
+  "contact.ph_message": "Tell us about the stay you have in mind",
   "contact.submit": "Send Enquiry",
   "contact.success": "Thank you — your message has been received. We will reply personally, soon.",
 
