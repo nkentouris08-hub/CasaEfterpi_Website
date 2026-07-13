@@ -57,23 +57,29 @@
   "rooms.heading": "Rooms & Suites",
   "rooms.intro": "Each Suite is named after a Muse from ancient Greek mythology. The furnishings are authentic wherever possible, and the rest of the spaces offer all the comforts you need to relax and unwind throughout your stay.",
 
-  "rooms.garden.name": "The Garden Room",
+  "rooms.garden.name": "Efterpi",
   "rooms.garden.desc": "Ground-floor quiet, opening directly onto the bougainvillea terrace.",
   "rooms.garden.feat1": "Queen bed",
   "rooms.garden.feat2": "Garden view",
   "rooms.garden.feat3": "Wifi",
 
-  "rooms.gulf.name": "The Gulf Suite",
+  "rooms.gulf.name": "Erato",
   "rooms.gulf.desc": "Top-floor views across the rooftops to the Aegean beyond.",
-  "rooms.gulf.feat1": "King bed",
+  "rooms.gulf.feat1": "Queen bed",
   "rooms.gulf.feat2": "Sea view",
   "rooms.gulf.feat3": "Soaking tub",
 
-  "rooms.olive.name": "The Olive Room",
+  "rooms.olive.name": "Kalypso",
   "rooms.olive.desc": "A smaller, sunlit room beneath the old roofline, facing the olive grove.",
-  "rooms.olive.feat1": "Double bed",
+  "rooms.olive.feat1": "Queen bed",
   "rooms.olive.feat2": "Private balcony",
   "rooms.olive.feat3": "Wifi",
+
+  "rooms.nafsika.name": "Nafsika",
+  "rooms.nafsika.desc": "A sun-drenched room on the garden level, with whitewashed walls and direct access to the courtyard.",
+  "rooms.nafsika.feat1": "Queen bed",
+  "rooms.nafsika.feat2": "Garden view",
+  "rooms.nafsika.feat3": "Wifi",
 
   "rooms.enquire": "Enquire",
 

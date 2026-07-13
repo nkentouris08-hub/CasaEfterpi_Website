@@ -57,23 +57,29 @@
   "rooms.heading": "Δωμάτια & Σουίτες",
   "rooms.intro": "Κάθε Σουίτα έχει πάρει το όνομά της από μία Μούσα της αρχαίας ελληνικής μυθολογίας. Η επίπλωση είναι αυθεντική όπου είναι δυνατόν. Οι υπόλοιποι χώροι προσφέρουν τις ανέσεις που απαιτούνται για τη χαλάρωση σας κατά τη διάρκεια των ημερών της διαμονής σας.",
 
-  "rooms.garden.name": "Το Δωμάτιο του Κήπου",
+  "rooms.garden.name": "Ευτέρπη",
   "rooms.garden.desc": "Γαλήνη στο ισόγειο, με άμεση πρόσβαση στη βεράντα με τις βουκαμβίλιες.",
-  "rooms.garden.feat1": "Queen κρεβάτι",
+  "rooms.garden.feat1": "Κρεβάτι Queen",
   "rooms.garden.feat2": "Θέα κήπου",
   "rooms.garden.feat3": "Wi-Fi",
 
-  "rooms.gulf.name": "Η Σουίτα του Κόλπου",
+  "rooms.gulf.name": "Ερατώ",
   "rooms.gulf.desc": "Θέα από τον τελευταίο όροφο πάνω από τις στέγες ως το Αιγαίο.",
-  "rooms.gulf.feat1": "King κρεβάτι",
+  "rooms.gulf.feat1": "Κρεβάτι Queen",
   "rooms.gulf.feat2": "Θέα θαλάσσης",
   "rooms.gulf.feat3": "Μπανιέρα εμβάπτισης",
 
-  "rooms.olive.name": "Το Δωμάτιο της Ελιάς",
+  "rooms.olive.name": "Καλυψώ",
   "rooms.olive.desc": "Ένα μικρότερο, ηλιόλουστο δωμάτιο κάτω από την παλιά στέγη, με θέα στον ελαιώνα.",
-  "rooms.olive.feat1": "Διπλό κρεβάτι",
+  "rooms.olive.feat1": "Κρεβάτι Queen",
   "rooms.olive.feat2": "Ιδιωτικό μπαλκόνι",
   "rooms.olive.feat3": "Wi-Fi",
+
+  "rooms.nafsika.name": "Ναυσικά",
+  "rooms.nafsika.desc": "Ένα ηλιόλουστο δωμάτιο στο επίπεδο του κήπου, με λευκούς τοίχους και άμεση πρόσβαση στην αυλή.",
+  "rooms.nafsika.feat1": "Κρεβάτι Queen",
+  "rooms.nafsika.feat2": "Θέα κήπου",
+  "rooms.nafsika.feat3": "Wi-Fi",
 
   "rooms.enquire": "Πληροφορίες",
 
