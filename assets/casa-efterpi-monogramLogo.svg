@@ -1,8 +1,6 @@
 <svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
 <title>Casa Efterpi monogram</title>
 <desc>Minimal interlocked CE monogram, Olive Brown and Aegean Gold, Cormorant Garamond</desc>
-<circle cx="200" cy="200" r="190" fill="none" stroke="#C8A96A" stroke-width="3"/>
-<circle cx="200" cy="200" r="182" fill="none" stroke="#C8A96A" stroke-width="1"/>
 <text x="170" y="255" font-family="Cormorant Garamond, Georgia, serif" font-size="195" font-weight="bold" text-anchor="middle" fill="#4A3520">C</text>
 <text x="232" y="253" font-family="Cormorant Garamond, Georgia, serif" font-size="158" font-weight="bold" text-anchor="middle" fill="#C8A96A">E</text>
 </svg>
