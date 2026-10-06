@@ -1,959 +1,962 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Casa Efterpi — A Neoclassical Estate in Samos, Greece</title>
-<meta name="description" content="Casa Efterpi is a grand neoclassical estate on Samos, Greece, intimately run by the family who has cared for it for generations." />
-<link rel="icon" type="image/svg+xml" href="assets/casa-efterpi-monogramLogo.svg" />
-<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png" />
-<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png" />
-<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
-<meta property="og:type" content="website" />
-<meta property="og:title" content="Casa Efterpi — A Neoclassical Estate in Samos, Greece" />
-<meta property="og:description" content="Casa Efterpi is a grand neoclassical estate on Samos, Greece, intimately run by the family who has cared for it for generations." />
-<meta property="og:image" content="assets/og-image.png" />
-<meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="630" />
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="assets/og-image.png" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title data-i18n="meta.title">Casa Efterpi · A neoclassical house on Samos</title>
+<meta name="description" data-i18n-attr="content:meta.desc" content="Casa Efterpi is a family-run neoclassical house in Karlovasi, Samos, with four suites, a courtyard garden and views to the Aegean. Opening 2027.">
+<meta name="theme-color" content="#FAF7F2">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&family=Parisienne&display=swap" rel="stylesheet">
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-  tailwind.config = {
-    theme: {
-      extend: {
-        colors: {
-          bg: '#FAF7F2',
-          cream: '#F5F0E8',
-          stone: '#E8E0D0',
-          terracotta: { DEFAULT: '#C17F5A', light: '#E8C4A8' },
-          gold: '#B8936A',
-          brown: '#3D2B1A',
-          sienna: '#6B4C35',
-          green: '#2E5A44',
-        },
-        fontFamily: {
-          heading: ['"Cormorant Garamond"', 'Georgia', 'serif'],
-          body: ['Jost', 'Arial', 'sans-serif'],
-        },
-      },
-    },
-  }
-</script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500;600&family=Noto+Serif+Display:ital,wght@0,300;0,400;1,300;1,400&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="assets/window-bare.webp" media="(min-aspect-ratio: 9/10)">
+<link rel="preload" as="image" href="assets/window-bare-p.webp" media="(max-aspect-ratio: 9/10)">
+<link rel="stylesheet" href="scrollcraft.css">
 <style>
-  :root{
-    --color-bg:#FAF7F2; --color-cream:#F5F0E8; --color-stone:#E8E0D0;
-    --color-terracotta:#C17F5A; --color-terracotta-l:#E8C4A8; --color-gold:#B8936A;
-    --color-dark-brown:#3D2B1A; --color-mid-brown:#6B4C35; --color-green:#2E5A44;
-    --font-heading:'Cormorant Garamond', Georgia, serif; --font-body:'Jost', Arial, sans-serif;
-    --font-script:'Parisienne', cursive;
-    --sp-xs:8px; --sp-sm:16px; --sp-md:32px; --sp-lg:64px; --sp-xl:120px; --sp-2xl:200px;
-    --r-sm:2px; --r-md:4px; --container:1280px; --container-narrow:760px;
+  /* Brand guidelines, not taste: Warm White ground, Estate Brown titles,
+     Warm Sienna body, Terracotta accent (darkened one step so small labels
+     clear 4.5:1), Shutter Green for the night. */
+  :root {
+    --sc-canvas:     #FAF7F2;
+    --sc-surface:    #F5F0E8;
+    --sc-ink:        #3D2B1A;
+    --sc-ink-soft:   #6B4C35;
+    --sc-accent:     #9A5734;
+    --sc-accent-ink: #FAF7F2;
+    /* Neither brand face has Greek glyphs, so each stack names a Greek
+       companion; the browser falls back per glyph and Latin text is untouched. */
+    --sc-font-display: "Cormorant Garamond", "Noto Serif Display", Georgia, serif;
+    --sc-font-text:    "Jost", "Manrope", system-ui, sans-serif;
+    --sc-font-mono:    "Jost", "Manrope", system-ui, sans-serif;
+    --sc-shadow-color: 28 30% 18%;
+    --gold: #B8936A;
+    --green: #2E5A44;
+    --night: #13201A;
+    --night-ink: #F3EADB;
+    --night-soft: #CDBFA8;
+    --night-accent: #DDA884;
+    --sc-r-sm: 2px;
   }
-  html{scroll-behavior:smooth; scroll-padding-top:88px;}
-  body{font-family:var(--font-body); background:var(--color-bg); color:var(--color-mid-brown);}
-  h1,h2,h3,.font-heading{font-family:var(--font-heading);}
+  body { font-weight: 300; }
+  .sc-display { font-weight: 300; letter-spacing: -0.012em; line-height: 1.02; }
+  .sc-body { font-size: clamp(1rem, .97rem + .2vw, 1.1rem); line-height: 1.8; }
 
-  .eyebrow{font-family:var(--font-body); font-size:13px; font-weight:500; letter-spacing:.22em; text-transform:uppercase; color:var(--color-terracotta);}
+  /* -------------------------------------------------------- chrome ---- */
+  .chrome {
+    position: fixed; inset: 0 0 auto 0; z-index: var(--sc-z-chrome);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: clamp(.9rem, 2vw, 1.5rem) var(--sc-gutter);
+    pointer-events: none; color: var(--sc-ink);
+    transition: color var(--sc-d-base) var(--sc-ease-out);
+  }
+  .chrome > * { pointer-events: auto; }
+  .chrome__left {
+    display: flex; align-items: center; gap: clamp(.9rem, 2vw, 1.6rem);
+    padding: .3rem 1rem .3rem .8rem; margin-left: -.8rem;
+    background: color-mix(in oklab, var(--sc-canvas) 90%, transparent);
+  }
+  .mark {
+    font-family: var(--sc-font-display); font-weight: 500; font-size: 1.9rem;
+    line-height: 1; text-decoration: none; letter-spacing: -0.04em; display: inline-flex;
+  }
+  .mark span:last-child { color: #94714A; margin-left: -.06em; }
+  .folio {
+    position: relative; display: inline-flex; align-items: baseline; gap: .7rem;
+    background: none; border: 0; padding: .35rem 0; cursor: pointer;
+    font-family: var(--sc-font-text); font-size: .8rem; letter-spacing: .14em;
+    text-transform: uppercase; color: inherit;
+  }
+  .folio__hour { font-variant-numeric: tabular-nums; font-weight: 500; }
+  .folio__room { font-weight: 400; opacity: .82; }
+  .folio::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px;
+    background: currentColor; transform: scaleX(0); transform-origin: 0 50%;
+    transition: transform var(--sc-d-fast) var(--sc-ease-out); opacity: .5;
+  }
+  @media (hover: hover) and (pointer: fine) { .folio:hover::after { transform: scaleX(1); } }
+  .hours {
+    position: absolute; top: calc(100% + .4rem); left: 0; margin: 0; padding: .6rem 0;
+    list-style: none; min-width: 15rem;
+    background: var(--sc-canvas); color: var(--sc-ink); box-shadow: var(--sc-e2);
+    border: 1px solid color-mix(in oklab, var(--gold) 45%, transparent);
+    opacity: 0; transform: translateY(-4px); pointer-events: none; visibility: hidden;
+    transition: opacity var(--sc-d-fast) var(--sc-ease-out), transform var(--sc-d-fast) var(--sc-ease-out), visibility 0s linear var(--sc-d-fast);
+  }
+  .hours.is-open { opacity: 1; transform: none; pointer-events: auto; visibility: visible; transition-delay: 0s; }
+  .hours a {
+    display: flex; gap: 1rem; padding: .55rem 1.1rem; text-decoration: none;
+    font-size: .82rem; letter-spacing: .1em; text-transform: uppercase;
+  }
+  .hours a span:first-child { font-variant-numeric: tabular-nums; font-weight: 500; min-width: 3.2rem; }
+  .hours a[aria-current="true"] { color: var(--sc-accent); }
+  @media (hover: hover) and (pointer: fine) { .hours a:hover { background: var(--sc-surface); } }
+  .book {
+    display: inline-flex; align-items: center; min-height: 44px; padding: 0 1.3rem;
+    font-size: .8rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase;
+    text-decoration: none; color: inherit; border: 1px solid currentColor;
+    background: color-mix(in oklab, var(--sc-canvas) 90%, transparent);
+    transition: background-color var(--sc-d-fast) var(--sc-ease-out), color var(--sc-d-fast) var(--sc-ease-out), transform 120ms var(--sc-ease-out);
+  }
+  .book:active { transform: translateY(1px); }
+  @media (hover: hover) and (pointer: fine) {
+    .book:hover { background: var(--sc-ink); color: var(--sc-canvas); border-color: var(--sc-ink); }
+    .is-night .book:hover { background: var(--night-ink); color: var(--night); border-color: var(--night-ink); }
+  }
+  .is-night .chrome { color: var(--night-ink); }
+  .is-night .chrome__left, .is-night .book { background: color-mix(in oklab, var(--night) 88%, transparent); }
+  .is-night .mark span:last-child { color: var(--gold); }
+  .is-night .hours { background: var(--night); color: var(--night-ink); }
+  .is-night .hours a[aria-current="true"] { color: var(--night-accent); }
+  .is-night .hours a:hover { background: #1c2c24; }
+  @media (max-width: 640px) {
+    .folio__room { display: none; }
+    .book { padding: 0 .95rem; letter-spacing: .12em; }
+  }
 
-  .nav-link{font-family:var(--font-body); font-size:13px; font-weight:400; text-transform:uppercase; letter-spacing:3px; text-decoration:none; padding-bottom:4px; border-bottom:2px solid transparent; transition:border-color .2s ease, color .2s ease;}
-  header.is-transparent .nav-link{color:var(--color-bg);}
-  header.is-solid .nav-link{color:var(--color-dark-brown);}
-  .nav-link:hover{border-bottom-color:var(--color-gold);}
+  /* shared labels */
+  .hour {
+    display: block; font-size: .78rem; font-weight: 500; letter-spacing: .2em;
+    text-transform: uppercase; color: var(--sc-accent); font-variant-numeric: tabular-nums;
+  }
+  .credit { font-size: .78rem; letter-spacing: .04em; color: var(--sc-ink-soft); margin: .7rem 0 0; }
+  figure { margin: 0; }
+  figure img { width: 100%; height: auto; }
 
-  .btn-primary{display:inline-block; background:var(--color-terracotta); color:var(--color-bg); font-family:var(--font-body); font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:3px; padding:14px 40px; border:none; border-radius:0; cursor:pointer; transition:background-color .25s ease;}
-  .btn-primary:hover, .btn-primary:focus-visible{background:var(--color-dark-brown);}
+  /* ---------------------------------------------- the window rigs ---- */
+  .rig-stage { background: var(--sc-canvas); }
+  .rig__view {
+    position: absolute; inset: -12%; z-index: 0;
+    background: center / cover no-repeat;
+    will-change: transform;
+  }
+  .rig {
+    position: absolute; left: 0; top: 0; z-index: 2;
+    transform-origin: 0 0; will-change: transform, opacity;
+  }
+  .rig__frame { display: block; position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; z-index: 3; }
+  .rig__frame img { width: 100%; height: 100%; max-width: none; }
+  .rig__leaves {
+    position: absolute; z-index: 2; perspective: 1400px;
+    display: flex; transform-style: preserve-3d;
+  }
+  .leaf {
+    position: relative; flex: 1 1 50%; height: 100%;
+    background: center / 100% 100% no-repeat;
+    backface-visibility: hidden; will-change: transform;
+  }
+  .leaf--l { background-image: url(assets/leaf-l.webp); transform-origin: 0 50%; }
+  .leaf--r { background-image: url(assets/leaf-r.webp); transform-origin: 100% 50%; }
+  .leaf::after {
+    /* shade the leaf as it turns away from the room */
+    content: ""; position: absolute; inset: 0; background: #0d1410;
+    opacity: var(--shade, 0);
+  }
+  .rig__light {
+    position: absolute; inset: 0; z-index: 4; pointer-events: none;
+    background: radial-gradient(60% 75% at var(--lx, 65%) var(--ly, 55%), rgba(255, 214, 160, .55), rgba(255, 214, 160, 0) 70%);
+    mix-blend-mode: soft-light; opacity: 0;
+  }
 
-  .btn-secondary{display:inline-block; background:transparent; color:var(--color-dark-brown); font-family:var(--font-body); font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:3px; padding:13px 40px; border:1px solid var(--color-gold); border-radius:0; cursor:pointer; transition:background-color .25s ease;}
-  .btn-secondary:hover, .btn-secondary:focus-visible{background:var(--color-bg);}
+  /* hero copy sits on the plaster, never on the photograph */
+  .hero__copy {
+    position: absolute; z-index: 20; left: var(--sc-gutter); top: 50%; translate: 0 -46%;
+    max-width: min(40vw, 34rem);
+  }
+  .hero__copy .place { font-size: .8rem; font-weight: 500; letter-spacing: .24em; text-transform: uppercase; color: var(--sc-ink-soft); margin: 0 0 1.4rem; }
+  .hero__copy h1 { font-size: clamp(3.4rem, 1.4rem + 6vw, 7.4rem); line-height: .92; letter-spacing: -0.02em; margin: 0; }
+  .hero__copy .sub { margin: 1.6rem 0 0; font-size: clamp(1.05rem, .98rem + .3vw, 1.25rem); line-height: 1.6; color: var(--sc-ink-soft); max-width: 30ch; }
+  .hero__wash { display: none; }
+  .hero__beat {
+    /* a caption plate, the way a magazine sets a line on a full-bleed spread */
+    position: absolute; z-index: 20; left: var(--sc-gutter); bottom: clamp(2rem, 7vh, 4.5rem);
+    max-width: 32rem; padding: 1.3rem 1.6rem 1.4rem;
+  }
+  .hero__plate {
+    position: absolute; inset: 0; z-index: 0;
+    background: color-mix(in oklab, var(--sc-canvas) 94%, transparent);
+    box-shadow: var(--sc-e2);
+    /* driven off the act's progress, not a cue: it is the ground under the
+       line, so it arrives before the text and leaves after it */
+    opacity: min(clamp(0, calc((var(--sc-p, 0) - 0.62) * 14), 1), clamp(0, calc((1 - var(--sc-p, 0)) * 25), 1));
+  }
+  @media (prefers-reduced-motion: reduce) { .hero__plate { opacity: 1; } }
+  .hero__beat-text { position: relative; z-index: 1; }
+  .hero__beat .hour { margin-bottom: .55rem; }
+  .hero__beat p {
+    margin: 0; font-family: var(--sc-font-display); font-style: italic; font-weight: 400;
+    font-size: clamp(1.7rem, 1.2rem + 1.6vw, 2.6rem); line-height: 1.08; color: var(--sc-ink);
+  }
+  @media (max-aspect-ratio: 9/10) {
+    .hero__copy { top: auto; bottom: clamp(1.4rem, 5vh, 3rem); translate: none; max-width: none; right: var(--sc-gutter); }
+    .hero__copy .place { margin-bottom: .8rem; }
+    .hero__copy h1 { font-size: clamp(2.6rem, 11vw, 3.6rem); }
+    .hero__copy .sub { margin-top: .9rem; font-size: 1rem; color: var(--sc-ink); }
+    .hero__copy .place { color: var(--sc-ink); }
+    /* the portrait plate's lower wall is a cool grey; warm morning light on
+       the plaster where the copy sits, gone before the push begins */
+    .hero__wash {
+      display: block; position: absolute; inset: auto 0 0 0; height: 46%; z-index: 10; pointer-events: none;
+      background: linear-gradient(to top, rgba(250, 245, 236, .78), rgba(250, 245, 236, .5) 55%, rgba(250, 245, 236, 0));
+      opacity: clamp(0, calc((0.46 - var(--sc-p, 0)) * 8), 1);
+    }
+    .hero__beat { right: var(--sc-gutter); bottom: clamp(1.4rem, 5vh, 3rem); padding: 1rem 1.2rem 1.1rem; }
+  }
 
-  header.is-transparent .btn-secondary{border-color:var(--color-bg); color:var(--color-bg);}
+  /* -------------------------------------------------------- 08:00 ---- */
+  .hall { padding-block: clamp(5rem, 10vw, 9rem) clamp(4rem, 8vw, 8rem); }
+  .hall__grid {
+    display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+    gap: clamp(2rem, 6vw, 7rem); align-items: start;
+  }
+  .hall__media { position: relative; padding-bottom: clamp(3rem, 8vw, 7rem); }
+  .hall__main { box-shadow: var(--sc-e2); }
+  .hall__inset {
+    position: absolute; right: clamp(-2rem, -3vw, -1rem); bottom: 0; width: 46%;
+    box-shadow: var(--sc-e3); border: 6px solid var(--sc-canvas);
+  }
+  .hall__text { padding-top: clamp(1rem, 6vw, 6rem); }
+  .hall__text h2 { font-size: clamp(3rem, 2rem + 4vw, 5.6rem); margin: .9rem 0 1.6rem; }
+  .hall__text .sc-body + .sc-body { margin-top: 1.1rem; }
+  @media (max-width: 860px) {
+    .hall__grid { grid-template-columns: 1fr; }
+    .hall__text { order: -1; padding-top: 0; }
+    .hall__inset { right: 0; width: 52%; }
+  }
 
-  header.is-transparent #menu-toggle{color:var(--color-bg);}
-  header.is-solid #menu-toggle{color:var(--color-dark-brown);}
-  header.is-transparent .site-wordmark{color:var(--color-bg);}
-  header.is-solid .site-wordmark{color:var(--color-dark-brown);}
+  /* -------------------------------------------------------- 11:00 ---- */
+  .suites .sc-stage { display: flex; align-items: center; }
+  .rail { gap: clamp(1.5rem, 3vw, 3.5rem); padding-inline: var(--sc-gutter); align-items: flex-end; }
+  .rail__lead { flex: 0 0 clamp(17rem, 28vw, 26rem); align-self: center; }
+  .rail__lead h2 { font-size: clamp(2.8rem, 1.8rem + 3.4vw, 5rem); margin: .8rem 0 1.3rem; }
+  .suite {
+    flex: 0 0 clamp(17rem, 30vw, 27rem); margin: 0;
+    opacity: clamp(.55, calc(var(--sc-p, 0) * 6 - var(--i) + 1.6), 1);
+    transition: opacity 120ms linear;
+  }
+  .suite__img { aspect-ratio: 4 / 5; overflow: hidden; box-shadow: var(--sc-e2); }
+  .suite__img img { width: 100%; height: 100%; max-width: none; object-fit: cover; }
+  .suite h3 { font-family: var(--sc-font-display); font-weight: 400; font-size: clamp(1.9rem, 1.5rem + 1vw, 2.5rem); margin: 1.1rem 0 .2rem; line-height: 1; }
+  .suite .who { margin: 0; font-family: var(--sc-font-display); font-style: italic; font-size: 1.18rem; color: var(--sc-ink-soft); }
+  .suite dl { display: grid; grid-template-columns: auto 1fr; gap: .2rem 1rem; margin: .9rem 0 0; font-size: .9rem; }
+  .suite dt { letter-spacing: .14em; text-transform: uppercase; font-size: .72rem; font-weight: 500; color: var(--sc-accent); align-self: center; }
+  .suite dd { margin: 0; }
+  .rail__note { flex: 0 0 clamp(15rem, 22vw, 20rem); align-self: center; opacity: clamp(.55, calc(var(--sc-p, 0) * 6 - 4.6), 1); }
+  .rail__note img { aspect-ratio: 4 / 5; object-fit: cover; width: 100%; height: auto; box-shadow: var(--sc-e1); }
+  .rail__note p { font-family: var(--sc-font-display); font-style: italic; font-size: 1.35rem; line-height: 1.3; margin: 1rem 0 0; }
+  @media (prefers-reduced-motion: reduce) { .suite, .rail__note { opacity: 1; } }
 
-  .brand-script{font-family:var(--font-script); font-weight:400; letter-spacing:.015em;}
+  /* -------------------------------------------------------- 13:00 ---- */
+  .garden .sc-stage { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2.1fr); align-items: center; gap: clamp(1.5rem, 4vw, 4.5rem); padding: clamp(5rem, 12vh, 7rem) var(--sc-gutter) clamp(2rem, 6vh, 4rem); }
+  .garden__copy h2 { font-size: clamp(2.6rem, 1.6rem + 3vw, 4.6rem); margin: .8rem 0 1.3rem; }
+  .garden__frame { position: relative; height: min(72vh, 46vw); overflow: hidden; box-shadow: var(--sc-e2); }
+  .garden__frame :is(video, .sc-stage__poster) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .garden__frame video { opacity: 0; transition: opacity 380ms var(--sc-ease-out); }
+  .sc-has-clip .garden__frame video { opacity: 1; }
+  .garden figcaption { position: absolute; left: 0; bottom: -2rem; }
+  @media (max-width: 860px) {
+    .garden .sc-stage { grid-template-columns: 1fr; grid-template-rows: auto 1fr; align-content: start; padding-top: 5rem; }
+    .garden__frame { height: 50svh; }
+    .garden__copy h2 { margin-top: .5rem; }
+  }
 
-  .brand-mark{transition:filter .35s ease, transform .35s ease;}
-  .brand-mark:hover{transform:scale(1.04);}
-  header.is-transparent .brand-mark{filter:brightness(0) invert(1);}
-  header.is-solid .brand-mark{filter:drop-shadow(0 0 4px rgba(184,147,106,.3)) drop-shadow(0 0 12px rgba(193,127,90,.18));}
-  #site-footer .brand-mark{filter:brightness(0) invert(1); opacity:.72;}
-  #site-footer .brand-mark:hover{opacity:1;}
+  /* -------------------------------------------------------- 18:00 ---- */
+  .table { padding-block: clamp(5rem, 9vw, 9rem); }
+  .table__quote {
+    font-family: var(--sc-font-display); font-style: italic; font-weight: 300;
+    font-size: clamp(2rem, 1.2rem + 3vw, 4.2rem); line-height: 1.12; letter-spacing: -0.01em;
+    max-width: 22ch; margin: 1rem 0 0; text-wrap: balance;
+  }
+  /* the Greek companion face sets wider than Cormorant: give it more measure */
+  html[lang="el"] .table__quote { max-width: 32ch; font-size: clamp(1.7rem, 1.1rem + 2.2vw, 3.2rem); line-height: 1.18; }
+  .table__by { margin: 1.4rem 0 0; font-size: .8rem; letter-spacing: .18em; text-transform: uppercase; color: var(--sc-ink-soft); }
+  .table__grid {
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    gap: clamp(2rem, 6vw, 7rem); margin-top: clamp(3.5rem, 7vw, 7rem); align-items: start;
+  }
+  .table__photo { box-shadow: var(--sc-e2); }
+  .table__side { padding-top: clamp(0rem, 8vw, 9rem); }
+  .table__side .sc-body + .sc-body { margin-top: 1.1rem; }
+  .table__kitchen { margin-top: clamp(2.5rem, 5vw, 4.5rem); width: 88%; margin-left: auto; box-shadow: var(--sc-e1); }
+  @media (max-width: 860px) { .table__grid { grid-template-columns: 1fr; } .table__kitchen { width: 100%; } }
 
-  a, button, input, textarea{outline-offset:3px;}
-  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible{outline:1.5px solid var(--color-gold);}
+  /* --------------------------------------------------------- night ---- */
+  .night, .letter { --sc-ink: var(--night-ink); --sc-ink-soft: var(--night-soft); --sc-accent: var(--night-accent); --sc-accent-ink: var(--night); color: var(--sc-ink); }
+  .night .rig-stage { background: var(--night); }
+  .night .leaf { filter: brightness(.42) saturate(.75); }
+  .night__copy { position: absolute; z-index: 20; left: var(--sc-gutter); top: 50%; translate: 0 -40%; max-width: min(40vw, 32rem); }
+  .night__copy h2 { font-size: clamp(3.2rem, 1.6rem + 5vw, 6.4rem); margin: .9rem 0 1.2rem; }
+  @media (max-aspect-ratio: 9/10) {
+    .night__copy { top: auto; bottom: clamp(1.4rem, 5vh, 3rem); translate: none; max-width: none; right: var(--sc-gutter); }
+    .night__copy h2 { font-size: clamp(2.6rem, 11vw, 3.4rem); margin: .5rem 0 .8rem; }
+  }
+  .letter { background: var(--night); padding-block: clamp(4rem, 8vw, 8rem) clamp(2.5rem, 4vw, 3.5rem); }
+  .letter__grid { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(2.5rem, 7vw, 8rem); }
+  .letter h2 { font-size: clamp(2.6rem, 1.6rem + 3vw, 4.4rem); margin: .8rem 0 1.3rem; }
+  .letter address { font-style: normal; margin-top: 2rem; line-height: 1.9; color: var(--sc-ink-soft); }
+  .letter address a { color: var(--sc-ink); }
+  form { display: grid; gap: 1.5rem; }
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  label { display: block; font-size: .74rem; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--sc-ink-soft); margin-bottom: .45rem; }
+  .field {
+    width: 100%; background: transparent; border: 0; border-bottom: 1px solid color-mix(in oklab, var(--night-ink) 38%, transparent);
+    padding: .6rem 0; font-size: 1.05rem; font-weight: 300; color: var(--sc-ink); border-radius: 0;
+    transition: border-color var(--sc-d-fast) var(--sc-ease-out);
+    color-scheme: dark;
+  }
+  .field::placeholder { color: color-mix(in oklab, var(--night-ink) 48%, transparent); }
+  .field:focus-visible { outline: none; border-bottom-color: var(--night-accent); box-shadow: 0 1px 0 var(--night-accent); }
+  textarea.field { resize: vertical; min-height: 7rem; }
+  .send {
+    justify-self: start; min-height: 48px; padding: 0 1.9rem; cursor: pointer;
+    background: var(--night-ink); color: var(--night); border: 1px solid var(--night-ink);
+    font-size: .8rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase;
+    transition: background-color var(--sc-d-fast) var(--sc-ease-out), color var(--sc-d-fast) var(--sc-ease-out), transform 120ms var(--sc-ease-out);
+  }
+  .send:active { transform: scale(.97); }
+  .send:disabled { opacity: .5; cursor: not-allowed; }
+  @media (hover: hover) and (pointer: fine) { .send:hover { background: transparent; color: var(--night-ink); } }
+  .status { min-height: 1.6em; margin: 0; color: var(--night-soft); font-size: .95rem; }
+  .colophon {
+    margin-top: clamp(4rem, 8vw, 7rem); padding-top: 1.6rem;
+    border-top: 1px solid color-mix(in oklab, var(--gold) 40%, transparent);
+    display: grid; grid-template-columns: auto 1fr; gap: 1rem 3rem; align-items: start;
+    font-size: .85rem; color: var(--sc-ink-soft);
+  }
+  .colophon p { margin: 0; max-width: 70ch; }
+  .colophon .mark { color: var(--sc-ink); }
+  @media (max-width: 860px) {
+    .letter__grid { grid-template-columns: 1fr; }
+    .colophon { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 420px) { .row2 { grid-template-columns: 1fr; } }
 
-  .reveal{transition:opacity .9s cubic-bezier(.22,1,.36,1), transform .9s cubic-bezier(.22,1,.36,1);}
-  html.js-reveal-ready .reveal{opacity:0; transform:translateY(28px);}
-  html.js-reveal-ready .reveal.is-visible{opacity:1; transform:translateY(0);}
+  /* ------------------------------------------------ language switch ---- */
+  .chrome__right { display: flex; align-items: center; gap: .6rem; }
+  .lang {
+    display: inline-flex; align-items: center; min-height: 44px; padding: 0 .35rem;
+    background: color-mix(in oklab, var(--sc-canvas) 90%, transparent);
+  }
+  .lang button {
+    min-width: 2.4rem; min-height: 44px; padding: 0 .45rem; border: 0; background: none; cursor: pointer;
+    font-size: .78rem; font-weight: 500; letter-spacing: .14em; color: inherit; opacity: .55;
+    text-decoration-line: underline; text-decoration-color: transparent; text-underline-offset: .4em;
+    transition: opacity var(--sc-d-fast) var(--sc-ease-out), text-decoration-color var(--sc-d-fast) var(--sc-ease-out);
+  }
+  .lang button[aria-pressed="true"] { opacity: 1; text-decoration-color: currentColor; }
+  @media (hover: hover) and (pointer: fine) { .lang button:hover { opacity: 1; } }
+  .is-night .lang { background: color-mix(in oklab, var(--night) 88%, transparent); }
+  @media (max-width: 400px) {
+    .chrome__right { gap: .35rem; }
+    .lang button { min-width: 2rem; padding: 0 .3rem; letter-spacing: .08em; }
+    .book { padding: 0 .7rem; letter-spacing: .08em; }
+  }
 
-  .shadow-soft{box-shadow:0 30px 60px -25px rgba(61,43,26,.25), 0 10px 20px -10px rgba(193,127,90,.18);}
+  /* ---------------------------------------------------- legal info ---- */
+  .legal { grid-column: 1 / -1; margin-top: .4rem; }
+  .legal__toggle {
+    background: none; border: 0; padding: .5rem 0; min-height: 44px; cursor: pointer;
+    font-size: .72rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--sc-ink-soft); text-decoration: underline; text-underline-offset: .45em;
+    text-decoration-color: color-mix(in oklab, var(--sc-ink-soft) 50%, transparent);
+    transition: color var(--sc-d-fast) var(--sc-ease-out);
+  }
+  @media (hover: hover) and (pointer: fine) { .legal__toggle:hover { color: var(--sc-ink); } }
+  .legal__panel { max-width: 40rem; margin-top: .8rem; padding: 1.3rem 1.5rem; border: 1px solid color-mix(in oklab, var(--gold) 32%, transparent); }
+  .legal__panel:not([hidden]) { animation: legal-in 260ms var(--sc-ease-out); }
+  @keyframes legal-in { from { opacity: 0; transform: translateY(-4px); } }
+  .legal dl { margin: 0; display: grid; gap: .55rem; font-size: .84rem; line-height: 1.5; }
+  .legal dl > div { display: grid; grid-template-columns: 11rem 1fr; gap: .2rem 1rem; }
+  .legal dt { color: var(--night-accent); font-weight: 500; }
+  .legal dd { margin: 0; color: var(--sc-ink); }
+  @media (max-width: 520px) { .legal dl > div { grid-template-columns: 1fr; } }
+  @media (prefers-reduced-motion: reduce) { .legal__panel:not([hidden]) { animation: none; } }
 
-  .grain{position:fixed; inset:0; pointer-events:none; z-index:60; opacity:.035; mix-blend-mode:multiply;}
-
-  .field{width:100%; background:transparent; border:none; border-bottom:1px solid var(--color-stone); padding:10px 2px; font-family:var(--font-body); font-size:15px; color:var(--color-dark-brown); border-radius:0; transition:border-color .25s ease;}
-  .field:focus{outline:none; border-bottom-color:var(--color-gold);}
-  .field::placeholder{color:#8a7a68;}
-  .field-label{font-size:12px; letter-spacing:.15em; text-transform:uppercase; color:var(--color-mid-brown); font-weight:500;}
-
-  .field-dark{width:100%; background:transparent; border:none; border-bottom:1px solid rgba(245,240,232,.3); padding:10px 2px; font-family:var(--font-body); font-size:14px; color:var(--color-bg); border-radius:0; transition:border-color .25s ease;}
-  .field-dark:focus{outline:none; border-bottom-color:var(--color-gold);}
-  .field-dark::placeholder{color:rgba(245,240,232,.5);}
-
-  @keyframes bounce-soft{0%,100%{transform:translateY(0);} 50%{transform:translateY(8px);}}
-  .scroll-cue{animation:bounce-soft 2.2s ease-in-out infinite;}
-
-  .ph-tile{position:relative; overflow:hidden;}
-  .ph-tile img{display:block; width:100%; height:100%; object-fit:cover;}
-  .ph-tile .ph-icon{position:absolute; inset:0; display:flex; align-items:center; justify-content:center; opacity:.55;}
-
-  /* Minimal nav-card tiles (image + plain caption below, no overlay) */
-  .nav-tile-caption{font-family:var(--font-heading); font-size:18px; font-weight:500; color:var(--color-dark-brown); transition:color .25s ease;}
-  .nav-tile:hover .nav-tile-caption{color:var(--color-terracotta);}
-
-  /* Understated text-link CTA used on hero / invitation, styled like an inline link, not a button */
-  .link-cta{display:inline-flex; align-items:center; gap:8px; font-family:var(--font-body); font-size:13px; font-weight:500; letter-spacing:.15em; text-transform:uppercase; border-bottom:1px solid currentColor; padding-bottom:4px; transition:opacity .25s ease, gap .25s ease;}
-  .link-cta:hover{opacity:.7; gap:12px;}
-
-  header.is-transparent .is-header-backdrop{background:linear-gradient(to bottom, rgba(42,31,21,.55), transparent);}
-  header.is-solid .is-header-backdrop{background:var(--color-bg);}
-  header.is-solid{box-shadow:0 8px 24px -16px rgba(61,43,26,.35);}
-
-  /* Legal disclosure (footer) */
-  .legal-info-toggle{display:inline-block; background:none; border:none; cursor:pointer; padding:4px 2px; font-family:var(--font-body); font-size:11px; font-weight:500; letter-spacing:.18em; text-transform:uppercase; color:var(--color-bg); opacity:.4; text-decoration:underline; text-decoration-color:currentColor; text-underline-offset:4px; transition:opacity .25s ease;}
-  .legal-info-toggle:hover, .legal-info-toggle:focus-visible{opacity:.75;}
-
-  .legal-info-panel{max-height:0; overflow:hidden; width:100%; transition:max-height .5s cubic-bezier(.22,1,.36,1);}
-  .legal-info-inner{max-width:560px; margin:18px auto 0; padding:24px 28px; border:1px solid rgba(250,247,242,.12); border-radius:var(--r-md); background:rgba(250,247,242,.03);}
-  .legal-info-list{display:flex; flex-direction:column; gap:10px; text-align:left;}
-  .legal-info-row{display:flex; flex-wrap:wrap; gap:2px 10px; font-size:13px; line-height:1.5;}
-  .legal-info-row dt{flex:0 0 168px; margin:0; color:var(--color-terracotta-l); font-weight:500; letter-spacing:.02em;}
-  .legal-info-row dd{flex:1 1 220px; margin:0; color:rgba(250,247,242,.85);}
-
-  /* ─── Language Switcher ─── */
-  .lang-switcher{position:relative;}
-
-  .lang-trigger{display:flex;align-items:center;gap:6px;border:1px solid transparent;padding:5px 14px;border-radius:50px;cursor:pointer;font-family:var(--font-body);font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;transition:border-color .25s ease,color .25s ease,background-color .25s ease;line-height:1;white-space:nowrap;}
-  header.is-transparent .lang-trigger{color:var(--color-bg);border-color:rgba(250,247,242,.6);background:rgba(250,247,242,.15);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);}
-  header.is-transparent .lang-trigger:hover{border-color:rgba(250,247,242,.9);background:rgba(250,247,242,.26);}
-  header.is-solid .lang-trigger{color:var(--color-dark-brown);border-color:var(--color-gold);background:var(--color-cream);}
-  header.is-solid .lang-trigger:hover{background:var(--color-stone);border-color:var(--color-gold);}
-
-  .lang-chevron{width:13px;height:13px;flex-shrink:0;transition:transform .2s ease;}
-  .lang-trigger[aria-expanded="true"] .lang-chevron{transform:rotate(180deg);}
-
-  .lang-dropdown{position:absolute;top:calc(100% + 8px);right:0;list-style:none;padding:5px 0;margin:0;min-width:152px;background:var(--color-bg);border:1px solid var(--color-stone);border-radius:var(--r-md);box-shadow:0 12px 32px -8px rgba(61,43,26,.22);z-index:200;display:block;opacity:0;transform:translateY(-6px);pointer-events:none;transition:opacity .2s ease,transform .2s ease;}
-  .lang-dropdown.is-open{opacity:1;transform:translateY(0);pointer-events:auto;}
-
-  .lang-option{display:flex;align-items:center;gap:10px;width:100%;padding:9px 16px;background:transparent;border:none;cursor:pointer;font-family:var(--font-body);font-size:13px;color:var(--color-mid-brown);text-align:left;white-space:nowrap;transition:background-color .15s ease;}
-  .lang-option:hover{background:var(--color-cream);color:var(--color-dark-brown);}
-  .lang-option[aria-selected="true"]{font-weight:600;color:var(--color-dark-brown);}
-
-  .lang-check{width:14px;height:14px;margin-left:auto;flex-shrink:0;color:var(--color-terracotta);visibility:hidden;}
-  .lang-option[aria-selected="true"] .lang-check{visibility:visible;}
-
-  /* Mobile language buttons */
-  .mobile-lang-btn{display:inline-flex;align-items:center;gap:5px;background:transparent;border:1px solid rgba(61,43,26,.25);padding:5px 13px;border-radius:50px;cursor:pointer;font-family:var(--font-body);font-size:12px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--color-mid-brown);transition:border-color .2s ease,color .2s ease;}
-  .mobile-lang-btn.is-active{border-color:var(--color-terracotta);color:var(--color-terracotta);font-weight:600;}
-  .mobile-lang-btn:hover:not(.is-active){border-color:var(--color-gold);}
+  [id] { scroll-margin-top: 0; }
+  .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 </style>
 </head>
-<body class="antialiased">
-<div class="grain" style="background-image:url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22><filter id=%22n%22><feTurbulence type=%22fractalNoise%22 baseFrequency=%220.85%22 numOctaves=%222%22 stitchTiles=%22stitch%22/></filter><rect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23n)%22/></svg>');"></div>
+<body>
 
-<!-- NAV -->
-<header id="site-header" class="is-transparent fixed top-0 inset-x-0 z-50 transition-colors duration-300">
-  <div class="absolute inset-0 -z-10 is-header-backdrop"></div>
-  <div class="max-w-[1280px] mx-auto flex items-center justify-between px-6 md:px-10 py-3">
-    <a href="#hero" class="flex items-center gap-3">
-      <img src="assets/casa-efterpi-monogramLogo.svg" alt="Casa Efterpi" class="brand-mark h-14 w-14 object-contain" />
-    </a>
-    <nav class="hidden lg:flex items-center gap-10">
-      <a class="nav-link" href="#hero" data-i18n="nav.home">Home</a>
-      <a class="nav-link" href="#rooms" data-i18n="nav.rooms">Rooms</a>
-      <a class="nav-link" href="#gallery" data-i18n="nav.gallery">Gallery</a>
-      <a class="nav-link" href="#about" data-i18n="nav.about">About</a>
-      <a class="nav-link" href="#contact" data-i18n="nav.contact">Contact</a>
+<div class="sc-grain" aria-hidden="true"></div>
+
+<header class="chrome">
+  <div class="chrome__left">
+    <a class="mark" href="#first-light" aria-label="Casa Efterpi, back to the top" data-i18n-attr="aria-label:mark.aria"><span>C</span><span>E</span></a>
+    <nav aria-label="Hours of the day" data-i18n-attr="aria-label:nav.aria" style="position:relative">
+      <button class="folio" type="button" aria-expanded="false" aria-controls="hours">
+        <span class="folio__hour">07:00</span><span class="folio__room">First light</span>
+        <span class="visually-hidden" data-i18n="nav.hint">, open the index of hours</span>
+      </button>
+      <ol class="hours" id="hours">
+        <li><a href="#first-light"><span>07:00</span><span data-i18n="room.first">First light</span></a></li>
+        <li><a href="#hall"><span>08:00</span><span data-i18n="room.hall">The hall</span></a></li>
+        <li><a href="#suites"><span>11:00</span><span data-i18n="room.suites">The suites</span></a></li>
+        <li><a href="#garden"><span>13:00</span><span data-i18n="room.garden">The garden</span></a></li>
+        <li><a href="#table"><span>18:00</span><span data-i18n="room.table">The table</span></a></li>
+        <li><a href="#night"><span>22:00</span><span data-i18n="room.night">Good night</span></a></li>
+      </ol>
     </nav>
-    <!-- Desktop: lang switcher + Book Now -->
-    <div class="hidden lg:flex items-center gap-4">
-      <div id="lang-switcher" class="lang-switcher">
-        <button id="lang-trigger" class="lang-trigger" aria-haspopup="listbox" aria-expanded="false" aria-label="Select language">
-          <span id="lang-flag">🇬🇧</span>
-          <span id="lang-label">English</span>
-          <svg class="lang-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-        </button>
-        <ul id="lang-dropdown" class="lang-dropdown" role="listbox" aria-label="Language selection">
-          <li role="presentation">
-            <button class="lang-option" role="option" data-lang="en" aria-selected="true">
-              🇬🇧 English
-              <svg class="lang-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>
-            </button>
-          </li>
-          <li role="presentation">
-            <button class="lang-option" role="option" data-lang="el" aria-selected="false">
-              🇬🇷 Ελληνικά
-              <svg class="lang-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>
-            </button>
-          </li>
-        </ul>
-      </div>
-      <a href="#contact" class="btn-secondary !py-2.5 !px-7 !text-[12px]" data-i18n="nav.book_now">Book Now</a>
-    </div>
-    <button id="menu-toggle" aria-label="Open menu" aria-expanded="false" class="lg:hidden p-2">
-      <svg id="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="w-7 h-7"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
-      <svg id="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="w-7 h-7 hidden"><path d="M6 6l12 12M18 6L6 18"/></svg>
-    </button>
   </div>
-  <div id="mobile-menu" class="hidden lg:hidden bg-bg border-t border-stone">
-    <div class="flex flex-col px-6 py-6 gap-5">
-      <a class="nav-link !text-brown" href="#hero" data-i18n="nav.home">Home</a>
-      <a class="nav-link !text-brown" href="#rooms" data-i18n="nav.rooms">Rooms</a>
-      <a class="nav-link !text-brown" href="#gallery" data-i18n="nav.gallery">Gallery</a>
-      <a class="nav-link !text-brown" href="#about" data-i18n="nav.about">About</a>
-      <a class="nav-link !text-brown" href="#contact" data-i18n="nav.contact">Contact</a>
-      <!-- Mobile language switcher -->
-      <div class="flex gap-3 pt-1 border-t border-stone/60">
-        <button class="mobile-lang-btn is-active" data-lang="en" aria-selected="true">🇬🇧 English</button>
-        <button class="mobile-lang-btn" data-lang="el" aria-selected="false">🇬🇷 Ελληνικά</button>
-      </div>
-      <a href="#contact" class="btn-primary text-center" data-i18n="nav.book_now">Book Now</a>
+  <div class="chrome__right">
+    <div class="lang" role="group" aria-label="Language" data-i18n-attr="aria-label:lang.aria">
+      <button type="button" data-lang="en" aria-pressed="true" lang="en">EN</button>
+      <button type="button" data-lang="el" aria-pressed="false" lang="el">ΕΛ</button>
     </div>
+    <a class="book" href="#book" data-i18n="book">Book Now</a>
   </div>
 </header>
 
-<!-- HERO -->
-<section id="hero" class="relative h-screen min-h-[640px] max-h-[940px] w-full overflow-hidden">
-  <div class="absolute inset-0">
-    <img src="https://placehold.co/2400x1029/c9b89a/c9b89a?text=+" alt="Full elevation of the Casa Efterpi facade, from pediment to garden" data-i18n-attr="alt:hero.img_alt" class="w-full h-full object-cover" style="object-position:top center;" />
-  </div>
+<main>
 
-  <div class="reveal absolute left-0 bottom-0 max-w-[90%] md:max-w-lg">
-    <div class="px-10 md:px-14 py-9 md:py-12" style="background:rgba(250,247,242,.88);">
-      <h1 class="sr-only">Casa Efterpi — Samos, Greece</h1>
-      <img src="assets/casa-efterpi-BrandLog-v2.svg" alt="Casa Efterpi — Samos · Greece" class="h-48 md:h-64 lg:h-72 w-auto" />
-    </div>
-  </div>
-
-  <a href="#invitation" aria-label="Scroll to content" data-i18n-attr="aria-label:hero.scroll_label" class="scroll-cue absolute bottom-7 right-7 md:right-10 w-11 h-11 flex items-center justify-center text-brown hover:text-terracotta transition-colors" style="background:rgba(250,247,242,.85);">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M12 4v16M5 13l7 7 7-7"/></svg>
-  </a>
-</section>
-
-<!-- INVITATION -->
-<section id="invitation" class="px-6 py-[var(--sp-xl)]">
-  <div class="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
-
-    <div class="reveal ph-tile aspect-[2/3] bg-stone order-1">
-      <img src="https://placehold.co/700x1050/e8c4a8/e8c4a8?text=+" alt="" />
-      <div class="ph-icon text-brown/60">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-12 h-12"><path d="M3 21V9l9-6 9 6v12M9 21V13h6v8"/></svg>
-      </div>
-    </div>
-
-    <div class="reveal order-2">
-      <p class="eyebrow" data-i18n="invitation.eyebrow">Our Invitation</p>
-      <h2 class="font-heading text-brown text-[34px] md:text-[42px] font-normal mt-3" data-i18n="invitation.heading">Settle In.</h2>
-      <p class="mt-6 text-[16px] leading-[1.8] text-sienna" data-i18n="invitation.body1">
-        There is no rush at Casa Efterpi. Mornings begin on the stone steps with coffee and the scent
-        of the garden; evenings end on the veranda, watching the light leave the Aegean.
-      </p>
-      <p class="mt-5 text-[16px] leading-[1.8] text-sienna" data-i18n="invitation.body2">
-        However long you stay, the house asks only one thing of you — that you slow down enough to meet it.
-      </p>
-      <div class="flex flex-wrap items-center gap-8 mt-8 text-terracotta">
-        <a href="#rooms" class="link-cta" data-i18n="invitation.cta1">Discover the Rooms</a>
-        <a href="#contact" class="link-cta" data-i18n="invitation.cta2">Begin Your Stay</a>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- NAV TILES (Rooms / Gallery / About) -->
-<section id="pillars" class="px-6 pb-[var(--sp-xl)]">
-  <div class="max-w-[1280px] mx-auto">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6">
-
-      <a href="#rooms" class="reveal nav-tile group block">
-        <div class="ph-tile aspect-[2/3] bg-stone">
-          <img src="https://placehold.co/800x1200/e8e0d0/e8e0d0?text=+" alt="" class="transition-transform duration-700 group-hover:scale-105" />
-        </div>
-        <p class="nav-tile-caption mt-4" data-i18n="tiles.rooms">Rooms</p>
-      </a>
-
-      <a href="#gallery" class="reveal nav-tile group block">
-        <div class="ph-tile aspect-[2/3] bg-terracotta-light">
-          <img src="https://placehold.co/800x1200/e8c4a8/e8c4a8?text=+" alt="" class="transition-transform duration-700 group-hover:scale-105" />
-        </div>
-        <p class="nav-tile-caption mt-4" data-i18n="tiles.gallery">Gallery</p>
-      </a>
-
-      <a href="#about" class="reveal nav-tile group block">
-        <div class="ph-tile aspect-[2/3] bg-stone">
-          <img src="assets/hero.jpg" alt="The neoclassical facade of Casa Efterpi" data-i18n-attr="alt:tiles.about_img_alt" class="transition-transform duration-700 group-hover:scale-105" />
-        </div>
-        <p class="nav-tile-caption mt-4" data-i18n="tiles.about">About</p>
-      </a>
-
-    </div>
-  </div>
-</section>
-
-<!-- WELCOME -->
-<section class="px-6 py-[var(--sp-xl)] bg-cream">
-  <div class="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
-
-    <div class="reveal order-2 md:order-1">
-      <p class="eyebrow" data-i18n="welcome.eyebrow">Welcome to Casa Efterpi</p>
-      <h2 class="font-heading text-brown text-[34px] md:text-[42px] font-normal mt-3" data-i18n="welcome.heading">Your Home on Samos</h2>
-      <p class="mt-6 text-[16px] leading-[1.8] text-sienna max-w-md" data-i18n="welcome.body1">
-        On the island of Samos, where the Aegean meets a nineteenth-century mansion, Casa Efterpi
-        offers quiet elegance to travellers who have stopped chasing more — and started noticing everything.
-      </p>
-      <p class="mt-5 text-[16px] leading-[1.8] text-sienna max-w-md" data-i18n="welcome.body2">
-        Set above the harbour town, the house has watched ships come and go since the 1870s. Our
-        concept is simple: a home run by the family who has always lived in it, open just enough to share it.
-      </p>
-    </div>
-
-    <div class="reveal order-1 md:order-2 flex justify-center">
-      <svg viewBox="0 0 220 320" class="w-full max-w-[240px]" fill="none">
-        <path d="M112 8 C 94 55, 100 110, 112 165 C 122 215, 108 270, 96 308" stroke="var(--color-gold)" stroke-width="1.4" stroke-linecap="round"/>
-        <path d="M110 38 C 86 30, 62 38, 50 54 C 68 54, 92 48, 110 38 Z" stroke="var(--color-terracotta)" stroke-width="1.2" stroke-linejoin="round"/>
-        <path d="M114 70 C 140 60, 164 66, 178 82 C 158 84, 134 80, 114 70 Z" stroke="var(--color-terracotta)" stroke-width="1.2" stroke-linejoin="round"/>
-        <path d="M108 104 C 84 98, 60 104, 48 120 C 66 120, 90 114, 108 104 Z" stroke="var(--color-terracotta)" stroke-width="1.2" stroke-linejoin="round"/>
-        <path d="M116 138 C 142 130, 164 136, 176 152 C 156 154, 134 148, 116 138 Z" stroke="var(--color-terracotta)" stroke-width="1.2" stroke-linejoin="round"/>
-        <path d="M106 174 C 82 170, 60 176, 50 192 C 68 191, 90 184, 106 174 Z" stroke="var(--color-terracotta)" stroke-width="1.2" stroke-linejoin="round"/>
-        <path d="M112 208 C 136 200, 156 206, 168 220 C 150 222, 130 217, 112 208 Z" stroke="var(--color-terracotta)" stroke-width="1.2" stroke-linejoin="round"/>
-        <circle cx="60" cy="98" r="4.5" fill="var(--color-gold)"/>
-        <circle cx="168" cy="138" r="4.5" fill="var(--color-gold)"/>
-        <circle cx="54" cy="170" r="4.5" fill="var(--color-gold)"/>
-      </svg>
-    </div>
-
-  </div>
-</section>
-
-<!-- PHOTO STRIP 1 -->
-<section class="px-0">
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-[2px] bg-bg">
-    <div class="ph-tile aspect-[4/5] bg-stone">
-      <img src="https://placehold.co/700x875/e8e0d0/e8e0d0?text=+" alt="Staircase detail at Casa Efterpi" data-i18n-attr="alt:photo1.alt1" />
-    </div>
-    <div class="ph-tile aspect-[4/5] bg-terracotta-light">
-      <img src="https://placehold.co/700x875/e8c4a8/e8c4a8?text=+" alt="Interior lounge detail" data-i18n-attr="alt:photo1.alt2" />
-    </div>
-    <div class="ph-tile aspect-[4/5] bg-stone">
-      <img src="https://placehold.co/700x875/e8e0d0/e8e0d0?text=+" alt="Table set for breakfast" data-i18n-attr="alt:photo1.alt3" />
-    </div>
-  </div>
-</section>
-
-<!-- QUOTE -->
-<section class="px-6 py-[var(--sp-xl)]">
-  <div class="max-w-[1280px] mx-auto reveal">
-    <svg viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 text-sienna/70"><path d="M9 7C5.7 7 3 9.7 3 13s2.7 6 6 6c.6 0 1-.4 1-1s-.4-1-1-1c-2.2 0-4-1.8-4-4 0-.4 0-.7.1-1H6c1.7 0 3-1.3 3-3V8c0-.6-.4-1-1-1H9zm10 0c-3.3 0-6 2.7-6 6s2.7 6 6 6c.6 0 1-.4 1-1s-.4-1-1-1c-2.2 0-4-1.8-4-4 0-.4 0-.7.1-1H16c1.7 0 3-1.3 3-3V8c0-.6-.4-1-1-1h-1z"/></svg>
-    <p class="font-heading italic text-brown text-[28px] md:text-[36px] leading-[1.4] mt-6 max-w-[820px]" data-i18n="quote.text">
-      Casa Efterpi was never meant to become a hotel in the usual sense. It is our family's home,
-      kept exactly as it was built, and shared — quietly — with those who know how to appreciate
-      a house that has done nothing but stand still and grow more beautiful.
-    </p>
-    <p class="eyebrow mt-7" data-i18n="quote.attribution">— The Family Behind Casa Efterpi</p>
-  </div>
-</section>
-
-<!-- PHOTO STRIP 2 -->
-<section class="px-0">
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-[2px] bg-bg">
-    <div class="ph-tile aspect-[4/5] bg-terracotta-light">
-      <img src="https://placehold.co/700x875/e8c4a8/e8c4a8?text=+" alt="Terrace dining at sunset" data-i18n-attr="alt:photo2.alt1" />
-    </div>
-    <div class="ph-tile aspect-[4/5] bg-stone">
-      <img src="https://placehold.co/700x875/e8e0d0/e8e0d0?text=+" alt="A local Samian dish" data-i18n-attr="alt:photo2.alt2" />
-    </div>
-    <div class="ph-tile aspect-[4/5] bg-terracotta-light">
-      <img src="https://placehold.co/700x875/e8c4a8/e8c4a8?text=+" alt="The garden courtyard" data-i18n-attr="alt:photo2.alt3" />
-    </div>
-  </div>
-</section>
-
-<!-- THREE PILLARS (text features) -->
-<section class="px-6 py-[var(--sp-xl)] bg-cream">
-  <div class="max-w-[1280px] mx-auto">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12">
-
-      <div class="reveal">
-        <h3 class="font-heading text-brown text-[24px] font-medium" data-i18n="pillars.arch.heading">The Architecture</h3>
-        <p class="mt-3 font-heading italic text-terracotta text-[18px] leading-snug" data-i18n="pillars.arch.sub">A neoclassical mansion built to outlast centuries.</p>
-        <p class="mt-4 text-[15px] leading-[1.8] text-sienna" data-i18n="pillars.arch.body">
-          The facade greets you first — full elevation, columns, pediment, and green shutters,
-          glowing warm in the morning light.
-        </p>
-        <a href="#about" class="link-cta mt-6 text-terracotta" data-i18n="pillars.arch.link">Explore the Architecture</a>
+  <!-- 07:00 · FIRST LIGHT. The peak. Closed shutters, then they open under
+       the hand and the room gives way to the garden and the sea. -->
+  <section id="first-light" data-room-key="room.first" class="hero" data-hour="07:00"
+           data-sc-act="pin" data-sc-span="4.2" data-sc-drift="#FAF7F2">
+    <div data-sc-stage class="rig-stage" data-rig="open">
+      <div class="rig__view" style="background-image:url(assets/view.webp)" aria-hidden="true"></div>
+      <div class="rig" aria-hidden="true">
+        <div class="rig__leaves"><div class="leaf leaf--l"></div><div class="leaf leaf--r"></div></div>
+        <picture class="rig__frame">
+          <source media="(max-aspect-ratio: 9/10)" srcset="assets/window-bare-p.webp">
+          <img src="assets/window-bare.webp" width="2400" height="1350" alt="">
+        </picture>
+        <div class="rig__light"></div>
       </div>
 
-      <div class="reveal">
-        <h3 class="font-heading text-brown text-[24px] font-medium" data-i18n="pillars.sea.heading">The Sea &amp; Garden</h3>
-        <p class="mt-3 font-heading italic text-terracotta text-[18px] leading-snug" data-i18n="pillars.sea.sub">The Aegean begins where the garden ends.</p>
-        <p class="mt-4 text-[15px] leading-[1.8] text-sienna" data-i18n="pillars.sea.body">
-          Bougainvillea in the foreground, blue water beyond — breakfast on the stone steps,
-          a book in the shade of an old olive tree.
-        </p>
-        <a href="#gallery" class="link-cta mt-6 text-terracotta" data-i18n="pillars.sea.link">Explore the Grounds</a>
+      <div class="hero__wash" aria-hidden="true"></div>
+      <div class="hero__copy" data-sc-cue="0 0.40 0">
+        <p class="place" data-i18n="hero.place">Karlovasi · Samos</p>
+        <h1 class="sc-display">Casa Efterpi</h1>
+        <p class="sub" data-i18n="hero.sub">A neoclassical house, four suites and one family. Opening 2027.</p>
       </div>
 
-      <div class="reveal">
-        <h3 class="font-heading text-brown text-[24px] font-medium" data-i18n="pillars.family.heading">The Family Story</h3>
-        <p class="mt-3 font-heading italic text-terracotta text-[18px] leading-snug" data-i18n="pillars.family.sub">Generations of care, in every detail.</p>
-        <p class="mt-4 text-[15px] leading-[1.8] text-sienna" data-i18n="pillars.family.body">
-          The people who built this house are the same people who welcome you into it,
-          generation after generation.
-        </p>
-        <a href="#about" class="link-cta mt-6 text-terracotta" data-i18n="pillars.family.link">Explore Our Story</a>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ROOMS -->
-<section id="rooms" class="px-6 py-[var(--sp-xl)]">
-  <div class="max-w-[1280px] mx-auto">
-    <div class="max-w-[760px] reveal">
-      <p class="eyebrow" data-i18n="rooms.eyebrow">Accommodations</p>
-      <h2 class="font-heading text-brown text-[36px] md:text-[44px] font-light mt-3" data-i18n="rooms.heading">Rooms &amp; Suites</h2>
-      <p class="mt-5 text-[16px] leading-[1.8] text-sienna" data-i18n="rooms.intro">
-        Each room is named for the feature of the house it overlooks — the garden, the gulf, the old olive grove.
-        Furnishings are original where possible, restored where necessary, and never replaced for the sake of fashion.
-      </p>
-    </div>
-
-    <div class="mt-14 divide-y divide-gold/20">
-
-      <!-- Room 1 -->
-      <div class="reveal flex flex-col md:flex-row gap-8 md:gap-12 py-10 first:pt-0">
-        <div class="ph-tile w-full md:w-[45%] aspect-[3/2] bg-stone shrink-0">
-          <img src="https://placehold.co/900x600/e8e0d0/e8e0d0?text=+" alt="" />
-        </div>
-        <div class="flex flex-col justify-center">
-          <h3 class="font-heading text-brown text-[26px] font-normal" data-i18n="rooms.garden.name">Efterpi</h3>
-          <p class="mt-3 text-[15px] leading-[1.8] text-sienna max-w-md" data-i18n="rooms.garden.desc">
-            Ground-floor quiet, opening directly onto the bougainvillea terrace.
-          </p>
-          <div class="flex items-center gap-6 mt-5 text-sienna">
-            <span class="flex items-center gap-2 text-[13px] tracking-wide text-mid-brown" style="color:var(--color-mid-brown)">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-sienna"><path d="M3 18v-7a2 2 0 012-2h14a2 2 0 012 2v7M3 18h18M3 14h18M7 11V8a1 1 0 011-1h2a1 1 0 011 1v3"/></svg>
-              <span data-i18n="rooms.garden.feat1">Queen bed</span>
-            </span>
-            <span class="flex items-center gap-2 text-[13px] tracking-wide" style="color:var(--color-mid-brown)">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-sienna"><path d="M21 3c-4 0-9 1-12 4-3 3-4 7-4 11 4 0 8-1 11-4 3-3 5-7 5-11z"/></svg>
-              <span data-i18n="rooms.garden.feat2">Garden view</span>
-            </span>
-            <span class="flex items-center gap-2 text-[13px] tracking-wide" style="color:var(--color-mid-brown)">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-sienna"><path d="M5 12.5a10 10 0 0114 0M8 15.5a6 6 0 018 0M12 19h.01"/></svg>
-              <span data-i18n="rooms.garden.feat3">Wifi</span>
-            </span>
-          </div>
-          <a href="#contact" class="btn-secondary mt-7 self-start" data-i18n="rooms.enquire">Enquire</a>
+      <div class="hero__beat">
+        <div class="hero__plate" aria-hidden="true"></div>
+        <div class="hero__beat-text" data-sc-cue="0.66 0.94 0.1 0.1">
+          <span class="hour" data-i18n="beat.hour">Karlovasi, morning</span>
+          <p data-i18n="beat.line">The garden first, then the sea.</p>
         </div>
       </div>
-
-      <!-- Room 2 -->
-      <div class="reveal flex flex-col md:flex-row gap-8 md:gap-12 py-10">
-        <div class="ph-tile w-full md:w-[45%] aspect-[3/2] bg-terracotta-light shrink-0">
-          <img src="https://placehold.co/900x600/e8c4a8/e8c4a8?text=+" alt="" />
-        </div>
-        <div class="flex flex-col justify-center">
-          <h3 class="font-heading text-brown text-[26px] font-normal" data-i18n="rooms.gulf.name">Erato</h3>
-          <p class="mt-3 text-[15px] leading-[1.8] text-sienna max-w-md" data-i18n="rooms.gulf.desc">
-            Top-floor views across the rooftops to the Aegean beyond.
-          </p>
-          <div class="flex items-center gap-6 mt-5">
-            <span class="flex items-center gap-2 text-[13px] tracking-wide" style="color:var(--color-mid-brown)">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-sienna"><path d="M3 18v-7a2 2 0 012-2h14a2 2 0 012 2v7M3 18h18M3 14h18M7 11V8a1 1 0 011-1h2a1 1 0 011 1v3"/></svg>
-              <span data-i18n="rooms.gulf.feat1">Queen bed</span>
-            </span>
-            <span class="flex items-center gap-2 text-[13px] tracking-wide" style="color:var(--color-mid-brown)">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-sienna"><path d="M2 9c1.5 1.5 3 1.5 4.5 0s3-1.5 4.5 0 3 1.5 4.5 0 3-1.5 4.5 0M2 14c1.5 1.5 3 1.5 4.5 0s3-1.5 4.5 0 3 1.5 4.5 0 3-1.5 4.5 0"/></svg>
-              <span data-i18n="rooms.gulf.feat2">Sea view</span>
-            </span>
-            <span class="flex items-center gap-2 text-[13px] tracking-wide" style="color:var(--color-mid-brown)">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-sienna"><path d="M4 12h16v3a4 4 0 01-4 4H8a4 4 0 01-4-4v-3zM4 12V7a2 2 0 012-2h1M7 5v2"/></svg>
-              <span data-i18n="rooms.gulf.feat3">Soaking tub</span>
-            </span>
-          </div>
-          <a href="#contact" class="btn-secondary mt-7 self-start" data-i18n="rooms.enquire">Enquire</a>
-        </div>
-      </div>
-
-      <!-- Room 3 -->
-      <div class="reveal flex flex-col md:flex-row gap-8 md:gap-12 py-10">
-        <div class="ph-tile w-full md:w-[45%] aspect-[3/2] bg-stone shrink-0">
-          <img src="https://placehold.co/900x600/e8e0d0/e8e0d0?text=+" alt="" />
-        </div>
-        <div class="flex flex-col justify-center">
-          <h3 class="font-heading text-brown text-[26px] font-normal" data-i18n="rooms.olive.name">Kalypso</h3>
-          <p class="mt-3 text-[15px] leading-[1.8] text-sienna max-w-md" data-i18n="rooms.olive.desc">
-            A smaller, sunlit room beneath the old roofline, facing the olive grove.
-          </p>
-          <div class="flex items-center gap-6 mt-5">
-            <span class="flex items-center gap-2 text-[13px] tracking-wide" style="color:var(--color-mid-brown)">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-sienna"><path d="M3 18v-7a2 2 0 012-2h14a2 2 0 012 2v7M3 18h18M3 14h18M7 11V8a1 1 0 011-1h2a1 1 0 011 1v3"/></svg>
-              <span data-i18n="rooms.olive.feat1">Queen bed</span>
-            </span>
-            <span class="flex items-center gap-2 text-[13px] tracking-wide" style="color:var(--color-mid-brown)">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-sienna"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M4.2 4.2l2 2M17.8 17.8l2 2M2 12h3M19 12h3M4.2 19.8l2-2M17.8 6.2l2-2"/></svg>
-              <span data-i18n="rooms.olive.feat2">Private balcony</span>
-            </span>
-            <span class="flex items-center gap-2 text-[13px] tracking-wide" style="color:var(--color-mid-brown)">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-sienna"><path d="M5 12.5a10 10 0 0114 0M8 15.5a6 6 0 018 0M12 19h.01"/></svg>
-              <span data-i18n="rooms.olive.feat3">Wifi</span>
-            </span>
-          </div>
-          <a href="#contact" class="btn-secondary mt-7 self-start" data-i18n="rooms.enquire">Enquire</a>
-        </div>
-      </div>
-
-      <!-- Room 4 — TODO: replace placeholder with final Nafsika suite photo -->
-      <div class="reveal flex flex-col md:flex-row gap-8 md:gap-12 py-10 last:pb-0">
-        <div class="ph-tile w-full md:w-[45%] aspect-[3/2] bg-terracotta-light shrink-0">
-          <img src="https://placehold.co/900x600/e8c4a8/e8c4a8?text=+" alt="" />
-        </div>
-        <div class="flex flex-col justify-center">
-          <h3 class="font-heading text-brown text-[26px] font-normal" data-i18n="rooms.nafsika.name">Nafsika</h3>
-          <p class="mt-3 text-[15px] leading-[1.8] text-sienna max-w-md" data-i18n="rooms.nafsika.desc">
-            A sun-drenched room on the garden level, with whitewashed walls and direct access to the courtyard.
-          </p>
-          <div class="flex items-center gap-6 mt-5">
-            <span class="flex items-center gap-2 text-[13px] tracking-wide" style="color:var(--color-mid-brown)">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-sienna"><path d="M3 18v-7a2 2 0 012-2h14a2 2 0 012 2v7M3 18h18M3 14h18M7 11V8a1 1 0 011-1h2a1 1 0 011 1v3"/></svg>
-              <span data-i18n="rooms.nafsika.feat1">Queen bed</span>
-            </span>
-            <span class="flex items-center gap-2 text-[13px] tracking-wide" style="color:var(--color-mid-brown)">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-sienna"><path d="M21 3c-4 0-9 1-12 4-3 3-4 7-4 11 4 0 8-1 11-4 3-3 5-7 5-11z"/></svg>
-              <span data-i18n="rooms.nafsika.feat2">Garden view</span>
-            </span>
-            <span class="flex items-center gap-2 text-[13px] tracking-wide" style="color:var(--color-mid-brown)">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-sienna"><path d="M5 12.5a10 10 0 0114 0M8 15.5a6 6 0 018 0M12 19h.01"/></svg>
-              <span data-i18n="rooms.nafsika.feat3">Wifi</span>
-            </span>
-          </div>
-          <a href="#contact" class="btn-secondary mt-7 self-start" data-i18n="rooms.enquire">Enquire</a>
-        </div>
-      </div>
-
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- GALLERY -->
-<section id="gallery" class="px-6 py-[var(--sp-xl)] bg-cream">
-  <div class="max-w-[1280px] mx-auto">
-    <div class="max-w-[760px] reveal">
-      <p class="eyebrow" data-i18n="gallery.eyebrow">Gallery</p>
-      <h2 class="font-heading text-brown text-[36px] md:text-[44px] font-light mt-3" data-i18n="gallery.heading">A Glimpse Inside</h2>
-      <p class="mt-5 text-[16px] leading-[1.8] text-sienna" data-i18n="gallery.intro">
-        Architecture, gardens, and the sea beyond — as the house presents them, without filters or staging.
-      </p>
-    </div>
-
-    <div class="mt-12 grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
-
-      <div class="reveal ph-tile aspect-[4/3] bg-stone group">
-        <img src="https://placehold.co/800x600/e8e0d0/e8e0d0?text=+" alt="" class="transition-transform duration-700 group-hover:scale-105" />
-        <div class="absolute inset-0 bg-gradient-to-t from-brown/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-        <span class="absolute bottom-3 left-3 text-bg text-[12px] tracking-wide opacity-0 group-hover:opacity-100 transition-opacity duration-300" data-i18n="gallery.cap1">Facade, Morning Light</span>
+  <!-- 08:00 · THE HALL. Welcome. A wipe is a door opening. -->
+  <section id="hall" data-room-key="room.hall" class="hall" data-hour="08:00" data-sc-act="flow" data-sc-drift="#F8F4EC">
+    <div class="sc-wrap hall__grid">
+      <div class="hall__media">
+        <figure data-sc-reveal="right" data-sc-reveal-at="0.05 0.42">
+          <img class="hall__main" src="assets/hall.jpg" width="1672" height="941"
+               data-i18n-attr="alt:hall.alt" alt="Entrance hall with a black and white marble floor, a curved oak staircase with an iron rail, brass wall lights and sheer curtains in morning sun.">
+        </figure>
+        <figure class="hall__inset" data-sc-parallax="-0.9">
+          <img src="assets/hall-bench.jpg" width="1672" height="941"
+               data-i18n-attr="alt:bench.alt" alt="A carved bench with red velvet seats and an old wooden coat stand beside a panelled door.">
+        </figure>
       </div>
-      <div class="reveal ph-tile aspect-[4/3] bg-terracotta-light group">
-        <img src="https://placehold.co/800x600/e8c4a8/e8c4a8?text=+" alt="" class="transition-transform duration-700 group-hover:scale-105" />
-        <div class="absolute inset-0 bg-gradient-to-t from-brown/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-        <span class="absolute bottom-3 left-3 text-bg text-[12px] tracking-wide opacity-0 group-hover:opacity-100 transition-opacity duration-300" data-i18n="gallery.cap2">Garden Terrace</span>
-      </div>
-      <div class="reveal ph-tile aspect-[4/3] bg-stone group">
-        <img src="https://placehold.co/800x600/e8e0d0/e8e0d0?text=+" alt="" class="transition-transform duration-700 group-hover:scale-105" />
-        <div class="absolute inset-0 bg-gradient-to-t from-brown/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-        <span class="absolute bottom-3 left-3 text-bg text-[12px] tracking-wide opacity-0 group-hover:opacity-100 transition-opacity duration-300" data-i18n="gallery.cap3">Sea View, Veranda</span>
-      </div>
-      <div class="reveal ph-tile aspect-[4/3] bg-terracotta-light group">
-        <img src="https://placehold.co/800x600/e8c4a8/e8c4a8?text=+" alt="" class="transition-transform duration-700 group-hover:scale-105" />
-        <div class="absolute inset-0 bg-gradient-to-t from-brown/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-        <span class="absolute bottom-3 left-3 text-bg text-[12px] tracking-wide opacity-0 group-hover:opacity-100 transition-opacity duration-300" data-i18n="gallery.cap4">Entrance Hall</span>
-      </div>
-      <div class="reveal ph-tile aspect-[4/3] bg-stone group">
-        <img src="https://placehold.co/800x600/e8e0d0/e8e0d0?text=+" alt="" class="transition-transform duration-700 group-hover:scale-105" />
-        <div class="absolute inset-0 bg-gradient-to-t from-brown/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-        <span class="absolute bottom-3 left-3 text-bg text-[12px] tracking-wide opacity-0 group-hover:opacity-100 transition-opacity duration-300" data-i18n="gallery.cap5">Breakfast on the Steps</span>
-      </div>
-      <div class="reveal ph-tile aspect-[4/3] bg-terracotta-light group">
-        <img src="https://placehold.co/800x600/e8c4a8/e8c4a8?text=+" alt="" class="transition-transform duration-700 group-hover:scale-105" />
-        <div class="absolute inset-0 bg-gradient-to-t from-brown/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-        <span class="absolute bottom-3 left-3 text-bg text-[12px] tracking-wide opacity-0 group-hover:opacity-100 transition-opacity duration-300" data-i18n="gallery.cap6">Evening, West Wing</span>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ABOUT / FAMILY STORY -->
-<section id="about" class="px-6 py-[var(--sp-xl)]">
-  <div class="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
-
-    <div class="reveal ph-tile aspect-[2/3] bg-stone border border-gold/30 max-w-[460px]">
-      <img src="https://placehold.co/700x1050/e8e0d0/e8e0d0?text=+" alt="" />
-      <div class="ph-icon text-brown/60">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-12 h-12"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3 2.5-5 6-5s6 2 6 5"/><circle cx="17" cy="9" r="2.5"/><path d="M15.5 14c2.7.3 4.5 2 4.5 5.5"/></svg>
+      <div class="hall__text sc-stack" data-sc-in data-sc-stagger="70">
+        <span class="hour" data-i18n="hall.hour">08:00 · The hall</span>
+        <h2 class="sc-display" data-i18n="hall.h2">Settle in.</h2>
+        <p class="sc-body" data-i18n="hall.p1">There is no rush here. The front door opens onto marble laid in black and white, an oak stair that curves up to the rooms, and morning light moving slowly across lime plaster.</p>
+        <p class="sc-body" data-i18n="hall.p2">The house is being restored room by room by the family who keep it, so that it feels like a home you have been invited into rather than a hotel you have checked into.</p>
+        <p class="credit" data-i18n="hall.credit">Entrance hall. Interior concept by Theasis Architects.</p>
       </div>
     </div>
+  </section>
 
-    <div class="reveal">
-      <p class="eyebrow" data-i18n="about.eyebrow">Our Story</p>
-      <h2 class="font-heading text-brown text-[36px] md:text-[44px] font-light mt-3" data-i18n="about.heading">Generations of Care</h2>
-      <p class="mt-6 text-[16px] leading-[1.8] text-sienna" data-i18n="about.body1">
-        Casa Efterpi has belonged to our family since the house was first built — and we have never thought
-        of ourselves as anything other than its caretakers. Every cornice, shutter, and stone step has been
-        maintained, not modernised, by the people who grew up beneath this roof.
-      </p>
-      <p class="mt-5 text-[16px] leading-[1.8] text-sienna" data-i18n="about.body2">
-        We open our home to a small number of guests at a time, because that is the only way we know how to
-        do this well. There is no front desk, no uniform, no script — only a family who happens to also
-        welcome travellers, the way Samos has always welcomed them.
-      </p>
-      <p class="mt-7 font-heading italic text-brown text-[19px]" data-i18n="about.attribution">— The family behind Casa Efterpi</p>
-    </div>
-
-  </div>
-</section>
-
-<!-- TESTIMONIALS -->
-<section id="testimonials" class="px-6 py-[var(--sp-xl)] overflow-hidden">
-  <div class="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 lg:gap-24 items-center">
-
-    <!-- Left: heading -->
-    <div class="reveal">
-      <p class="eyebrow" data-i18n="testimonials.eyebrow">Guest Stories</p>
-      <h2 class="font-heading text-brown text-[34px] md:text-[42px] font-normal mt-3" data-i18n="testimonials.heading">What Guests Remember</h2>
-      <p class="mt-6 text-[16px] leading-[1.8] text-sienna max-w-md" data-i18n="testimonials.body">
-        We don't ask guests to leave reviews — but some write to us anyway. The house is currently being
-        restored, and their stories will return here once we reopen our doors.
-      </p>
-    </div>
-
-    <!-- Right: stacked testimonial cards -->
-    <div class="reveal relative min-h-[380px] md:min-h-[360px]">
-      <div id="testimonial-track" class="relative h-full">
-
-        <article class="testimonial-card absolute inset-0 transition-all duration-500 ease-in-out overflow-hidden" data-index="0" style="opacity:1; transform:translateX(0) scale(1); z-index:10;" aria-hidden="false">
-          <div class="bg-bg border border-gold/20 shadow-soft p-8 md:p-10 h-full flex flex-col items-center justify-center text-center overflow-hidden">
-            <svg viewBox="0 0 24 24" fill="currentColor" class="w-7 h-7 text-terracotta/15 mb-5 shrink-0"><path d="M9 7C5.7 7 3 9.7 3 13s2.7 6 6 6c.6 0 1-.4 1-1s-.4-1-1-1c-2.2 0-4-1.8-4-4 0-.4 0-.7.1-1H6c1.7 0 3-1.3 3-3V8c0-.6-.4-1-1-1H9zm10 0c-3.3 0-6 2.7-6 6s2.7 6 6 6c.6 0 1-.4 1-1s-.4-1-1-1c-2.2 0-4-1.8-4-4 0-.4 0-.7.1-1H16c1.7 0 3-1.3 3-3V8c0-.6-.4-1-1-1h-1z"/></svg>
-            <p class="font-heading italic text-brown text-[18px] md:text-[20px] leading-[1.6] max-w-[300px]" data-i18n="testimonials.placeholder">Guest stories are on their way. We're restoring Casa Efterpi with care, and look forward to sharing them again soon.</p>
-          </div>
+  <!-- 11:00 · THE SUITES. Desire. Lateral travel reads as choice. -->
+  <section id="suites" data-room-key="room.suites" class="suites" data-hour="11:00" data-sc-act="pan" data-sc-span="3.4" data-sc-drift="#F6F1E8">
+    <div data-sc-stage>
+      <div class="rail" data-sc-pan="0.04">
+        <div class="rail__lead sc-stack">
+          <span class="hour" data-i18n="suites.hour">11:00 · The suites</span>
+          <h2 class="sc-display" data-i18n="suites.h2">Four suites</h2>
+          <p class="sc-body" data-i18n="suites.intro">Each one is named for a muse or a heroine of the old stories, and each has its own bathroom in stone, brass and dark oak.</p>
+        </div>
+        <article class="suite" style="--i:0">
+          <div class="suite__img"><img src="assets/suite-efterpi.jpg" width="1672" height="941" data-i18n-attr="alt:efterpi.alt" alt="A bedroom with an iron bed, linen bedding, panelled walls, brass sconces and a tall window with sheer curtains."></div>
+          <h3 data-i18n="efterpi.name">Efterpi</h3>
+          <p class="who" data-i18n="efterpi.who">The muse of music</p>
+          <dl><dt data-i18n="lbl.floor">Floor</dt><dd data-i18n="lbl.ground">Ground</dd><dt data-i18n="lbl.sleeps">Sleeps</dt><dd data-i18n="lbl.four">Four</dd></dl>
+          <p class="credit" data-i18n="lbl.render">Concept render</p>
         </article>
-
-      </div>
-
-      <!-- Decorative elements -->
-      <div class="hidden md:block absolute -bottom-6 -left-6 h-24 w-24 bg-terracotta/5 -z-10"></div>
-      <div class="hidden md:block absolute -top-6 -right-6 h-24 w-24 bg-terracotta/5 -z-10"></div>
-    </div>
-
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact" class="px-6 py-[var(--sp-xl)] bg-cream">
-  <div class="max-w-[1280px] mx-auto">
-    <div class="max-w-[760px] reveal">
-      <p class="eyebrow" data-i18n="contact.eyebrow">Visit</p>
-      <h2 class="font-heading text-brown text-[36px] md:text-[44px] font-light mt-3" data-i18n="contact.heading">Begin Your Stay</h2>
-      <p class="mt-5 text-[16px] leading-[1.8] text-sienna" data-i18n="contact.intro">
-        Write to us directly, or use the form below. We answer every message ourselves.
-      </p>
-    </div>
-
-    <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">
-
-      <div class="reveal">
-        <ul class="space-y-5">
-          <li class="flex items-start gap-4">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mt-0.5 text-sienna shrink-0"><path d="M12 21s7-6.5 7-12a7 7 0 10-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
-            <span class="text-[15px] text-mid-brown" style="color:var(--color-mid-brown)"><span data-i18n="contact.address1">Anonimos 9</span><br><span data-i18n="contact.address2">Karlovasi, Samos 83200</span></span>
-          </li>
-          <li class="flex items-start gap-4">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mt-0.5 text-sienna shrink-0"><rect x="3" y="5" width="18" height="14"/><path d="M3 6l9 7 9-7"/></svg>
-            <span class="text-[15px] text-mid-brown" style="color:var(--color-mid-brown)">info@casa-efterpi.gr</span>
-          </li>
-          <li class="flex items-start gap-4">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mt-0.5 text-sienna shrink-0"><path d="M5 4h3l2 5-2 1.5a11 11 0 005.5 5.5L15 14l5 2v3a2 2 0 01-2 2C9.5 21 3 14.5 3 6a2 2 0 012-2z"/></svg>
-            <span class="text-[15px] text-mid-brown" style="color:var(--color-mid-brown)">+30 698 777 2651</span>
-          </li>
-        </ul>
-
-        <div class="ph-tile aspect-[4/3] bg-stone mt-8 border border-gold/30">
-          <img src="https://placehold.co/800x600/e8e0d0/e8e0d0?text=+" alt="" />
-          <div class="ph-icon text-brown/60">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-10 h-10"><path d="M12 21s7-6.5 7-12a7 7 0 10-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
-          </div>
+        <article class="suite" style="--i:1">
+          <div class="suite__img"><img src="assets/suite-erato.jpg" width="1672" height="941" data-i18n-attr="alt:erato.alt" alt="A bedroom with an upholstered bed, an olive throw, a large abstract print in deep red and a dark oak wardrobe."></div>
+          <h3 data-i18n="erato.name">Erato</h3>
+          <p class="who" data-i18n="erato.who">The muse of love poetry</p>
+          <dl><dt data-i18n="lbl.floor">Floor</dt><dd data-i18n="lbl.first">First</dd><dt data-i18n="lbl.sleeps">Sleeps</dt><dd data-i18n="lbl.two">Two</dd></dl>
+          <p class="credit" data-i18n="lbl.render">Concept render</p>
+        </article>
+        <article class="suite" style="--i:2">
+          <div class="suite__img"><img src="assets/suite-kalypso.jpg" width="1672" height="941" data-i18n-attr="alt:kalypso.alt" alt="A bright bedroom with two tall windows, sheer curtains, a writing desk with a cane chair and a navy abstract print."></div>
+          <h3 data-i18n="kalypso.name">Kalypso</h3>
+          <p class="who" data-i18n="kalypso.who">The nymph of the Odyssey</p>
+          <dl><dt data-i18n="lbl.floor">Floor</dt><dd data-i18n="lbl.first">First</dd><dt data-i18n="lbl.sleeps">Sleeps</dt><dd data-i18n="lbl.two">Two</dd></dl>
+          <p class="credit" data-i18n="lbl.render">Concept render</p>
+        </article>
+        <article class="suite" style="--i:3">
+          <div class="suite__img"><img src="assets/suite-nafsika.jpg" width="1672" height="941" data-i18n-attr="alt:nafsika.alt" alt="A bedroom with a brass chandelier, panelled walls, an upholstered bed and a terracotta print beside dried pampas grass."></div>
+          <h3 data-i18n="nafsika.name">Nafsika</h3>
+          <p class="who" data-i18n="nafsika.who">The princess who found Odysseus</p>
+          <dl><dt data-i18n="lbl.floor">Floor</dt><dd data-i18n="lbl.first">First</dd><dt data-i18n="lbl.sleeps">Sleeps</dt><dd data-i18n="lbl.four">Four</dd></dl>
+          <p class="credit" data-i18n="lbl.render">Concept render</p>
+        </article>
+        <div class="rail__note">
+          <img src="assets/bath.jpg" width="1122" height="1402" data-i18n-attr="alt:bath.alt" alt="A bathroom vanity in dark oak with a stone basin, a carved gilt mirror and brass sconces beside a sunlit window.">
+          <p data-i18n="note.line">Stone, brass and old oak, in every bathroom.</p>
+          <p class="credit" data-i18n="note.credit">Concept render. Layouts may change before opening.</p>
         </div>
       </div>
+    </div>
+  </section>
 
-      <form id="contact-form" class="reveal space-y-6">
-        <div>
-          <label class="field-label" for="name" data-i18n="contact.label_name">Name</label>
-          <input class="field" type="text" id="name" name="name" placeholder="Your full name" data-i18n-attr="placeholder:contact.ph_name" required />
+  <!-- 13:00 · THE GARDEN. Ease. The one clip on the page. -->
+  <section id="garden" data-room-key="room.garden" class="garden" data-hour="13:00"
+           data-sc-act="scrub" data-sc-span="2.4" data-sc-dwell="0.32" data-sc-drift="#F4EEE3">
+    <div data-sc-stage>
+      <div class="garden__copy sc-stack" data-sc-cue="0 0.9 0 0.14">
+        <span class="hour" data-i18n="garden.hour">13:00 · The garden</span>
+        <h2 class="sc-display" data-i18n="garden.h2">The garden comes first.</h2>
+        <p class="sc-body" data-i18n="garden.p">The courtyard sits just inside the front gate: a vine over the pergola, a lemon tree, bougainvillea on the wall and a cold glass of water. Nothing to do until the shade moves.</p>
+      </div>
+      <figure class="garden__frame">
+        <picture>
+          <source media="(max-width: 860px)" srcset="assets/garden-poster-m.jpg">
+          <img class="sc-stage__poster" src="assets/garden-poster.jpg" width="1920" height="1080" data-i18n-attr="alt:garden.alt" alt="A courtyard garden with a vine-covered pergola, a lemon tree, magenta bougainvillea, green shutters and a small marble table with two chairs.">
+        </picture>
+        <video data-sc-scrub data-sc-src="assets/garden.mp4" data-sc-src-mobile="assets/garden-m.mp4" muted playsinline aria-hidden="true"></video>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 18:00 · THE TABLE. Intimacy. Reading, close, unhurried. -->
+  <section id="table" data-room-key="room.table" class="table" data-hour="18:00" data-sc-act="flow" data-sc-drift="#F2E8D8">
+    <div class="sc-wrap">
+      <div data-sc-in>
+        <span class="hour" data-i18n="table.hour">18:00 · The table</span>
+        <blockquote class="table__quote" style="margin-inline:0" data-i18n="table.quote">We are not a hotel company. We are a family restoring a house we love, and opening it to a few guests at a time.</blockquote>
+        <p class="table__by" data-i18n="table.by">The family behind Casa Efterpi</p>
+      </div>
+      <div class="table__grid">
+        <figure data-sc-parallax="-0.8">
+          <img class="table__photo" src="assets/table.webp" width="1400" height="1866" data-i18n-attr="alt:table.alt" alt="A long wooden table set under a vine in low evening sun, with linen, ceramic plates, bread, tomatoes, olives and a carafe of golden wine.">
+          <figcaption class="credit" data-i18n="table.cap">Illustration of the courtyard at evening.</figcaption>
+        </figure>
+        <div class="table__side sc-stack" data-sc-in data-sc-stagger="70">
+          <p class="sc-body" data-i18n="table.p1">There is no front desk and no script. The people who look after the house are the people who welcome you into it.</p>
+          <p class="sc-body" data-i18n="table.p2">On the ground floor, the kitchen and the sitting room are shared, the way they would be in any family home. Evenings tend to end around the table.</p>
+          <figure class="table__kitchen">
+            <img src="assets/kitchen.jpg" width="1672" height="941" data-i18n-attr="alt:kitchen.alt" alt="The shared kitchen with oak cabinets, a glass-fronted dresser, a marble counter and sun through a sheer curtain.">
+            <figcaption class="credit" data-i18n="kitchen.cap">Shared kitchen. Interior concept by Theasis Architects.</figcaption>
+          </figure>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 22:00 · GOOD NIGHT. The shutters close again. -->
+  <section id="night" data-room-key="room.night" class="night" data-hour="22:00" data-ground="night"
+           data-sc-act="pin" data-sc-span="1.7">
+    <div data-sc-stage class="rig-stage" data-rig="close">
+      <div class="rig__view" style="background-image:url(assets/view-night.webp)" aria-hidden="true"></div>
+      <div class="rig" aria-hidden="true">
+        <div class="rig__leaves"><div class="leaf leaf--l"></div><div class="leaf leaf--r"></div></div>
+        <picture class="rig__frame">
+          <source media="(max-aspect-ratio: 9/10)" srcset="assets/window-bare-p-night.webp">
+          <img src="assets/window-bare-night.webp" width="2400" height="1350" alt="" loading="lazy">
+        </picture>
+      </div>
+      <div class="night__copy" data-sc-cue="0.12 1 0.18 0.16">
+        <span class="hour" data-i18n="night.hour">22:00 · Good night</span>
+        <h2 class="sc-display" data-i18n="night.h2">Good night.</h2>
+        <p class="sc-body" data-i18n="night.p">When you are ready, write to us. We answer every message ourselves.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- The letter. The last screen, and it holds. -->
+  <section id="book" class="letter" data-ground="night" aria-labelledby="book-h">
+    <div class="sc-wrap">
+      <div class="letter__grid">
         <div>
-          <label class="field-label" for="email" data-i18n="contact.label_email">Email</label>
-          <input class="field" type="email" id="email" name="email" placeholder="you@example.com" required />
+          <span class="hour" data-i18n="letter.hour">Write to the family</span>
+          <h2 class="sc-display" id="book-h" data-i18n="letter.h2">Begin your stay</h2>
+          <p class="sc-body" data-i18n="letter.p">Tell us when you would like to come and who is coming with you. Casa Efterpi opens in 2027, and we are already happy to hear from you.</p>
+          <address data-i18n-html="letter.address">
+            Anonimos 9, Karlovasi<br>
+            Samos 83200, Greece<br>
+            <a href="mailto:info@casa-efterpi.gr">info@casa-efterpi.gr</a>
+          </address>
         </div>
-        <div class="grid grid-cols-2 gap-6">
+        <form id="enquiry" action="mailto:info@casa-efterpi.gr" method="post" enctype="text/plain" novalidate>
           <div>
-            <label class="field-label" for="arrival" data-i18n="contact.label_arrival">Arrival</label>
-            <input class="field" type="date" id="arrival" name="arrival" />
+            <label for="name" data-i18n="f.name">Name</label>
+            <input class="field" type="text" id="name" name="name" placeholder="Your full name" data-i18n-attr="placeholder:f.ph_name" autocomplete="name" required>
           </div>
           <div>
-            <label class="field-label" for="departure" data-i18n="contact.label_departure">Departure</label>
-            <input class="field" type="date" id="departure" name="departure" />
+            <label for="email" data-i18n="f.email">Email</label>
+            <input class="field" type="email" id="email" name="email" placeholder="you@example.com" autocomplete="email" required>
+          </div>
+          <div class="row2">
+            <div>
+              <label for="arrival" data-i18n="f.arrival">Arrival</label>
+              <input class="field" type="date" id="arrival" name="arrival">
+            </div>
+            <div>
+              <label for="departure" data-i18n="f.departure">Departure</label>
+              <input class="field" type="date" id="departure" name="departure">
+            </div>
+          </div>
+          <div>
+            <label for="message" data-i18n="f.message">Message</label>
+            <textarea class="field" id="message" name="message" rows="4" placeholder="Tell us about the stay you have in mind" data-i18n-attr="placeholder:f.ph_message"></textarea>
+          </div>
+          <button class="send" type="submit" data-i18n="f.send">Send Enquiry</button>
+          <p class="status" id="status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+
+      <footer class="colophon">
+        <a class="mark" href="#first-light" aria-label="Casa Efterpi, back to the top" data-i18n-attr="aria-label:mark.aria"><span>C</span><span>E</span></a>
+        <p data-i18n="colophon">Interior images are concept renders by Theasis Architects (Nayia Giakouvi, Thaleia Stergiou) and will change as the restoration finishes. The window, garden, view and table images are AI-generated illustrations, not photographs of the house. © 2026 Casa Efterpi, Samos.</p>
+        <div class="legal">
+          <button type="button" class="legal__toggle" aria-expanded="false" aria-controls="legal-panel" data-i18n="legal.toggle">Legal Info</button>
+          <div class="legal__panel" id="legal-panel" hidden>
+            <!-- Registry details as published on the current site. Greek in both
+                 languages, as filed. -->
+            <dl lang="el">
+              <div><dt>Επωνυμία</dt><dd>Τουριστικές κατοικίες οικογένειας Κεντούρη Μονοπρόσωπη ΙΚΕ</dd></div>
+              <div><dt>Διακριτικός Τίτλος</dt><dd>Casa Efterpi</dd></div>
+              <div><dt>Αριθμός ΓΕΜΗ</dt><dd>193851851000 (έναρξη 18/05/2026)</dd></div>
+              <div><dt>ΑΦΜ</dt><dd>803287721 · ΔΟΥ Σάμου</dd></div>
+              <div><dt>ΚΑΔ</dt><dd>55200103</dd></div>
+              <div><dt>Έδρα</dt><dd>Ανώνυμος 9, 83200 Καρλόβασι, Σάμος</dd></div>
+              <div><dt>Μοναδικός Εταίρος</dt><dd>Γεώργιος Α. Κεντούρης</dd></div>
+              <div><dt>Διαχειριστές</dt><dd>Γεώργιος Α. Κεντούρης &amp; Άννα Ν. Μουρατίδου</dd></div>
+              <div><dt>Εταιρικό Κεφάλαιο</dt><dd>140.000 €</dd></div>
+            </dl>
           </div>
         </div>
-        <div>
-          <label class="field-label" for="message" data-i18n="contact.label_message">Message</label>
-          <textarea class="field" id="message" name="message" rows="4" placeholder="Tell us about your stay" data-i18n-attr="placeholder:contact.ph_message"></textarea>
-        </div>
-        <button type="submit" class="btn-primary w-full sm:w-auto" data-i18n="contact.submit">Send Enquiry</button>
-      </form>
-      <p id="form-success" class="hidden text-[15px] mt-2 reveal is-visible" style="color:var(--color-green)" data-i18n="contact.success">Thank you — your message has been received. We will reply personally, soon.</p>
-
+      </footer>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- FOOTER -->
-<footer id="site-footer" class="bg-brown text-bg px-6 pt-[var(--sp-lg)] pb-8">
-  <div class="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-10">
+</main>
 
-    <div>
-      <img src="assets/casa-efterpi-monogramLogo.svg" alt="Casa Efterpi" class="brand-mark h-12 w-12 object-contain" />
-      <p class="mt-4 text-[13px] tracking-[.2em] uppercase text-bg/60" data-i18n="footer.location">Samos · Greece</p>
-    </div>
-
-    <div>
-      <p class="text-[12px] tracking-[.2em] uppercase text-bg/50 mb-4" data-i18n="footer.find_us">Find Us</p>
-      <ul class="space-y-3 text-[14px] text-bg/85">
-        <li data-i18n="footer.address">Anonimos 9, Karlovasi, Samos 83200</li>
-        <li>info@casa-efterpi.gr</li>
-        <li>+30 698 777 2651</li>
-      </ul>
-    </div>
-
-    <div>
-      <p class="text-[12px] tracking-[.2em] uppercase text-bg/50 mb-4" data-i18n="footer.discover">Discover</p>
-      <ul class="space-y-3 text-[14px]">
-        <li><a href="#hero" class="hover:text-terracotta-light transition-colors" data-i18n="footer.home">Home</a></li>
-        <li><a href="#rooms" class="hover:text-terracotta-light transition-colors" data-i18n="footer.rooms">Rooms</a></li>
-        <li><a href="#gallery" class="hover:text-terracotta-light transition-colors" data-i18n="footer.gallery">Gallery</a></li>
-        <li><a href="#about" class="hover:text-terracotta-light transition-colors" data-i18n="footer.about">About</a></li>
-        <li><a href="#contact" class="hover:text-terracotta-light transition-colors" data-i18n="footer.contact">Contact</a></li>
-      </ul>
-    </div>
-
-    <div>
-      <p class="text-[12px] tracking-[.2em] uppercase text-bg/50 mb-4" data-i18n="footer.stay_touch">Stay in Touch</p>
-      <form id="newsletter-form">
-        <label class="sr-only" for="newsletter-email" data-i18n="footer.newsletter_label">Email Address</label>
-        <input class="field-dark" type="email" id="newsletter-email" name="email" placeholder="your@email.com" required />
-        <button type="submit" class="btn-secondary !border-bg/40 !text-bg w-full mt-5 hover:!bg-bg/10" data-i18n="footer.subscribe">Subscribe</button>
-      </form>
-      <p id="newsletter-success" class="hidden text-[13px] mt-3 text-terracotta-light" data-i18n="footer.newsletter_success">Thank you — you're on the list.</p>
-    </div>
-
-  </div>
-
-  <div class="max-w-[1280px] mx-auto border-t border-bg/15 mt-12 pt-6 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-    <div class="flex items-center gap-6">
-      <a href="#" aria-label="Instagram" class="text-bg/70 hover:text-bg transition-colors">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-5 h-5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
-      </a>
-      <a href="#about" class="text-[13px] text-bg/70 hover:text-bg transition-colors" data-i18n="footer.about_us">About Us</a>
-      <a href="#" class="text-[13px] text-bg/70 hover:text-bg transition-colors" data-i18n="footer.privacy">Privacy Policy</a>
-      <a href="#" class="text-[13px] text-bg/70 hover:text-bg transition-colors" data-i18n="footer.cancellation">Cancellation Policy</a>
-    </div>
-    <p class="text-[13px] text-bg/50" data-i18n="footer.copyright">© 2026 Casa Efterpi. All rights reserved.</p>
-  </div>
-
-  <div class="max-w-[1280px] mx-auto mt-8 flex flex-col items-center text-center">
-    <button type="button" id="legal-info-toggle" class="legal-info-toggle" aria-expanded="false" aria-controls="legal-info-panel" data-i18n="footer.legal">Legal Info</button>
-    <div id="legal-info-panel" class="legal-info-panel">
-      <div class="legal-info-inner">
-        <dl class="legal-info-list">
-          <div class="legal-info-row"><dt>Επωνυμία</dt><dd>Τουριστικές κατοικίες οικογένειας Κεντούρη Μονοπρόσωπη ΙΚΕ</dd></div>
-          <div class="legal-info-row"><dt>Διακριτικός Τίτλος</dt><dd>Casa Efterpi</dd></div>
-          <div class="legal-info-row"><dt>Αριθμός ΓΕΜΗ</dt><dd>193851851000 (έναρξη 18/05/2026)</dd></div>
-          <div class="legal-info-row"><dt>ΑΦΜ</dt><dd>803287721 — ΔΟΥ Σάμου</dd></div>
-          <div class="legal-info-row"><dt>ΚΑΔ</dt><dd>55200103</dd></div>
-          <div class="legal-info-row"><dt>Έδρα</dt><dd>Ανώνυμος 9, 83200 Καρλόβασι, Σάμος</dd></div>
-          <div class="legal-info-row"><dt>Μοναδικός Εταίρος</dt><dd>Γεώργιος Α. Κεντούρης</dd></div>
-          <div class="legal-info-row"><dt>Διαχειριστές</dt><dd>Γεώργιος Α. Κεντούρης &amp; Άννα Ν. Μουρατίδου</dd></div>
-          <div class="legal-info-row"><dt>Εταιρικό Κεφάλαιο</dt><dd>140.000 €</dd></div>
-        </dl>
-      </div>
-    </div>
-  </div>
-</footer>
-
+<script src="scrollcraft.js"></script>
+<script>ScrollCraft.mount(document.body);</script>
 <script>
-  // Header transparent -> solid on scroll
-  var header = document.getElementById('site-header');
-  function updateHeader(){
-    if (window.scrollY > 40) {
-      header.classList.remove('is-transparent');
-      header.classList.add('is-solid');
+/* Page-local code. The engine is untouched; this reads --sc-p off the two
+   window acts and drives the shutters, the push through the window, the
+   light, the hour folio and the enquiry form. */
+(function () {
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var portraitMQ = matchMedia('(max-aspect-ratio: 9/10)');
+
+  /* opening rectangles measured off the frame images by src/planes.py */
+  var FRAMES = {
+    land: { ar: 2720 / 1530, open: [0.5430, 0.2176, 0.7529, 0.8706] },
+    port: { ar: 1530 / 2720, open: [0.3000, 0.2287, 0.7359, 0.6868] }
+  };
+
+  var clamp = function (v, a, b) { return Math.min(b, Math.max(a, v)); };
+  var seg = function (p, a, b) { return clamp((p - a) / (b - a), 0, 1); };
+  var ease = function (t) { return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; };
+
+  function Rig(stage) {
+    this.stage = stage;
+    this.act = stage.closest('[data-sc-act]');
+    this.mode = stage.getAttribute('data-rig');
+    this.rig = stage.querySelector('.rig');
+    this.view = stage.querySelector('.rig__view');
+    this.leaves = stage.querySelector('.rig__leaves');
+    this.L = stage.querySelector('.leaf--l');
+    this.R = stage.querySelector('.leaf--r');
+    this.light = stage.querySelector('.rig__light');
+    this.last = -1;
+    this.measure();
+  }
+  Rig.prototype.measure = function () {
+    var vw = this.stage.clientWidth, vh = this.stage.clientHeight;
+    var f = portraitMQ.matches ? FRAMES.port : FRAMES.land;
+    /* cover the stage at the frame's aspect ratio */
+    var w = Math.max(vw, vh * f.ar), h = w / f.ar;
+    var x = (vw - w) / 2, y = (vh - h) / 2;
+    var o = f.open;
+    this.g = {
+      vw: vw, vh: vh, w: w, h: h, x: x, y: y,
+      ox: o[0] * w, oy: o[1] * h, ow: (o[2] - o[0]) * w, oh: (o[3] - o[1]) * h
+    };
+    this.g.cx = this.g.ox + this.g.ow / 2;   /* opening centre, rig space */
+    this.g.cy = this.g.oy + this.g.oh / 2;
+    /* scale at which the opening covers the whole stage */
+    this.g.sEnd = Math.max(vw / this.g.ow, vh / this.g.oh) * 1.06;
+    var r = this.rig.style;
+    r.width = w + 'px'; r.height = h + 'px';
+    r.transformOrigin = this.g.cx + 'px ' + this.g.cy + 'px';
+    var l = this.leaves.style;
+    l.left = this.g.ox + 'px'; l.top = this.g.oy + 'px';
+    l.width = this.g.ow + 'px'; l.height = this.g.oh + 'px';
+    if (this.light) { this.light.style.setProperty('--lx', (o[0] + o[2]) * 50 + '%'); this.light.style.setProperty('--ly', (o[1] + o[3]) * 50 + '%'); }
+    this.last = -1;
+  };
+  Rig.prototype.frame = function () {
+    var p = parseFloat(this.act.style.getPropertyValue('--sc-p')) || 0;
+    if (reduce) p = this.mode === 'open' ? 0.5 : 0.8;   /* a still, complete composition */
+    if (Math.abs(p - this.last) < 0.0004) return;
+    this.last = p;
+    var g = this.g, open, push, fade;
+
+    if (this.mode === 'open') {
+      open = ease(seg(p, 0.10, 0.50));          /* shutters swing out */
+      push = reduce ? 0 : ease(seg(p, 0.40, 0.92));  /* step through the window */
+      fade = reduce ? 0 : seg(p, 0.70, 0.90);   /* the near wall passes the viewer */
     } else {
-      header.classList.remove('is-solid');
-      header.classList.add('is-transparent');
+      open = 1 - ease(seg(p, 0.08, 0.62));      /* shutters swing shut */
+      push = 0; fade = 0;
     }
+
+    var ang = open * 104;
+    this.L.style.transform = 'rotateY(' + ang + 'deg)';
+    this.R.style.transform = 'rotateY(' + (-ang) + 'deg)';
+    var shade = (Math.sin(ang * Math.PI / 180) * 0.55).toFixed(3);
+    this.L.style.setProperty('--shade', shade);
+    this.R.style.setProperty('--shade', shade);
+    var lo = (1 - seg(open, 0.82, 1)).toFixed(3);   /* edge-on leaves read as lines; let them go */
+    this.L.style.opacity = lo; this.R.style.opacity = lo;
+    if (this.light) this.light.style.opacity = (open * (1 - push) * 0.9).toFixed(3);
+
+    /* push: scale about the opening centre and bring that centre to the middle */
+    var s = 1 + (g.sEnd - 1) * push;
+    var tx = g.x + (g.vw / 2 - (g.x + g.cx)) * push;
+    var ty = g.y + (g.vh / 2 - (g.y + g.cy)) * push;
+    this.rig.style.transform = 'translate3d(' + tx.toFixed(1) + 'px,' + ty.toFixed(1) + 'px,0) scale(' + s.toFixed(4) + ')';
+    this.rig.style.opacity = (1 - fade).toFixed(3);
+
+    /* the view is far away: it moves a fraction of the wall's movement, and
+       starts centred on the opening so the best of it shows through */
+    var vx = ((g.x + g.cx) - g.vw / 2) * (1 - push) * 0.82;
+    var vy = ((g.y + g.cy) - g.vh / 2) * (1 - push) * 0.82;
+    var vs = 1.0 + 0.10 * push + (this.mode === 'open' ? 0.04 * (1 - open) : 0);
+    this.view.style.transform = 'translate3d(' + vx.toFixed(1) + 'px,' + vy.toFixed(1) + 'px,0) scale(' + vs.toFixed(4) + ')';
+  };
+
+  var rigs = [].map.call(document.querySelectorAll('[data-rig]'), function (s) { return new Rig(s); });
+  var visible = new Set(rigs);
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        var r = rigs.find(function (x) { return x.stage === e.target; });
+        if (e.isIntersecting) visible.add(r); else visible.delete(r);
+      });
+    }, { rootMargin: '25% 0px' });
+    rigs.forEach(function (r) { io.observe(r.stage); });
   }
-  updateHeader();
-  window.addEventListener('scroll', updateHeader, { passive: true });
+  function loop() { visible.forEach(function (r) { r.frame(); }); requestAnimationFrame(loop); }
+  requestAnimationFrame(loop);
+  var rz;
+  function remeasure() { clearTimeout(rz); rz = setTimeout(function () { rigs.forEach(function (r) { r.measure(); r.frame(); }); }, 80); }
+  addEventListener('resize', remeasure);
+  portraitMQ.addEventListener && portraitMQ.addEventListener('change', remeasure);
 
-  // Mobile menu toggle
-  var menuToggle = document.getElementById('menu-toggle');
-  var mobileMenu = document.getElementById('mobile-menu');
-  var iconOpen = document.getElementById('icon-open');
-  var iconClose = document.getElementById('icon-close');
-  menuToggle.addEventListener('click', function(){
-    var isHidden = mobileMenu.classList.contains('hidden');
-    mobileMenu.classList.toggle('hidden');
-    iconOpen.classList.toggle('hidden');
-    iconClose.classList.toggle('hidden');
-    menuToggle.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
-  });
-  mobileMenu.querySelectorAll('a').forEach(function(link){
-    link.addEventListener('click', function(){
-      mobileMenu.classList.add('hidden');
-      iconOpen.classList.remove('hidden');
-      iconClose.classList.add('hidden');
-      menuToggle.setAttribute('aria-expanded', 'false');
+  /* ---- languages -------------------------------------------------------
+     English lives in the markup and is read back from it, so it can never
+     drift from what the page shows. Greek is below. The choice is stored
+     under the same key the previous site used, so a returning visitor keeps
+     their language. Where the family's own Greek from the old site covered
+     the same line, it is reused. */
+  var EL = {
+    'meta.title': 'Casa Efterpi · Ένα νεοκλασικό σπίτι στη Σάμο',
+    'meta.desc': 'Η Casa Efterpi είναι ένα οικογενειακό νεοκλασικό σπίτι στο Καρλόβασι της Σάμου, με τέσσερις σουίτες, αυλή με κήπο και θέα στο Αιγαίο. Ανοίγει το 2027.',
+    'mark.aria': 'Casa Efterpi, επιστροφή στην αρχή',
+    'nav.aria': 'Οι ώρες της ημέρας',
+    'nav.hint': ', άνοιγμα του ευρετηρίου ωρών',
+    'lang.aria': 'Γλώσσα',
+    'room.first': 'Πρώτο φως', 'room.hall': 'Η είσοδος', 'room.suites': 'Οι σουίτες',
+    'room.garden': 'Ο κήπος', 'room.table': 'Το τραπέζι', 'room.night': 'Καληνύχτα',
+    'book': 'Κράτηση',
+    'hero.place': 'Καρλόβασι · Σάμος',
+    'hero.sub': 'Ένα νεοκλασικό σπίτι, τέσσερις σουίτες και μία οικογένεια. Ανοίγει το 2027.',
+    'beat.hour': 'Καρλόβασι, πρωί',
+    'beat.line': 'Πρώτα ο κήπος, μετά η θάλασσα.',
+    'hall.hour': '08:00 · Η είσοδος',
+    'hall.h2': 'Αφεθείτε.',
+    'hall.p1': 'Εδώ δεν βιάζεται κανείς. Η εξώπορτα ανοίγει σε ένα μαρμάρινο δάπεδο σε μαύρο και λευκό, μια δρύινη σκάλα που ανεβαίνει καμπυλωτά προς τα δωμάτια και το πρωινό φως που κινείται αργά πάνω στον ασβεστοσοβά.',
+    'hall.p2': 'Το σπίτι αναπαλαιώνεται δωμάτιο προς δωμάτιο από την οικογένεια που το φροντίζει, ώστε να νιώθετε ότι σας προσκάλεσαν σε ένα σπίτι και όχι ότι κάνατε check-in σε ένα ξενοδοχείο.',
+    'hall.credit': 'Η είσοδος. Πρόταση εσωτερικού χώρου από την Theasis Architects.',
+    'hall.alt': 'Χολ εισόδου με μαρμάρινο δάπεδο σε μαύρο και λευκό, καμπυλωτή δρύινη σκάλα με σιδερένιο κάγκελο, ορειχάλκινα φωτιστικά τοίχου και διάφανες κουρτίνες στον πρωινό ήλιο.',
+    'bench.alt': 'Σκαλιστός πάγκος με κόκκινα βελούδινα καθίσματα και ένας παλιός ξύλινος καλόγερος δίπλα σε ταμπλαδωτή πόρτα.',
+    'suites.hour': '11:00 · Οι σουίτες',
+    'suites.h2': 'Τέσσερις σουίτες',
+    'suites.intro': 'Η καθεμία παίρνει το όνομά της από μια Μούσα ή μια ηρωίδα των παλιών ιστοριών, και η καθεμία έχει το δικό της μπάνιο από πέτρα, ορείχαλκο και σκούρα δρυ.',
+    'efterpi.name': 'Ευτέρπη', 'efterpi.who': 'Η Μούσα της μουσικής',
+    'efterpi.alt': 'Υπνοδωμάτιο με σιδερένιο κρεβάτι, λινά σεντόνια, ταμπλαδωτούς τοίχους, ορειχάλκινες απλίκες και ψηλό παράθυρο με διάφανες κουρτίνες.',
+    'erato.name': 'Ερατώ', 'erato.who': 'Η Μούσα της ερωτικής ποίησης',
+    'erato.alt': 'Υπνοδωμάτιο με ταπετσαρισμένο κρεβάτι, λαδί ριχτάρι, μεγάλο αφηρημένο έργο σε βαθύ κόκκινο και ντουλάπα από σκούρα δρυ.',
+    'kalypso.name': 'Καλυψώ', 'kalypso.who': 'Η νύμφη της Οδύσσειας',
+    'kalypso.alt': 'Φωτεινό υπνοδωμάτιο με δύο ψηλά παράθυρα, διάφανες κουρτίνες, γραφείο με ψάθινη καρέκλα και ένα μπλε αφηρημένο έργο.',
+    'nafsika.name': 'Ναυσικά', 'nafsika.who': 'Η πριγκίπισσα που βρήκε τον Οδυσσέα',
+    'nafsika.alt': 'Υπνοδωμάτιο με ορειχάλκινο πολυέλαιο, ταμπλαδωτούς τοίχους, ταπετσαρισμένο κρεβάτι και ένα έργο σε χρώμα τερακότας δίπλα σε αποξηραμένα πάμπας.',
+    'lbl.floor': 'Όροφος', 'lbl.sleeps': 'Άτομα', 'lbl.ground': 'Ισόγειο', 'lbl.first': 'Πρώτος',
+    'lbl.four': 'Τέσσερα', 'lbl.two': 'Δύο', 'lbl.render': 'Πρόταση σχεδιασμού',
+    'bath.alt': 'Έπιπλο μπάνιου από σκούρα δρυ με πέτρινο νιπτήρα, σκαλιστό επιχρυσωμένο καθρέφτη και ορειχάλκινες απλίκες δίπλα σε ηλιόλουστο παράθυρο.',
+    'note.line': 'Πέτρα, ορείχαλκος και παλιά δρυς, σε κάθε μπάνιο.',
+    'note.credit': 'Πρόταση σχεδιασμού. Οι διατάξεις μπορεί να αλλάξουν πριν το άνοιγμα.',
+    'garden.hour': '13:00 · Ο κήπος',
+    'garden.h2': 'Πρώτα ο κήπος.',
+    'garden.p': 'Η αυλή βρίσκεται αμέσως μετά την αυλόπορτα: ένα κλήμα πάνω από την πέργκολα, μια λεμονιά, βουκαμβίλια στον τοίχο και ένα δροσερό ποτήρι νερό. Τίποτα να κάνετε μέχρι να μετακινηθεί η σκιά.',
+    'garden.alt': 'Αυλή με πέργκολα σκεπασμένη από κλήμα, λεμονιά, φούξια βουκαμβίλια, πράσινα παραθυρόφυλλα και ένα μικρό μαρμάρινο τραπέζι με δύο καρέκλες.',
+    'table.hour': '18:00 · Το τραπέζι',
+    'table.quote': 'Δεν είμαστε ξενοδοχειακή εταιρεία. Είμαστε μια οικογένεια που αναπαλαιώνει ένα σπίτι που αγαπά, και το ανοίγει σε λίγους επισκέπτες κάθε φορά.',
+    'table.by': 'Η οικογένεια πίσω από την Casa Efterpi',
+    'table.alt': 'Μακρύ ξύλινο τραπέζι στρωμένο κάτω από κληματαριά στο χαμηλό απογευματινό φως, με λινό τραπεζομάντιλο, κεραμικά πιάτα, ψωμί, ντομάτες, ελιές και μια καράφα χρυσαφένιο κρασί.',
+    'table.cap': 'Εικονογράφηση της αυλής το βράδυ.',
+    'table.p1': 'Δεν υπάρχει ρεσεψιόν ούτε τυπικότητες. Οι άνθρωποι που φροντίζουν το σπίτι είναι οι ίδιοι που σας υποδέχονται σε αυτό.',
+    'table.p2': 'Στο ισόγειο, η κουζίνα και το σαλόνι είναι κοινόχρηστα, όπως σε κάθε οικογενειακό σπίτι. Τα βράδια συνήθως τελειώνουν γύρω από το τραπέζι.',
+    'kitchen.alt': 'Η κοινόχρηστη κουζίνα με δρύινα ντουλάπια, μπουφέ με τζαμένιες πόρτες, μαρμάρινο πάγκο και ήλιο μέσα από διάφανη κουρτίνα.',
+    'kitchen.cap': 'Κοινόχρηστη κουζίνα. Πρόταση εσωτερικού χώρου από την Theasis Architects.',
+    'night.hour': '22:00 · Καληνύχτα',
+    'night.h2': 'Καληνύχτα.',
+    'night.p': 'Όταν είστε έτοιμοι, γράψτε μας. Απαντάμε σε κάθε μήνυμα προσωπικά.',
+    'letter.hour': 'Γράψτε στην οικογένεια',
+    'letter.h2': 'Ξεκινήστε τη διαμονή σας',
+    'letter.p': 'Πείτε μας πότε θα θέλατε να έρθετε και ποιοι θα είστε. Η Casa Efterpi ανοίγει το 2027 και θα χαρούμε να σας ακούσουμε από τώρα.',
+    'letter.address': 'Ανώνυμος 9, Καρλόβασι<br>Σάμος 83200, Ελλάδα<br><a href="mailto:info@casa-efterpi.gr">info@casa-efterpi.gr</a>',
+    'f.name': 'Ονοματεπώνυμο', 'f.email': 'Email', 'f.arrival': 'Άφιξη', 'f.departure': 'Αναχώρηση',
+    'f.message': 'Μήνυμα', 'f.ph_name': 'Το πλήρες όνομά σας', 'f.ph_message': 'Πείτε μας τι έχετε στο νου σας',
+    'f.send': 'Αποστολή Ερωτήματος',
+    'colophon': 'Οι εικόνες των εσωτερικών χώρων είναι προτάσεις σχεδιασμού της Theasis Architects (Nayia Giakouvi, Thaleia Stergiou) και θα αλλάξουν καθώς ολοκληρώνεται η αναπαλαίωση. Οι εικόνες του παραθύρου, του κήπου, της θέας και του τραπεζιού είναι εικονογραφήσεις που δημιουργήθηκαν με τεχνητή νοημοσύνη, όχι φωτογραφίες του σπιτιού. © 2026 Casa Efterpi, Σάμος.',
+    'legal.toggle': 'Νομικές Πληροφορίες',
+    /* script-only strings */
+    's.invalid': 'Συμπληρώστε το όνομά σας και ένα έγκυρο email.',
+    's.opened': 'Η εφαρμογή email σας θα ανοίξει με το μήνυμα έτοιμο για αποστολή. Αν δεν ανοίξει, γράψτε μας στο info@casa-efterpi.gr.',
+    'm.subject': 'Ερώτημα διαμονής από ', 'm.name': 'Όνομα', 'm.arrival': 'Άφιξη',
+    'm.departure': 'Αναχώρηση', 'm.unset': 'δεν ορίστηκε'
+  };
+  var EN = {
+    's.invalid': 'Please add your name and a valid email address.',
+    's.opened': 'Your email app should open with the message ready to send. If it does not, write to info@casa-efterpi.gr.',
+    'm.subject': 'Stay enquiry from ', 'm.name': 'Name', 'm.arrival': 'Arrival',
+    'm.departure': 'Departure', 'm.unset': 'not set'
+  };
+  /* read the English back out of the markup */
+  [].forEach.call(document.querySelectorAll('[data-i18n]'), function (el) { EN[el.getAttribute('data-i18n')] = el.textContent; });
+  [].forEach.call(document.querySelectorAll('[data-i18n-html]'), function (el) { EN[el.getAttribute('data-i18n-html')] = el.innerHTML.trim(); });
+  [].forEach.call(document.querySelectorAll('[data-i18n-attr]'), function (el) {
+    el.getAttribute('data-i18n-attr').split(',').forEach(function (pair) {
+      var i = pair.indexOf(':'); EN[pair.slice(i + 1).trim()] = el.getAttribute(pair.slice(0, i).trim());
     });
   });
-
-  // Scroll-reveal animation (progressive enhancement: content is visible by
-  // default; the js-reveal-ready class only arms the hidden/fade-in state
-  // once we know the observer is ready to bring elements back).
-  var revealEls = document.querySelectorAll('.reveal');
-  var observer = new IntersectionObserver(function(entries){
-    entries.forEach(function(entry){
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-        observer.unobserve(entry.target);
-      }
+  var DICTS = { en: EN, el: EL };
+  var LANG_KEY = 'casa-efterpi-lang';
+  var lang = 'en';
+  try { lang = localStorage.getItem(LANG_KEY) === 'el' ? 'el' : 'en'; } catch (e) {}
+  function t(key) { var d = DICTS[lang]; return d[key] !== undefined ? d[key] : EN[key]; }
+  function applyLang(code, user) {
+    lang = code;
+    document.documentElement.lang = code;
+    [].forEach.call(document.querySelectorAll('[data-i18n]'), function (el) {
+      var v = t(el.getAttribute('data-i18n')); if (v !== undefined) el.textContent = v;
     });
-  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
-  revealEls.forEach(function(el){
-    var rect = el.getBoundingClientRect();
-    var alreadyInView = rect.top < window.innerHeight && rect.bottom > 0;
-    if (alreadyInView) {
-      el.classList.add('is-visible');
-    } else {
-      observer.observe(el);
-    }
-  });
-  document.documentElement.classList.add('js-reveal-ready');
-
-  // Testimonials carousel
-  var testimonialCards = document.querySelectorAll('.testimonial-card');
-  var testimonialDots = document.querySelectorAll('#testimonial-dots button');
-  var testimonialIndex = 0;
-  var testimonialTimer;
-
-  function showTestimonial(index){
-    testimonialCards.forEach(function(card, i){
-      if (i === index) {
-        card.style.opacity = '1';
-        card.style.transform = 'translateX(0) scale(1)';
-        card.style.zIndex = '10';
-        card.style.pointerEvents = 'auto';
-        card.setAttribute('aria-hidden', 'false');
-      } else {
-        card.style.opacity = '0';
-        card.style.transform = 'translateX(40px) scale(0.96)';
-        card.style.zIndex = '0';
-        card.style.pointerEvents = 'none';
-        card.setAttribute('aria-hidden', 'true');
-      }
+    [].forEach.call(document.querySelectorAll('[data-i18n-html]'), function (el) {
+      var v = t(el.getAttribute('data-i18n-html')); if (v !== undefined) el.innerHTML = v;
     });
-    testimonialDots.forEach(function(dot, i){
-      dot.className = i === index
-        ? 'rounded-full transition-all duration-300 h-2.5 w-10 bg-terracotta'
-        : 'rounded-full transition-all duration-300 h-2.5 w-2.5 bg-stone hover:bg-gold/60';
-    });
-    testimonialIndex = index;
-  }
-
-  function startTestimonialAutoRotate(){
-    clearInterval(testimonialTimer);
-    if (testimonialCards.length <= 1) return;
-    testimonialTimer = setInterval(function(){
-      showTestimonial((testimonialIndex + 1) % testimonialCards.length);
-    }, 6000);
-  }
-
-  if (testimonialCards.length) {
-    testimonialDots.forEach(function(dot){
-      dot.addEventListener('click', function(){
-        showTestimonial(parseInt(dot.getAttribute('data-index'), 10));
-        startTestimonialAutoRotate();
+    [].forEach.call(document.querySelectorAll('[data-i18n-attr]'), function (el) {
+      el.getAttribute('data-i18n-attr').split(',').forEach(function (pair) {
+        var i = pair.indexOf(':'), v = t(pair.slice(i + 1).trim());
+        if (v !== undefined) el.setAttribute(pair.slice(0, i).trim(), v);
       });
     });
-    startTestimonialAutoRotate();
+    [].forEach.call(document.querySelectorAll('[data-lang]'), function (b) {
+      b.setAttribute('aria-pressed', b.getAttribute('data-lang') === code ? 'true' : 'false');
+    });
+    var st = document.getElementById('status'); if (st) st.textContent = '';
+    if (user) {
+      try { localStorage.setItem(LANG_KEY, code); } catch (e) {}
+      /* the suite rail measures its own width; text length just changed */
+      dispatchEvent(new Event('resize'));
+    }
+    if (typeof current !== 'undefined') { current = null; chrome(); }
   }
-
-  // Contact form (front-end only)
-  var contactForm = document.getElementById('contact-form');
-  var formSuccess = document.getElementById('form-success');
-  contactForm.addEventListener('submit', function(e){
-    e.preventDefault();
-    contactForm.classList.add('hidden');
-    formSuccess.classList.remove('hidden');
+  [].forEach.call(document.querySelectorAll('[data-lang]'), function (b) {
+    b.addEventListener('click', function () { if (b.getAttribute('data-lang') !== lang) applyLang(b.getAttribute('data-lang'), true); });
   });
 
-  // Newsletter form (front-end only)
-  var newsletterForm = document.getElementById('newsletter-form');
-  var newsletterSuccess = document.getElementById('newsletter-success');
-  newsletterForm.addEventListener('submit', function(e){
-    e.preventDefault();
-    newsletterForm.classList.add('hidden');
-    newsletterSuccess.classList.remove('hidden');
+  /* ---- legal info ------------------------------------------------------ */
+  var legalBtn = document.querySelector('.legal__toggle');
+  var legalPanel = document.getElementById('legal-panel');
+  legalBtn.addEventListener('click', function () {
+    var open = legalBtn.getAttribute('aria-expanded') === 'true';
+    legalBtn.setAttribute('aria-expanded', open ? 'false' : 'true');
+    legalPanel.hidden = open;
   });
 
-  // Legal info disclosure (footer)
-  var legalToggle = document.getElementById('legal-info-toggle');
-  var legalPanel = document.getElementById('legal-info-panel');
-  if (legalToggle && legalPanel) {
-    legalToggle.addEventListener('click', function(){
-      var isOpen = legalToggle.getAttribute('aria-expanded') === 'true';
-      if (isOpen) {
-        legalPanel.style.maxHeight = '0px';
-        legalToggle.setAttribute('aria-expanded', 'false');
-      } else {
-        legalPanel.style.maxHeight = legalPanel.scrollHeight + 'px';
-        legalToggle.setAttribute('aria-expanded', 'true');
-      }
-    });
-    window.addEventListener('resize', function(){
-      if (legalToggle.getAttribute('aria-expanded') === 'true') {
-        legalPanel.style.maxHeight = legalPanel.scrollHeight + 'px';
-      }
-    });
+  /* ---- the hour folio ------------------------------------------------ */
+  var folio = document.querySelector('.folio');
+  var hours = document.getElementById('hours');
+  var hourEl = folio.querySelector('.folio__hour');
+  var roomEl = folio.querySelector('.folio__room');
+  var chapters = [].slice.call(document.querySelectorAll('[data-hour]'));
+  var links = [].slice.call(hours.querySelectorAll('a'));
+  var nightSecs = [].slice.call(document.querySelectorAll('[data-ground="night"]'));
+  function setOpen(on) {
+    folio.setAttribute('aria-expanded', on ? 'true' : 'false');
+    hours.classList.toggle('is-open', on);
   }
+  folio.addEventListener('click', function () { setOpen(folio.getAttribute('aria-expanded') !== 'true'); });
+  links.forEach(function (a) { a.addEventListener('click', function () { setOpen(false); }); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && hours.classList.contains('is-open')) { setOpen(false); folio.focus(); } });
+  document.addEventListener('click', function (e) { if (!e.target.closest('.chrome nav')) setOpen(false); });
+
+  var current = null, ticking = false;
+  function chrome() {
+    ticking = false;
+    var mid = innerHeight * 0.45, pick = chapters[0];
+    chapters.forEach(function (c) { if (c.getBoundingClientRect().top <= mid) pick = c; });
+    if (pick !== current) {
+      current = pick;
+      hourEl.textContent = pick.getAttribute('data-hour');
+      roomEl.textContent = t(pick.getAttribute('data-room-key'));
+      links.forEach(function (a) { a.setAttribute('aria-current', a.getAttribute('href') === '#' + pick.id ? 'true' : 'false'); });
+    }
+    var night = nightSecs.some(function (s) { var r = s.getBoundingClientRect(); return r.top <= 40 && r.bottom > 40; });
+    document.body.classList.toggle('is-night', night);
+  }
+  addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(chrome); } }, { passive: true });
+  if (lang !== 'en') applyLang(lang, false); else chrome();
+
+  /* ---- the enquiry ----------------------------------------------------
+     There is no server behind this site yet, so the honest thing is to hand
+     the message to the visitor's own email app, addressed and filled in. It
+     never claims a message was sent. */
+  var form = document.getElementById('enquiry');
+  var status = document.getElementById('status');
+  var arrival = document.getElementById('arrival'), departure = document.getElementById('departure');
+  arrival.min = new Date().toISOString().slice(0, 10);
+  arrival.addEventListener('change', function () { departure.min = arrival.value; if (departure.value && departure.value < arrival.value) departure.value = ''; });
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var nameEl = document.getElementById("name"), emailEl = document.getElementById("email"), msgEl = document.getElementById("message");
+    var name = nameEl.value.trim(), email = emailEl.value.trim();
+    if (!name || !email || !emailEl.checkValidity()) {
+      status.textContent = t('s.invalid');
+      (name ? emailEl : nameEl).focus();
+      return;
+    }
+    var lines = [
+      t('m.name') + ': ' + name, 'Email: ' + email,
+      t('m.arrival') + ': ' + (arrival.value || t('m.unset')), t('m.departure') + ': ' + (departure.value || t('m.unset')),
+      '', msgEl.value.trim()
+    ];
+    var href = 'mailto:info@casa-efterpi.gr?subject=' + encodeURIComponent(t('m.subject') + name) +
+               '&body=' + encodeURIComponent(lines.join('\n'));
+    var a = document.createElement('a');
+    a.href = href; a.hidden = true;
+    document.body.appendChild(a); a.click(); a.remove();
+    status.textContent = t('s.opened');
+  });
+})();
 </script>
-
-<script src="js/i18n.js"></script>
 </body>
 </html>
