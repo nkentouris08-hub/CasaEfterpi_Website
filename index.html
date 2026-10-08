@@ -13,6 +13,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500;600&family=Noto+Serif+Display:ital,wght@0,300;0,400;1,300;1,400&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="assets/window-bare.webp" media="(min-aspect-ratio: 9/10)">
 <link rel="preload" as="image" href="assets/window-bare-p.webp" media="(max-aspect-ratio: 9/10)">
+<link rel="preload" as="image" href="assets/view-4k.webp" media="(min-width: 861px), (min-resolution: 1.5dppx)">
 <link rel="stylesheet" href="scrollcraft.css">
 <style>
   /* Brand guidelines, not taste: Warm White ground, Estate Brown titles,
@@ -131,6 +132,13 @@
     background: center / cover no-repeat;
     will-change: transform;
   }
+  /* 4K by default; small, low-density screens get the 1920 file */
+  .rig__view--day   { background-image: url(assets/view-4k.webp); }
+  .rig__view--night { background-image: url(assets/view-night-4k.webp); }
+  @media (max-width: 860px) and (max-resolution: 1.5dppx) {
+    .rig__view--day   { background-image: url(assets/view.webp); }
+    .rig__view--night { background-image: url(assets/view-night.webp); }
+  }
   .rig {
     position: absolute; left: 0; top: 0; z-index: 2;
     transform-origin: 0 0; will-change: transform, opacity;
@@ -179,7 +187,7 @@
     box-shadow: var(--sc-e2);
     /* driven off the act's progress, not a cue: it is the ground under the
        line, so it arrives before the text and leaves after it */
-    opacity: min(clamp(0, calc((var(--sc-p, 0) - 0.62) * 14), 1), clamp(0, calc((1 - var(--sc-p, 0)) * 25), 1));
+    opacity: min(clamp(0, calc((var(--sc-p, 0) - 0.68) * 14), 1), clamp(0, calc((1 - var(--sc-p, 0)) * 25), 1));
   }
   @media (prefers-reduced-motion: reduce) { .hero__plate { opacity: 1; } }
   .hero__beat-text { position: relative; z-index: 1; }
@@ -413,9 +421,9 @@
   <!-- 07:00 · FIRST LIGHT. The peak. Closed shutters, then they open under
        the hand and the room gives way to the garden and the sea. -->
   <section id="first-light" data-room-key="room.first" class="hero" data-hour="07:00"
-           data-sc-act="pin" data-sc-span="4.2" data-sc-drift="#FAF7F2">
+           data-sc-act="pin" data-sc-span="5.6" data-sc-drift="#FAF7F2">
     <div data-sc-stage class="rig-stage" data-rig="open">
-      <div class="rig__view" style="background-image:url(assets/view.webp)" aria-hidden="true"></div>
+      <div class="rig__view rig__view--day" aria-hidden="true"></div>
       <div class="rig" aria-hidden="true">
         <div class="rig__leaves"><div class="leaf leaf--l"></div><div class="leaf leaf--r"></div></div>
         <picture class="rig__frame">
@@ -434,7 +442,7 @@
 
       <div class="hero__beat">
         <div class="hero__plate" aria-hidden="true"></div>
-        <div class="hero__beat-text" data-sc-cue="0.66 0.94 0.1 0.1">
+        <div class="hero__beat-text" data-sc-cue="0.72 0.96 0.08 0.08">
           <span class="hour" data-i18n="beat.hour">Karlovasi, morning</span>
           <p data-i18n="beat.line">The garden first, then the sea.</p>
         </div>
@@ -557,9 +565,9 @@
 
   <!-- 22:00 · GOOD NIGHT. The shutters close again. -->
   <section id="night" data-room-key="room.night" class="night" data-hour="22:00" data-ground="night"
-           data-sc-act="pin" data-sc-span="1.7">
+           data-sc-act="pin" data-sc-span="2.8">
     <div data-sc-stage class="rig-stage" data-rig="close">
-      <div class="rig__view" style="background-image:url(assets/view-night.webp)" aria-hidden="true"></div>
+      <div class="rig__view rig__view--night" aria-hidden="true"></div>
       <div class="rig" aria-hidden="true">
         <div class="rig__leaves"><div class="leaf leaf--l"></div><div class="leaf leaf--r"></div></div>
         <picture class="rig__frame">
@@ -662,7 +670,8 @@
 
   var clamp = function (v, a, b) { return Math.min(b, Math.max(a, v)); };
   var seg = function (p, a, b) { return clamp((p - a) / (b - a), 0, 1); };
-  var ease = function (t) { return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; };
+  /* sine in-out: gentle at both ends, no sudden middle */
+  var ease = function (t) { return -(Math.cos(Math.PI * t) - 1) / 2; };
 
   function Rig(stage) {
     this.stage = stage;
@@ -702,18 +711,26 @@
     this.last = -1;
   };
   Rig.prototype.frame = function () {
-    var p = parseFloat(this.act.style.getPropertyValue('--sc-p')) || 0;
-    if (reduce) p = this.mode === 'open' ? 0.5 : 0.8;   /* a still, complete composition */
-    if (Math.abs(p - this.last) < 0.0004) return;
+    var target = parseFloat(this.act.style.getPropertyValue('--sc-p')) || 0;
+    if (reduce) target = this.mode === 'open' ? 0.5 : 0.8;   /* a still, complete composition */
+    /* The scroll arrives in notches. Ease the drawn progress toward it
+       (time-based, ~0.2s to settle) so the shutters and the push glide. */
+    var now = performance.now(), dt = Math.min(64, now - (this.t || now));
+    this.t = now;
+    if (this.sp === undefined || reduce || Math.abs(target - this.sp) > 0.35) this.sp = target;
+    else this.sp += (target - this.sp) * (1 - Math.exp(-dt / 110));
+    if (Math.abs(target - this.sp) < 0.0002) this.sp = target;
+    var p = this.sp;
+    if (Math.abs(p - this.last) < 0.0002) return;
     this.last = p;
     var g = this.g, open, push, fade;
 
     if (this.mode === 'open') {
-      open = ease(seg(p, 0.10, 0.50));          /* shutters swing out */
-      push = reduce ? 0 : ease(seg(p, 0.40, 0.92));  /* step through the window */
-      fade = reduce ? 0 : seg(p, 0.70, 0.90);   /* the near wall passes the viewer */
+      open = ease(seg(p, 0.07, 0.50));          /* shutters swing out */
+      push = reduce ? 0 : ease(seg(p, 0.44, 0.95));  /* step through the window */
+      fade = reduce ? 0 : ease(seg(p, 0.72, 0.94));  /* the near wall passes the viewer */
     } else {
-      open = 1 - ease(seg(p, 0.08, 0.62));      /* shutters swing shut */
+      open = 1 - ease(seg(p, 0.06, 0.74));      /* shutters swing shut */
       push = 0; fade = 0;
     }
 
